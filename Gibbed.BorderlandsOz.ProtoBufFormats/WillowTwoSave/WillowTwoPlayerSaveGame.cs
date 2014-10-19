@@ -1166,7 +1166,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
             }
         }
 
-        [ProtoMember(59, IsRequired = false)]
+        [ProtoMember(59, IsRequired = false, IsPacked = true)]
         public List<int> PlayerFlags
         {
             get { return this._PlayerFlags; }

@@ -233,7 +233,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             this.CurrencyOnHand.ImportData(saveFile.SaveGame);
             this.Backpack.ImportData(saveFile.SaveGame, saveFile.Platform);
             this.Bank.ImportData(saveFile.SaveGame, saveFile.Platform);
-            this.FastTravel.ImportData(saveFile.SaveGame);
+            //this.FastTravel.ImportData(saveFile.SaveGame);
             this.SaveFile = saveFile;
         }
 
@@ -304,7 +304,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                         this.CurrencyOnHand.ImportData(saveFile.SaveGame);
                         this.Backpack.ImportData(saveFile.SaveGame, saveFile.Platform);
                         this.Bank.ImportData(saveFile.SaveGame, saveFile.Platform);
-                        this.FastTravel.ImportData(saveFile.SaveGame);
+                        //this.FastTravel.ImportData(saveFile.SaveGame);
                         this.SaveFile = saveFile;
                     }
                     catch (Exception)
@@ -496,7 +496,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                     this.CurrencyOnHand.ExportData(saveFile.SaveGame);
                     this.Backpack.ExportData(saveFile.SaveGame, platform);
                     this.Bank.ExportData(saveFile.SaveGame, platform);
-                    this.FastTravel.ExportData(saveFile.SaveGame);
+                    //this.FastTravel.ExportData(saveFile.SaveGame);
 
                     if (saveFile.SaveGame != null &&
                         saveFile.SaveGame.WeaponData != null)

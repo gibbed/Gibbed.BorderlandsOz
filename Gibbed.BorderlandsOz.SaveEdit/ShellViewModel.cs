@@ -215,14 +215,13 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                         CharacterName = Encoding.UTF8.GetBytes(playerClass.Name),
                     },
                     AppliedCustomizations = new List<string>()
-                            {
-                                "None",
-                                "",
-                                "",
-                                "",
-                                "None",
-                            },
-                    LastVisitedTeleporter = "None",
+                    {
+                        "None",
+                        "",
+                        "",
+                        "",
+                        "None",
+                    },
                 },
             };
 
@@ -243,7 +242,10 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             yield return new DelegateResult(
                 () =>
                 {
-                    var playerClasses = InfoManager.PlayerClasses.Items.Where(pc => pc.Value.DLC == null).Select(kv => kv.Value).ToArray();
+                    var playerClasses =
+                        InfoManager.PlayerClasses.Items.Where(pc => pc.Value.DLC == null)
+                                   .Select(kv => kv.Value)
+                                   .ToArray();
                     var playerClass = playerClasses[new Random().Next(playerClasses.Length)];
                     this.DoNewSaveFromPlayerClass(playerClass);
                 })

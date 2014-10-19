@@ -51,13 +51,13 @@ namespace Gibbed.BorderlandsOz.SaveEdit
         #endregion
 
         #region Fields
-        private string _PlayerClassDefinition = "GD_Assassin.Character.CharClass_Assassin";
+        private string _PlayerClassDefinition = "GD_Prototype.Character.CharClass_Prototype";
         private int _ExpLevel = 1;
         private int _ExpPoints;
         private int _GeneralSkillPoints;
         private int _SpecialistSkillPoints;
         private int _OverpowerLevel;
-        private string _CharacterName = "Zer0";
+        private string _CharacterName = "Claptrap";
         private string _SelectedHead;
         private string _SelectedSkin;
         #endregion

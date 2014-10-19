@@ -56,7 +56,7 @@
         </CollectionViewSource>
     </UserControl.Resources>
     <StackPanel Orientation="Vertical">
-        <Expander Header="MoonBuggy"
+        <Expander Header="Moon Buggy"
                   IsExpanded="True">
             <Grid>
                 <Grid.RowDefinitions>
@@ -116,7 +116,7 @@
                 </ComboBox>
             </Grid>
         </Expander>
-        <Expander Header="StingRay"
+        <Expander Header="Stingray"
                   IsExpanded="True">
             <Grid>
                 <Grid.RowDefinitions>

@@ -32,6 +32,7 @@ namespace Gibbed.BorderlandsOz.GameInfo
         SniperRifle,
         AssaultRifle,
         RocketLauncher,
+        Laser,
         // ReSharper restore InconsistentNaming
     }
 }

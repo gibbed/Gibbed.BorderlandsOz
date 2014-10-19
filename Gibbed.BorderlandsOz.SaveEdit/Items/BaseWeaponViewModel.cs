@@ -74,13 +74,6 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 return text;
             }
 
-            if (type != "None" &&
-                InfoManager.WeaponTypes.ContainsKey(type) == true &&
-                string.IsNullOrEmpty(InfoManager.WeaponTypes[type].Name) == false)
-            {
-                return InfoManager.WeaponTypes[type].Name;
-            }
-
             return "Unknown Weapon";
         }
 

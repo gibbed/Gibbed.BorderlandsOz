@@ -32,7 +32,6 @@ namespace Gibbed.BorderlandsOz.GameInfo
 
         public string ResourcePath { get; internal set; }
         public WeaponType Type { get; internal set; }
-        public string Name { get; internal set; }
         public List<string> Titles { get; internal set; }
         public List<string> Prefixes { get; internal set; }
         public List<string> BodyParts { get; internal set; }

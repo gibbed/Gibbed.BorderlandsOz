@@ -48,9 +48,6 @@ namespace Gibbed.BorderlandsOz.GameInfo.Raw
         [JsonProperty(PropertyName = "type", Required = Required.Always)]
         public WeaponType Type { get; set; }
 
-        [JsonProperty(PropertyName = "name", Required = Required.Always)]
-        public string Name { get; set; }
-
         [JsonProperty(PropertyName = "titles")]
         public List<string> Titles { get; set; }
 

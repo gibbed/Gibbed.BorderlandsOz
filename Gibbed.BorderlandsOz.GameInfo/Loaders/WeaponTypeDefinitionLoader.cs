@@ -49,7 +49,6 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
             {
                 ResourcePath = kv.Key,
                 Type = kv.Value.Type,
-                Name = kv.Value.Name,
                 Titles = kv.Value.Titles,
                 Prefixes = kv.Value.Prefixes,
                 BodyParts = kv.Value.BodyParts,

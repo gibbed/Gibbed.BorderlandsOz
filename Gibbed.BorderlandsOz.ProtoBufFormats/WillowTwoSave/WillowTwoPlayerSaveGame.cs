@@ -1180,7 +1180,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
             }
         }
 
-        [ProtoMember(60, IsRequired = false)]
+        [ProtoMember(60, IsRequired = true)]
         public int VehicleSteeringMode
         {
             get { return this._VehicleSteeringMode; }

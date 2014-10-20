@@ -332,7 +332,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 {
                     case ItemType.Artifact:
                     {
-                        return "Relic";
+                        return "Oz Kit";
                     }
 
                     case ItemType.ClassMod:

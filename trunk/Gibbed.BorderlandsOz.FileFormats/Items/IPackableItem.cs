@@ -20,14 +20,13 @@
  *    distribution.
  */
 
-using Gibbed.BorderlandsOz.FileFormats.Items;
+using Gibbed.BorderlandsOz.GameInfo;
 
-namespace Gibbed.BorderlandsOz.SaveEdit
+namespace Gibbed.BorderlandsOz.FileFormats.Items
 {
-    internal interface IBaseSlotViewModel
+    public interface IPackableItem : IPackableSlot
     {
-        IPackableSlot BaseSlot { get; }
-        string DisplayName { get; }
-        string DisplayGroup { get; }
+        void Unpack(PackedItem packed, Platform platform);
+        PackedItem Pack(Platform platform);
     }
 }

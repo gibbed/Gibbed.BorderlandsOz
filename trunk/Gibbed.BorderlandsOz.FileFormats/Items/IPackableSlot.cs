@@ -24,7 +24,7 @@ using System;
 
 namespace Gibbed.BorderlandsOz.FileFormats.Items
 {
-    public interface IBaseSlot : ICloneable
+    public interface IPackableSlot : ICloneable
     {
         int UniqueId { get; set; }
         int AssetLibrarySetId { get; set; }

@@ -219,7 +219,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                     {
                         var code = match.Groups["data"].Value;
 
-                        IPackable packable;
+                        IPackableSlot packable;
 
                         try
                         {
@@ -283,7 +283,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 () =>
                 {
                     if (this.SelectedSlot == null ||
-                        (this.SelectedSlot.BackpackSlot is IPackable) == false)
+                        this.SelectedSlot.BackpackSlot == null)
                     {
                         if (MyClipboard.SetText("") != MyClipboard.Result.Success)
                         {
@@ -296,7 +296,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                     }
 
                     // just a hack until I add a way to override the unique ID in Encode()
-                    var copy = (IPackable)this.SelectedSlot.BackpackSlot.Clone();
+                    var copy = (IPackableSlot)this.SelectedSlot.BackpackSlot.Clone();
                     copy.UniqueId = 0;
 
                     var data = BackpackDataHelper.Encode(copy, Platform.PC);
@@ -306,11 +306,11 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                     sb.Append(")");
 
                     /*
-                if (MyClipboard.SetText(sb.ToString()) != MyClipboard.Result.Success)
-                {
-                    MessageBox.Show("Clipboard failure.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                */
+                    if (MyClipboard.SetText(sb.ToString()) != MyClipboard.Result.Success)
+                    {
+                        MessageBox.Show("Clipboard failure.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    */
 
                     var dobj = new DataObject();
                     dobj.SetText(sb.ToString());

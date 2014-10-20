@@ -59,9 +59,14 @@
     <Compile Include="Items\BaseItem.cs" />
     <Compile Include="Items\BaseWeapon.cs" />
     <Compile Include="Items\IBackpackSlot.cs" />
-    <Compile Include="Items\IBaseSlot.cs" />
-    <Compile Include="Items\IPackable.cs" />
+    <Compile Include="Items\IPackableSlot.cs" />
+    <Compile Include="Items\IPackableItem.cs" />
+    <Compile Include="Items\IPackedSlot.cs" />
+    <Compile Include="Items\IPackableWeapon.cs" />
     <Compile Include="Items\PackedDataHelper.cs" />
+    <Compile Include="Items\PackedAssetReference.cs" />
+    <Compile Include="Items\PackedItem.cs" />
+    <Compile Include="Items\PackedWeapon.cs" />
     <Compile Include="LZO.cs" />
     <Compile Include="PlayerStats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

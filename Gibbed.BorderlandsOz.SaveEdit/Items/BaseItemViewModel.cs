@@ -34,7 +34,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
         private readonly BaseItem _Item;
         private string _DisplayName = "Unknown Item";
 
-        public IBaseSlot BaseSlot
+        public IPackableSlot BaseSlot
         {
             get { return this._Item; }
         }

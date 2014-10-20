@@ -211,7 +211,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                     {
                         var code = match.Groups["data"].Value;
 
-                        IPackable packable;
+                        IPackableSlot packable;
 
                         try
                         {
@@ -270,7 +270,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 () =>
                 {
                     if (this.SelectedSlot == null ||
-                        (this.SelectedSlot.BaseSlot is IPackable) == false)
+                        this.SelectedSlot.BaseSlot == null)
                     {
                         if (MyClipboard.SetText("") != MyClipboard.Result.Success)
                         {
@@ -283,7 +283,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                     }
 
                     // just a hack until I add a way to override the unique ID in Encode()
-                    var copy = (IPackable)this.SelectedSlot.BaseSlot.Clone();
+                    var copy = (IPackableSlot)this.SelectedSlot.BaseSlot.Clone();
                     copy.UniqueId = 0;
 
                     var data = BaseDataHelper.Encode(copy, Platform.PC);
@@ -309,7 +309,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 return;
             }
 
-            var copy = (IBaseSlot)this.SelectedSlot.BaseSlot.Clone();
+            var copy = (IPackableSlot)this.SelectedSlot.BaseSlot.Clone();
             copy.UniqueId = new Random().Next(int.MinValue, int.MaxValue);
             // TODO: check other item unique IDs to prevent rare collisions
 
@@ -386,7 +386,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             this._BrokenSlots.Clear();
             foreach (var bankSlot in saveGame.BankSlots)
             {
-                IPackable slot;
+                IPackableSlot slot;
                 try
                 {
                     slot = BaseDataHelper.Decode(bankSlot.InventorySerialNumber, platform);

@@ -140,6 +140,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
             }
         }
 
+        // ReSharper disable UnusedMember.Local
         private enum DataType : byte
         {
             Empty = 0,
@@ -152,6 +153,8 @@ namespace Gibbed.BorderlandsOz.FileFormats
             DateTime = 7,
             Byte = 8,
         }
+
+        // ReSharper restore UnusedMember.Local
 
         private static object ReadData(Stream input, DataType type, Endian endian)
         {

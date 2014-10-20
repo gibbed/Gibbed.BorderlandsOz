@@ -22,7 +22,7 @@
 
 namespace Gibbed.BorderlandsOz.FileFormats.Items
 {
-    public interface IBackpackSlot : IBaseSlot
+    public interface IBackpackSlot : IPackableSlot
     {
     }
 }

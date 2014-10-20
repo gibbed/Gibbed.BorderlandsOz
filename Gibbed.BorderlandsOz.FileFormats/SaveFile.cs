@@ -409,7 +409,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                         }
 
                         int uncompressedOffset = 0;
-                        int uncompressedSizeLeft = (int)uncompressedSize;
+                        var uncompressedSizeLeft = (int)uncompressedSize;
                         foreach (var blockInfo in blockInfos)
                         {
                             var blockUncompressedSize = Math.Min((int)blockInfo.Item2, uncompressedSizeLeft);
@@ -455,7 +455,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                         }
 
                         int uncompressedOffset = 0;
-                        int uncompressedSizeLeft = (int)uncompressedSize;
+                        var uncompressedSizeLeft = (int)uncompressedSize;
                         foreach (var blockInfo in blockInfos)
                         {
                             var blockUncompressedSize = Math.Min((int)blockInfo.Item2, uncompressedSizeLeft);

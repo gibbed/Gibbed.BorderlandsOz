@@ -34,7 +34,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
         private readonly BaseWeapon _Weapon;
         private string _DisplayName;
 
-        public IBaseSlot BaseSlot
+        public IPackableSlot BaseSlot
         {
             get { return this._Weapon; }
         }

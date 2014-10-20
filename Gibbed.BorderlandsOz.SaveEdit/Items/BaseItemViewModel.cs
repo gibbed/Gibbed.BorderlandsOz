@@ -332,28 +332,28 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 {
                     case ItemType.Artifact:
                     {
-                        return "Oz Kit";
+                        return "Oz Kits";
                     }
 
                     case ItemType.ClassMod:
                     case ItemType.CrossDLCClassMod:
                     {
-                        return "Class Mod";
+                        return "Class Mods";
                     }
 
                     case ItemType.GrenadeMod:
                     {
-                        return "Grenade Mod";
+                        return "Grenade Mods";
                     }
 
                     case ItemType.Shield:
                     {
-                        return "Shield";
+                        return "Shields";
                     }
 
                     case ItemType.UsableCustomizationItem:
                     {
-                        return "Customization";
+                        return "Customizations";
                     }
 
                     case ItemType.UsableItem:

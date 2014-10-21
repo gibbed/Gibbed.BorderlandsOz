@@ -232,8 +232,12 @@
                         <xctk:PropertyDefinition TargetProperties="QueuedTrainingMessages" />
                         <xctk:PropertyDefinition TargetProperties="AwesomeSkillDisabled" />
                         <xctk:PropertyDefinition TargetProperties="MaxBankSlots" />
+                        <xctk:PropertyDefinition TargetProperties="BodySwitches" />
+                        <xctk:PropertyDefinition TargetProperties="PlayerFlags" />
+                        <xctk:PropertyDefinition TargetProperties="VehicleSteeringMode" />
+                        <xctk:PropertyDefinition TargetProperties="DiscoveredInteractiveObjectCompassIcons" />
                         <xctk:PropertyDefinition TargetProperties="PlayerHasPlayedInPlaythroughThree" />
-                        <xctk:PropertyDefinition TargetProperties="LastOverpowerChoice" />
+                        <!--xctk:PropertyDefinition TargetProperties="LastOverpowerChoice" /-->
                     </xctk:PropertyGrid.PropertyDefinitions>
                     <xctk:PropertyGrid.EditorDefinitions>
                         <xctk:EditorTemplateDefinition TargetProperties="StatsData">

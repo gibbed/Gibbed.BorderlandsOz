@@ -41,6 +41,8 @@ namespace Gibbed.BorderlandsOz.SaveEdit
 
         private string _SelectedStingRay1 = "None";
         private string _SelectedStingRay2 = "None";
+        private string _SelectedStingRay3 = "None";
+        private string _SelectedStingRay4 = "None";
         private readonly List<string> _ExtraStingRay = new List<string>();
         #endregion
 
@@ -87,6 +89,26 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             {
                 this._SelectedStingRay2 = value;
                 this.NotifyOfPropertyChange(() => this.SelectedStingRay2);
+            }
+        }
+
+        public string SelectedStingRay3
+        {
+            get { return this._SelectedStingRay3; }
+            set
+            {
+                this._SelectedStingRay3 = value;
+                this.NotifyOfPropertyChange(() => this.SelectedStingRay3);
+            }
+        }
+
+        public string SelectedStingRay4
+        {
+            get { return this._SelectedStingRay4; }
+            set
+            {
+                this._SelectedStingRay4 = value;
+                this.NotifyOfPropertyChange(() => this.SelectedStingRay4);
             }
         }
 
@@ -149,31 +171,26 @@ namespace Gibbed.BorderlandsOz.SaveEdit
 
         private static void ImportTarget(string name,
                                          IEnumerable<ChosenVehicleCustomization> customizations,
-                                         Action<string> skin1,
-                                         Action<string> skin2,
-                                         Action<string> extra)
+                                         Action<string> extra,
+                                         params Action<string>[] skins)
         {
-            skin1("None");
-            skin2("None");
+            int count = skins.Length;
+
+            for (int i = 0; i < count; i++)
+            {
+                skins[i]("None");
+            }
 
             var customization = customizations.FirstOrDefault(c => c.Family == name);
             if (customization != null &&
                 customization.Customizations != null)
             {
-                if (customization.Customizations.Count > 0)
+                for (int i = 0; i < count && i < customization.Customizations.Count; i++)
                 {
-                    skin1(customization.Customizations[0]);
+                    skins[i](customization.Customizations[i]);
                 }
 
-                if (customization.Customizations.Count > 1)
-                {
-                    skin2(customization.Customizations[1]);
-                }
-
-                if (customization.Customizations.Count > 2)
-                {
-                    customization.Customizations.Skip(2).Apply(extra);
-                }
+                customization.Customizations.Skip(count).Apply(extra);
             }
         }
 
@@ -182,38 +199,36 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             this.ExtraMoonBuggy.Clear();
             ImportTarget("GD_Globals.VehicleSpawnStation.VehicleFamily_MoonBuggy",
                          saveGame.ChosenVehicleCustomizations,
+                         s => this.ExtraMoonBuggy.Add(s),
                          s => this.SelectedMoonBuggy1 = s,
-                         s => this.SelectedMoonBuggy2 = s,
-                         s => this.ExtraMoonBuggy.Add(s));
+                         s => this.SelectedMoonBuggy2 = s);
 
             this.ExtraStingRay.Clear();
             ImportTarget("GD_Globals.VehicleSpawnStation.VehicleFamily_StingRay",
                          saveGame.ChosenVehicleCustomizations,
+                         s => this.ExtraStingRay.Add(s),
                          s => this.SelectedStingRay1 = s,
                          s => this.SelectedStingRay2 = s,
-                         s => this.ExtraStingRay.Add(s));
+                         s => this.SelectedStingRay3 = s,
+                         s => this.SelectedStingRay4 = s);
         }
 
         private static void ExportTarget(string name,
                                          List<ChosenVehicleCustomization> customizations,
-                                         string skin1,
-                                         string skin2,
-                                         IEnumerable<string> extras)
+                                         IEnumerable<string> extras,
+                                         params string[] skins)
         {
             customizations.RemoveAll(c => c.Family == name);
 
-            var skins = extras.ToArray();
-            if (skin1 != "None" ||
-                skin2 != "None" ||
-                skins.Length > 0)
+            var extraSkins = extras.ToArray();
+            if (skins.Any(s => s != "None") == true)
             {
                 var customization = new ChosenVehicleCustomization()
                 {
                     Family = name,
                 };
-                customization.Customizations.Add(skin1);
-                customization.Customizations.Add(skin2);
                 customization.Customizations.AddRange(skins);
+                customization.Customizations.AddRange(extraSkins);
                 customizations.Add(customization);
             }
         }
@@ -222,14 +237,16 @@ namespace Gibbed.BorderlandsOz.SaveEdit
         {
             ExportTarget("GD_Globals.VehicleSpawnStation.VehicleFamily_MoonBuggy",
                          saveGame.ChosenVehicleCustomizations,
+                         this.ExtraMoonBuggy,
                          this.SelectedMoonBuggy1,
-                         this.SelectedMoonBuggy2,
-                         this.ExtraMoonBuggy);
+                         this.SelectedMoonBuggy2);
             ExportTarget("GD_Globals.VehicleSpawnStation.VehicleFamily_StingRay",
                          saveGame.ChosenVehicleCustomizations,
+                         this.ExtraStingRay,
                          this.SelectedStingRay1,
                          this.SelectedStingRay2,
-                         this.ExtraStingRay);
+                         this.SelectedStingRay3,
+                         this.SelectedStingRay4);
         }
     }
 }

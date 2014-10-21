@@ -33,25 +33,37 @@
         <CollectionViewSource x:Key="GroupedMoonBuggyAssets1"
                               Source="{Binding Path=MoonBuggyAssets}">
             <CollectionViewSource.GroupDescriptions>
-                <PropertyGroupDescription PropertyName="Group"></PropertyGroupDescription>
+                <PropertyGroupDescription PropertyName="Group" />
             </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
         <CollectionViewSource x:Key="GroupedMoonBuggyAssets2"
                               Source="{Binding Path=MoonBuggyAssets}">
             <CollectionViewSource.GroupDescriptions>
-                <PropertyGroupDescription PropertyName="Group"></PropertyGroupDescription>
+                <PropertyGroupDescription PropertyName="Group" />
             </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
         <CollectionViewSource x:Key="GroupedStingRayAssets1"
                               Source="{Binding Path=StingRayAssets}">
             <CollectionViewSource.GroupDescriptions>
-                <PropertyGroupDescription PropertyName="Group"></PropertyGroupDescription>
+                <PropertyGroupDescription PropertyName="Group" />
             </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
         <CollectionViewSource x:Key="GroupedStingRayAssets2"
                               Source="{Binding Path=StingRayAssets}">
             <CollectionViewSource.GroupDescriptions>
-                <PropertyGroupDescription PropertyName="Group"></PropertyGroupDescription>
+                <PropertyGroupDescription PropertyName="Group" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+        <CollectionViewSource x:Key="GroupedStingRayAssets3"
+                              Source="{Binding Path=StingRayAssets}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Group" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+        <CollectionViewSource x:Key="GroupedStingRayAssets4"
+                              Source="{Binding Path=StingRayAssets}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Group" />
             </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
     </UserControl.Resources>
@@ -122,6 +134,8 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -162,6 +176,52 @@
                           DisplayMemberPath="Name"
                           SelectedValuePath="Path"
                           SelectedValue="{Binding Path=SelectedStingRay2}">
+                    <ComboBox.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock FontSize="15"
+                                               FontWeight="Bold"
+                                               Text="{Binding Path=Name}" />
+                                </DataTemplate>
+                            </GroupStyle.HeaderTemplate>
+                        </GroupStyle>
+                    </ComboBox.GroupStyle>
+                </ComboBox>
+                <Label Grid.Row="2"
+                       Grid.Column="0"
+                       HorizontalContentAlignment="Right"
+                       Content="Skin #3:" />
+                <ComboBox Grid.Row="2"
+                          Grid.Column="1"
+                          Margin="3"
+                          ItemsSource="{Binding Source={StaticResource GroupedStingRayAssets3}}"
+                          DisplayMemberPath="Name"
+                          SelectedValuePath="Path"
+                          SelectedValue="{Binding Path=SelectedStingRay2}">
+                    <ComboBox.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock FontSize="15"
+                                               FontWeight="Bold"
+                                               Text="{Binding Path=Name}" />
+                                </DataTemplate>
+                            </GroupStyle.HeaderTemplate>
+                        </GroupStyle>
+                    </ComboBox.GroupStyle>
+                </ComboBox>
+                <Label Grid.Row="3"
+                       Grid.Column="0"
+                       HorizontalContentAlignment="Right"
+                       Content="Skin #4:" />
+                <ComboBox Grid.Row="3"
+                          Grid.Column="1"
+                          Margin="3"
+                          ItemsSource="{Binding Source={StaticResource GroupedStingRayAssets4}}"
+                          DisplayMemberPath="Name"
+                          SelectedValuePath="Path"
+                          SelectedValue="{Binding Path=SelectedStingRay4}">
                     <ComboBox.GroupStyle>
                         <GroupStyle>
                             <GroupStyle.HeaderTemplate>

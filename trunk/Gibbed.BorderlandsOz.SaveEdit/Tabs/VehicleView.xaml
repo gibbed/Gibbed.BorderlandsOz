@@ -198,7 +198,7 @@
                           ItemsSource="{Binding Source={StaticResource GroupedStingRayAssets3}}"
                           DisplayMemberPath="Name"
                           SelectedValuePath="Path"
-                          SelectedValue="{Binding Path=SelectedStingRay2}">
+                          SelectedValue="{Binding Path=SelectedStingRay3}">
                     <ComboBox.GroupStyle>
                         <GroupStyle>
                             <GroupStyle.HeaderTemplate>

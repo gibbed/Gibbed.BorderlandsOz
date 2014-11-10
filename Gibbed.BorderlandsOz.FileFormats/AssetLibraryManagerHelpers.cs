@@ -213,6 +213,14 @@ namespace Gibbed.BorderlandsOz.FileFormats
             }
 
             var set = assetLibraryManager.GetSet(actualSetId);
+            if (set == null)
+            {
+                throw new FormatException(
+                    string.Format(
+                        "unknown asset library set {0} in packed data (this generally means new DLC that is not supported yet)",
+                        actualSetId));
+            }
+
             var library = set.Libraries[group];
 
             if (sublibraryIndex < 0 || sublibraryIndex >= library.Sublibraries.Count)

@@ -29,6 +29,7 @@ namespace Gibbed.BorderlandsOz.GameInfo
         Gladiator,
         Lawbringer,
         Prototype,
+        Doppel,
         MoonBuggy,
         StingRay,
     }

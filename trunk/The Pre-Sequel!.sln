@@ -144,7 +144,6 @@ Global
 		{E040D0B3-355C-4787-8F64-549EE898307E}.Release|x86.Build.0 = Release|x86
 		{E040D0B3-355C-4787-8F64-549EE898307E}.SaveEdit Packaging|Any CPU.ActiveCfg = Release|x86
 		{E040D0B3-355C-4787-8F64-549EE898307E}.SaveEdit Packaging|Mixed Platforms.ActiveCfg = Release|x86
-		{E040D0B3-355C-4787-8F64-549EE898307E}.SaveEdit Packaging|Mixed Platforms.Build.0 = Release|x86
 		{E040D0B3-355C-4787-8F64-549EE898307E}.SaveEdit Packaging|x86.ActiveCfg = Release|x86
 		{E040D0B3-355C-4787-8F64-549EE898307E}.SaveEdit Packaging|x86.Build.0 = Release|x86
 	EndGlobalSection

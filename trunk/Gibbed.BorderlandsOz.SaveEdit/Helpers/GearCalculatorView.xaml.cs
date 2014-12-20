@@ -22,14 +22,11 @@
 
 namespace Gibbed.BorderlandsOz.SaveEdit
 {
-    /// <summary>
-    /// Interaction logic for GearCalculatorView.xaml
-    /// </summary>
     public partial class GearCalculatorView
     {
         public GearCalculatorView()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

@@ -18,7 +18,7 @@
       <LineBreak/>
       For anyone else I missed, you know who you are!<LineBreak />
       <LineBreak />
-      <Hyperlink NavigateUri="http://www.patreon.com/gibbed" se:HyperlinkExtensions.IsExternal="true">Want to support the developer?</Hyperlink>
+      Want to support the developer? <Hyperlink NavigateUri="http://www.patreon.com/gibbed" se:HyperlinkExtensions.IsExternal="true">Contribute to gibbed's Patreon</Hyperlink>.
     </TextBlock>
   </DockPanel>
 </UserControl>

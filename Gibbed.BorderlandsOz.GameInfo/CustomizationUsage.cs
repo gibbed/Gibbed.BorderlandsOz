@@ -30,6 +30,7 @@ namespace Gibbed.BorderlandsOz.GameInfo
         Lawbringer,
         Prototype,
         Doppel,
+        Baroness,
         MoonBuggy,
         StingRay,
     }

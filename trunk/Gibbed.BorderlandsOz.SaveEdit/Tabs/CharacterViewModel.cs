@@ -253,6 +253,11 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 {
                     return CustomizationUsage.Doppel;
                 }
+
+                case "Crocus_Baroness.Character.CharClass_Baroness":
+                {
+                    return CustomizationUsage.Doppel;
+                }
             }
 
             return CustomizationUsage.Unknown;

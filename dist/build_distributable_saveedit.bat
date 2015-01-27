@@ -17,6 +17,7 @@ del *.pdb
 mkdir assemblies
 move *.dll assemblies\
 del *.xml
+del ..\saveedit.zip
 7z a -r -tzip -mx=9 ..\saveedit.zip .
 cd ".."
 pause

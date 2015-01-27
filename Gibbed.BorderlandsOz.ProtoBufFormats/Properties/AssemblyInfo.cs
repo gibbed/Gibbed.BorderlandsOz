@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2014 Rick (rick 'at' gibbed 'dot' us)
+﻿/* Copyright (c) 2015 Rick (rick 'at' gibbed 'dot' us)
  * 
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -32,7 +32,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Gibbed.BorderlandsOz.ProtoBufFormats")]
-[assembly: AssemblyCopyright("Copyright © Gibbed 2014")]
+[assembly: AssemblyCopyright("Copyright © Gibbed 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

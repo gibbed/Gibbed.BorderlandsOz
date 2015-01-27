@@ -256,7 +256,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
 
                 case "Crocus_Baroness.Character.CharClass_Baroness":
                 {
-                    return CustomizationUsage.Doppel;
+                    return CustomizationUsage.Baroness;
                 }
             }
 

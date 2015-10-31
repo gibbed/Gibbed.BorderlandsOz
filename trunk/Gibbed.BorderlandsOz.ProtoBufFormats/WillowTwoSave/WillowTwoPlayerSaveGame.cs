@@ -92,6 +92,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
         private List<int> _PlayerFlags = new List<int>();
         private int _VehicleSteeringMode;
         private List<NameBasedObjectPath> _DiscoveredInteractiveObjectCompassIcons;
+        private bool? _SuppressAtmosphereNotifications;
 
         private int? _PlayerHasPlayedInPlaythroughThree;
         private int? _NumOverpowerLevelsUnlocked;
@@ -1204,6 +1205,20 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
                 {
                     this._DiscoveredInteractiveObjectCompassIcons = value;
                     this.NotifyPropertyChanged("DiscoveredInteractiveObjectCompassIcons");
+                }
+            }
+        }
+        
+        [ProtoMember(62, IsRequired = false)]
+        public bool? SuppressAtmosphereNotifications
+        {
+            get { return this._SuppressAtmosphereNotifications; }
+            set
+            {
+                if (value != this._SuppressAtmosphereNotifications)
+                {
+                    this._SuppressAtmosphereNotifications = value;
+                    this.NotifyPropertyChanged("SuppressAtmosphereNotifications");
                 }
             }
         }

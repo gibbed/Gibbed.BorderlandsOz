@@ -38,7 +38,7 @@
     <DockPanel LastChildFill="True">
         <TextBlock TextWrapping="Wrap"
                    Margin="4">
-            <Run Text="Developed by " /><Hyperlink NavigateUri="http://gib.me/" Foreground="{StaticResource Gibbed}"><Run Text="gibbed" Foreground="{StaticResource Gibbed}" /></Hyperlink><Run Text=" for use with Borderlands 2." />
+            <Run Text="Developed by " /><Hyperlink NavigateUri="http://gib.me/" Foreground="{StaticResource Gibbed}"><Run Text="gibbed" Foreground="{StaticResource Gibbed}" /></Hyperlink><Run Text=" for use with Borderlands: The Pre-Sequel!" />
             <LineBreak />
             <LineBreak />
             <Run Text="Want to support the developer?" FontSize="15" FontWeight="Bold" />

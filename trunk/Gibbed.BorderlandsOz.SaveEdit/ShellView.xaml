@@ -92,7 +92,7 @@
             </Button>
         </ToolBar>
         <TabControl TabStripPlacement="Top">
-            <TabItem>
+            <TabItem IsSelected="{Binding Path=IsGeneralSelected}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Image Height="24"
@@ -236,6 +236,7 @@
                         <xctk:PropertyDefinition TargetProperties="PlayerFlags" />
                         <xctk:PropertyDefinition TargetProperties="VehicleSteeringMode" />
                         <xctk:PropertyDefinition TargetProperties="DiscoveredInteractiveObjectCompassIcons" />
+                        <xctk:PropertyDefinition TargetProperties="SuppressAtmosphereNotifications" />
                         <xctk:PropertyDefinition TargetProperties="PlayerHasPlayedInPlaythroughThree" />
                         <!--xctk:PropertyDefinition TargetProperties="LastOverpowerChoice" /-->
                     </xctk:PropertyGrid.PropertyDefinitions>
@@ -259,7 +260,7 @@
                     </xctk:PropertyGrid.EditorDefinitions>
                 </xctk:PropertyGrid>
             </TabItem>
-            <TabItem>
+            <TabItem IsSelected="{Binding Path=IsAboutSelected}">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <Image Height="24"

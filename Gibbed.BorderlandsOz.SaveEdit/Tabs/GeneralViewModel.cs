@@ -116,6 +116,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 new PlatformDisplay("PC", Platform.PC),
                 new PlatformDisplay("360", Platform.X360),
                 new PlatformDisplay("PS3", Platform.PS3),
+                new PlatformDisplay("Android", Platform.Android),
             };
         }
 

@@ -62,6 +62,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Gibbed.BorderlandsOz.SaveEdit.Startup</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Caliburn.Micro, Version=1.5.1.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.1.5.1\lib\net40\Caliburn.Micro.dll</HintPath>
@@ -122,6 +125,7 @@
     <Compile Include="Items\IBaseSlotViewModel.cs" />
     <Compile Include="Items\ItemTypeFilter.cs" />
     <Compile Include="SaveLoad.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="Tabs\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
     </Compile>
@@ -208,7 +212,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -353,6 +359,24 @@
     <Resource Include="Resources\fugue\television-test.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Gibbed.BorderlandsOz.FileFormats\Gibbed.BorderlandsOz.FileFormats.csproj">
+      <Project>{CEEBF236-CE02-42A0-A9C4-1B2094AF3283}</Project>
+      <Name>Gibbed.BorderlandsOz.FileFormats</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gibbed.BorderlandsOz.GameInfo\Gibbed.BorderlandsOz.GameInfo.csproj">
+      <Project>{B7893168-DE33-4D78-BB97-393077E55C93}</Project>
+      <Name>Gibbed.BorderlandsOz.GameInfo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gibbed.BorderlandsOz.ProtoBufFormats\Gibbed.BorderlandsOz.ProtoBufFormats.csproj">
+      <Project>{F6A846F8-1541-4D51-B438-7BCA47463A90}</Project>
+      <Name>Gibbed.BorderlandsOz.ProtoBufFormats</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Gibbed.IO\Gibbed.IO.csproj">
+      <Project>{047857BA-DAA3-4CA7-AFB8-A1B082B28C6A}</Project>
+      <Name>Gibbed.IO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Resources\scooter.png" />
   </ItemGroup>
   <ItemGroup>
@@ -370,20 +394,6 @@
     <Resource Include="Resources\Xceed.Wpf.Toolkit\PropertyGrid\Images\Style11.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Gibbed.BorderlandsOz.FileFormats\Gibbed.BorderlandsOz.FileFormats.csproj">
-      <Project>{CEEBF236-CE02-42A0-A9C4-1B2094AF3283}</Project>
-      <Name>Gibbed.BorderlandsOz.FileFormats</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Gibbed.BorderlandsOz.GameInfo\Gibbed.BorderlandsOz.GameInfo.csproj">
-      <Project>{B7893168-DE33-4D78-BB97-393077E55C93}</Project>
-      <Name>Gibbed.BorderlandsOz.GameInfo</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Gibbed.BorderlandsOz.ProtoBufFormats\Gibbed.BorderlandsOz.ProtoBufFormats.csproj">
-      <Project>{F6A846F8-1541-4D51-B438-7BCA47463A90}</Project>
-      <Name>Gibbed.BorderlandsOz.ProtoBufFormats</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Jack.png" />
     <Resource Include="Resources\moonstone.png" />
   </ItemGroup>
@@ -391,6 +401,13 @@
     <Resource Include="Resources\Jack.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="AfterResolveReferences">
+    <ItemGroup>
+      <EmbeddedResource Include="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.Extension)' == '.dll'">
+        <LogicalName>%(ReferenceCopyLocalPaths.DestinationSubDirectory)%(ReferenceCopyLocalPaths.Filename)%(ReferenceCopyLocalPaths.Extension)</LogicalName>
+      </EmbeddedResource>
+    </ItemGroup>
+  </Target>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

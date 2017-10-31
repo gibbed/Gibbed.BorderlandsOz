@@ -132,7 +132,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
 
                 ProtoBuf.Serializer.Serialize(innerUncompressedData, saveGame);
                 innerUncompressedData.Position = 0;
-                innerUncompressedBytes = innerUncompressedData.ReadBytes((uint)innerUncompressedData.Length);
+                innerUncompressedBytes = innerUncompressedData.ReadBytes((int)innerUncompressedData.Length);
             }
 
             byte[] innerCompressedBytes;
@@ -154,7 +154,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                 innerCompressedData.WriteValueU32((uint)(innerCompressedData.Length - 4), Endian.Big);
 
                 innerCompressedData.Position = 0;
-                innerCompressedBytes = innerCompressedData.ReadBytes((uint)innerCompressedData.Length);
+                innerCompressedBytes = innerCompressedData.ReadBytes((int)innerCompressedData.Length);
             }
 
             byte[] compressedBytes;
@@ -190,7 +190,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                         temp.Flush();
 
                         temp.Position = 0;
-                        compressedBytes = temp.ReadBytes((uint)temp.Length);
+                        compressedBytes = temp.ReadBytes((int)temp.Length);
                     }
                 }
                 else
@@ -247,7 +247,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                         }
 
                         blockData.Position = 0;
-                        compressedBytes = blockData.ReadBytes((uint)blockData.Length);
+                        compressedBytes = blockData.ReadBytes((int)blockData.Length);
                     }
                 }
                 else if (this.Platform == Platform.PS3 || this.Platform == Platform.Android)
@@ -275,7 +275,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                                 temp.Flush();
 
                                 temp.Position = 0;
-                                compressedBytes = temp.ReadBytes((uint)temp.Length);
+                                compressedBytes = temp.ReadBytes((int)temp.Length);
                             }
 
                             blockData.WriteBytes(compressedBytes);
@@ -293,7 +293,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                         }
 
                         blockData.Position = 0;
-                        compressedBytes = blockData.ReadBytes((uint)blockData.Length);
+                        compressedBytes = blockData.ReadBytes((int)blockData.Length);
                     }
                 }
                 else
@@ -308,7 +308,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                 uncompressedData.WriteValueS32(innerCompressedBytes.Length, Endian.Big);
                 uncompressedData.WriteBytes(compressedBytes);
                 uncompressedData.Position = 0;
-                uncompressedBytes = uncompressedData.ReadBytes((uint)uncompressedData.Length);
+                uncompressedBytes = uncompressedData.ReadBytes((int)uncompressedData.Length);
             }
 
             byte[] computedHash;
@@ -350,7 +350,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
             input.Seek(-4, SeekOrigin.Current);
 
             var readSha1Hash = input.ReadBytes(20);
-            using (var data = input.ReadToMemoryStream(input.Length - 20))
+            using (var data = input.ReadToMemoryStream((int)(input.Length - 20)))
             {
                 byte[] computedSha1Hash;
                 using (var sha1 = new System.Security.Cryptography.SHA1Managed())
@@ -373,11 +373,11 @@ namespace Gibbed.BorderlandsOz.FileFormats
                     if (platform == Platform.PC || platform == Platform.X360)
                     {
                         var actualUncompressedSize = (int)uncompressedSize;
-                        var compressedSize = (uint)(data.Length - 4);
+                        var compressedSize = (int)(data.Length - 4);
                         var compressedBytes = data.ReadBytes(compressedSize);
                         var result = LZO.Decompress(compressedBytes,
                                                     0,
-                                                    (int)compressedSize,
+                                                    compressedSize,
                                                     uncompressedBytes,
                                                     0,
                                                     ref actualUncompressedSize);
@@ -393,7 +393,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                     }
                     else if (platform == Platform.PS3 || platform == Platform.Android)
                     {
-                        var compressedSize = (uint)(data.Length - 4);
+                        var compressedSize = (int)(data.Length - 4);
                         using (var temp = data.ReadToMemoryStream(compressedSize))
                         {
                             var zlib = new InflaterInputStream(temp);
@@ -544,7 +544,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                     var readCRC32Hash = outerData.ReadValueU32(endian);
                     var innerUncompressedSize = outerData.ReadValueS32(endian);
 
-                    var innerCompressedBytes = outerData.ReadBytes(innerSize - 3 - 4 - 4 - 4);
+                    var innerCompressedBytes = outerData.ReadBytes((int)(innerSize - 3 - 4 - 4 - 4));
                     var innerUncompressedBytes = Huffman.Decoder.Decode(innerCompressedBytes,
                                                                         innerUncompressedSize);
                     if (innerUncompressedBytes.Length != innerUncompressedSize)
@@ -590,7 +590,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                                 }
 
                                 testData.Position = 0;
-                                var testBytes = testData.ReadBytes((uint)testData.Length);
+                                var testBytes = testData.ReadBytes((int)testData.Length);
                                 if (innerUncompressedBytes.SequenceEqual(testBytes) == false)
                                 {
                                     throw new SaveCorruptionException("reencode mismatch");

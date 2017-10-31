@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gibbed.BorderlandsOz.ProtoBufFormats", "Gibbed.BorderlandsOz.ProtoBufFormats\Gibbed.BorderlandsOz.ProtoBufFormats.csproj", "{F6A846F8-1541-4D51-B438-7BCA47463A90}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gibbed.BorderlandsOz.ProtoBufFormats", "projects\Gibbed.BorderlandsOz.ProtoBufFormats\Gibbed.BorderlandsOz.ProtoBufFormats.csproj", "{F6A846F8-1541-4D51-B438-7BCA47463A90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gibbed.BorderlandsOz.GameInfo", "Gibbed.BorderlandsOz.GameInfo\Gibbed.BorderlandsOz.GameInfo.csproj", "{B7893168-DE33-4D78-BB97-393077E55C93}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gibbed.BorderlandsOz.GameInfo", "projects\Gibbed.BorderlandsOz.GameInfo\Gibbed.BorderlandsOz.GameInfo.csproj", "{B7893168-DE33-4D78-BB97-393077E55C93}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{14E61882-DD3A-474B-B920-469C039D531A}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,9 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{14E618
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gibbed.BorderlandsOz.FileFormats", "Gibbed.BorderlandsOz.FileFormats\Gibbed.BorderlandsOz.FileFormats.csproj", "{CEEBF236-CE02-42A0-A9C4-1B2094AF3283}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gibbed.BorderlandsOz.FileFormats", "projects\Gibbed.BorderlandsOz.FileFormats\Gibbed.BorderlandsOz.FileFormats.csproj", "{CEEBF236-CE02-42A0-A9C4-1B2094AF3283}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gibbed.IO", "Gibbed.IO\Gibbed.IO.csproj", "{047857BA-DAA3-4CA7-AFB8-A1B082B28C6A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gibbed.IO", "projects\Gibbed.IO\Gibbed.IO.csproj", "{047857BA-DAA3-4CA7-AFB8-A1B082B28C6A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Game", "Game", "{B4DBC961-36BD-404D-B9FA-B948CB5E9C05}"
 EndProject
@@ -24,11 +24,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{DC20B65F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{2A0E7026-F7AD-448B-BB02-B63603210EBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDesk.Options", "NDesk.Options\NDesk.Options.csproj", "{C98A6CD6-9422-4B35-8B7A-F520D75534D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NDesk.Options", "projects\NDesk.Options\NDesk.Options.csproj", "{C98A6CD6-9422-4B35-8B7A-F520D75534D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gibbed.BorderlandsOz.SaveEdit", "Gibbed.BorderlandsOz.SaveEdit\Gibbed.BorderlandsOz.SaveEdit.csproj", "{582B962B-9A50-4B27-AE99-CB16B8DB0C7E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gibbed.BorderlandsOz.SaveEdit", "projects\Gibbed.BorderlandsOz.SaveEdit\Gibbed.BorderlandsOz.SaveEdit.csproj", "{582B962B-9A50-4B27-AE99-CB16B8DB0C7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerifySaves", "VerifySaves\VerifySaves.csproj", "{E040D0B3-355C-4787-8F64-549EE898307E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerifySaves", "projects\VerifySaves\VerifySaves.csproj", "{E040D0B3-355C-4787-8F64-549EE898307E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

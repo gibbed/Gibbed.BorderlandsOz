@@ -85,7 +85,8 @@
                                     Value="{Binding Path=Eridium, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
         </Expander>
-        <Expander Header="Reserved"
+        <Expander Header="Reserved (Unused)"
+                  FontStyle="Italic"
                   IsExpanded="False">
             <Grid>
                 <Grid.RowDefinitions>
@@ -135,10 +136,12 @@
                                     Value="{Binding Path=SeraphCrystals, UpdateSourceTrigger=PropertyChanged}" />
                 <Label Grid.Column="0"
                        HorizontalContentAlignment="Right"
-                       Content="A:" Grid.Row="1" />
+                       Content="A:"
+                       Grid.Row="1" />
                 <xctk:IntegerUpDown Grid.Column="1"
                                     Margin="3"
-                                    Value="{Binding Path=ReservedA, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" />
+                                    Value="{Binding Path=ReservedA, UpdateSourceTrigger=PropertyChanged}"
+                                    Grid.Row="1" />
                 <Label Grid.Row="3"
                        Grid.Column="0"
                        HorizontalContentAlignment="Right"

@@ -1,0 +1,57 @@
+version: 1.0.{build}
+
+branches:
+  only:
+    - master
+
+skip_tags: true
+skip_commits:
+  files:
+    - README.md
+
+max_jobs: 1
+
+image: Visual Studio 2015
+
+clone_folder: c:\projects\gibbed-borderlandsoz
+
+cache:
+  - packages -> **\packages.config
+  - '%LocalAppData%\NuGet\Cache'
+  - '%LocalAppData%\NuGet\v3-cache'
+
+install:
+  - git submodule update --init --recursive
+
+configuration:
+  - SaveEdit Packaging
+  - Debug
+
+build:
+  project: The Pre-Sequel!.sln
+  parallel: true
+  verbosity: minimal
+
+before_build:
+  - nuget restore
+  - echo namespace Gibbed.BorderlandsOz.SaveEdit > projects/Gibbed.BorderlandsOz.SaveEdit/Version.cs
+  - echo { >> projects/Gibbed.BorderlandsOz.SaveEdit/Version.cs
+  - echo   internal static class Version >> projects/Gibbed.BorderlandsOz.SaveEdit/Version.cs
+  - echo   { >> projects/Gibbed.BorderlandsOz.SaveEdit/Version.cs
+  - if "%CONFIGURATION%"=="SaveEdit Packaging" echo public const string Configuration = null; >> projects/Gibbed.BorderlandsOz.SaveEdit/Version.cs
+  - if NOT "%CONFIGURATION%"=="SaveEdit Packaging" echo public const string Configuration = "%CONFIGURATION%"; >> projects/Gibbed.BorderlandsOz.SaveEdit/Version.cs
+  - echo     public const string Commit = "%APPVEYOR_REPO_COMMIT%"; >> projects/Gibbed.BorderlandsOz.SaveEdit/Version.cs
+  - echo     public const string Timestamp = "%APPVEYOR_REPO_COMMIT_TIMESTAMP%"; >> projects/Gibbed.BorderlandsOz.SaveEdit/Version.cs
+  - echo   } >> projects/Gibbed.BorderlandsOz.SaveEdit/Version.cs
+  - echo } >> projects/Gibbed.BorderlandsOz.SaveEdit/Version.cs
+  
+after_build:
+  - set TZ=GMT
+  - git log . > git-log.txt
+  - if NOT "%CONFIGURATION%"=="SaveEdit Packaging" 7z a -r -tzip -mx=9 -x!bin/Test.exe -x!*/LICENSE.txt borderlandsoz-%APPVEYOR_BUILD_VERSION%.zip ./LICENSE.txt ./README.txt git-log.txt bin/*.exe bin/*.dll bin/projects
+  - if NOT "%CONFIGURATION%"=="SaveEdit Packaging" 7z a -r -tzip -mx=9 -x!bin/Test.exe -x!*/LICENSE.txt borderlandsoz-%APPVEYOR_BUILD_VERSION%-with-symbols.zip ./LICENSE.txt ./README.txt git-log.txt bin/*.exe bin/*.dll bin/*.pdb bin/projects
+  - if "%CONFIGURATION%"=="SaveEdit Packaging" 7z a -r -tzip -mx=9 -x!*/LICENSE.txt saveedit-%APPVEYOR_BUILD_VERSION%.zip ./LICENSE.txt ./README.txt ./git-log.txt ./bin_saveedit/*.exe ./dist/*
+  - if "%CONFIGURATION%"=="SaveEdit Packaging" 7z a -r -tzip -mx=9 -x!*/LICENSE.txt saveedit-%APPVEYOR_BUILD_VERSION%-with-symbols.zip ./LICENSE.txt ./README.txt ./git-log.txt ./bin_saveedit/*.exe ./bin_saveedit/*.pdb ./dist/*
+
+artifacts:
+  - path: '*-*.zip'

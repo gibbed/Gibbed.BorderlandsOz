@@ -166,14 +166,15 @@ namespace Gibbed.BorderlandsOz.FileFormats
                     compressedBytes = new byte[innerCompressedBytes.Length +
                                                (innerCompressedBytes.Length / 16) + 64 + 3];
                     var actualCompressedSize = compressedBytes.Length;
-
-                    var result = LZO.Compress(innerCompressedBytes,
-                                              0,
-                                              innerCompressedBytes.Length,
-                                              compressedBytes,
-                                              0,
-                                              ref actualCompressedSize);
-                    if (result != LZO.ErrorCode.Success)
+                    var result = MiniLZO.LZO.Compress(
+                        innerCompressedBytes,
+                        0,
+                        innerCompressedBytes.Length,
+                        compressedBytes,
+                        0,
+                        ref actualCompressedSize,
+                        new MiniLZO.CompressWorkBuffer());
+                    if (result != MiniLZO.ErrorCode.Success)
                     {
                         throw new SaveCorruptionException(string.Format("LZO compression failure ({0})", result));
                     }
@@ -220,14 +221,15 @@ namespace Gibbed.BorderlandsOz.FileFormats
                             compressedBytes = new byte[blockUncompressedSize +
                                                        (blockUncompressedSize / 16) + 64 + 3];
                             var actualCompressedSize = compressedBytes.Length;
-
-                            var result = LZO.Compress(innerCompressedBytes,
-                                                      innerCompressedOffset,
-                                                      blockUncompressedSize,
-                                                      compressedBytes,
-                                                      0,
-                                                      ref actualCompressedSize);
-                            if (result != LZO.ErrorCode.Success)
+                            var result = MiniLZO.LZO.Compress(
+                                innerCompressedBytes,
+                                innerCompressedOffset,
+                                blockUncompressedSize,
+                                compressedBytes,
+                                0,
+                                ref actualCompressedSize,
+                                new MiniLZO.CompressWorkBuffer());
+                            if (result != MiniLZO.ErrorCode.Success)
                             {
                                 throw new SaveCorruptionException(string.Format("LZO compression failure ({0})", result));
                             }
@@ -375,13 +377,13 @@ namespace Gibbed.BorderlandsOz.FileFormats
                         var actualUncompressedSize = (int)uncompressedSize;
                         var compressedSize = (int)(data.Length - 4);
                         var compressedBytes = data.ReadBytes(compressedSize);
-                        var result = LZO.Decompress(compressedBytes,
-                                                    0,
-                                                    compressedSize,
-                                                    uncompressedBytes,
-                                                    0,
-                                                    ref actualUncompressedSize);
-                        if (result != LZO.ErrorCode.Success)
+                        var result = MiniLZO.LZO.Decompress(compressedBytes,
+                                                            0,
+                                                            (int)compressedSize,
+                                                            uncompressedBytes,
+                                                            0,
+                                                            ref actualUncompressedSize);
+                        if (result != MiniLZO.ErrorCode.Success)
                         {
                             throw new SaveCorruptionException(string.Format("LZO decompression failure ({0})", result));
                         }
@@ -440,13 +442,13 @@ namespace Gibbed.BorderlandsOz.FileFormats
                             var actualUncompressedSize = blockUncompressedSize;
                             var compressedSize = (int)blockInfo.Item1;
                             var compressedBytes = data.ReadBytes(compressedSize);
-                            var result = LZO.Decompress(compressedBytes,
-                                                        0,
-                                                        compressedSize,
-                                                        uncompressedBytes,
-                                                        uncompressedOffset,
-                                                        ref actualUncompressedSize);
-                            if (result != LZO.ErrorCode.Success)
+                            var result = MiniLZO.LZO.Decompress(compressedBytes,
+                                                                0,
+                                                                compressedSize,
+                                                                uncompressedBytes,
+                                                                uncompressedOffset,
+                                                                ref actualUncompressedSize);
+                            if (result != MiniLZO.ErrorCode.Success)
                             {
                                 throw new SaveCorruptionException(string.Format("LZO decompression failure ({0})",
                                                                                 result));

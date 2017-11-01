@@ -72,7 +72,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                               .AddFilter("sav", this._FilterIndex == 3)
                               .WithDescription("PS3 Save Files")
                               .AddFilter("sav", this._FilterIndex == 4)
-                              .WithDescription("Android Save Files"))
+                              .WithDescription("NVIDIA SHIELD Save Files"))
                 .WithFileDo(s => fileName = s)
                 .WithFilterIndexDo(i => filterIndex = i);
 
@@ -97,7 +97,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 Platform.PC,
                 Platform.X360,
                 Platform.PS3,
-                Platform.Android,
+                Platform.Shield,
             };
 
             fileNameAction(fileName);

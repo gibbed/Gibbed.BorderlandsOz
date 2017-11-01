@@ -29,7 +29,7 @@ namespace Gibbed.BorderlandsOz.GameInfo
         PC,
         X360,
         PS3,
-        Android,
+        Shield,
         // ReSharper restore InconsistentNaming
     }
 }

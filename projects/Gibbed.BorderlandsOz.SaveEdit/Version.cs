@@ -24,6 +24,8 @@ namespace Gibbed.BorderlandsOz.SaveEdit
 {
     internal static class Version
     {
-        public const string DisplayText = null;
+        public const string Configuration = null;
+        public const string Commit = null;
+        public const string Timestamp = null;
     }
 }

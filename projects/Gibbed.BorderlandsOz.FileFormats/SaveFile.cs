@@ -28,6 +28,7 @@ using System.Linq;
 using Gibbed.BorderlandsOz.GameInfo;
 using Gibbed.IO;
 using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
+using ProtoSerializer = ProtoBuf.Serializer;
 using WillowTwoSave = Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave;
 
 namespace Gibbed.BorderlandsOz.FileFormats
@@ -83,32 +84,12 @@ namespace Gibbed.BorderlandsOz.FileFormats
 
         public const int BlockSize = 0x40000;
 
-        public static bool IsSupportedPlatform(Platform platform)
+        private static bool IsSupportedPlatform(Platform platform)
         {
             return platform == Platform.PC ||
                    platform == Platform.X360 ||
                    platform == Platform.PS3 ||
-                   platform == Platform.Android;
-        }
-
-        public static Endian GetPlatformEndianness(Platform platform)
-        {
-            switch (platform)
-            {
-                case Platform.PC:
-                case Platform.Android:
-                {
-                    return Endian.Little;
-                }
-
-                case Platform.PS3:
-                case Platform.X360:
-                {
-                    return Endian.Big;
-                }
-            }
-
-            throw new NotSupportedException();
+                   platform == Platform.Shield;
         }
 
         public void Serialize(Stream output)
@@ -120,7 +101,8 @@ namespace Gibbed.BorderlandsOz.FileFormats
                 throw new InvalidOperationException("unsupported platform");
             }
 
-            var endian = GetPlatformEndianness(this.Platform);
+            var endian = this.Platform.GetEndian();
+            var compressionScheme = this.Platform.GetCompressionScheme();
 
             byte[] innerUncompressedBytes;
             using (var innerUncompressedData = new MemoryStream())
@@ -130,7 +112,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                     saveGame.StatsData = this.PlayerStats.Serialize(endian);
                 }
 
-                ProtoBuf.Serializer.Serialize(innerUncompressedData, saveGame);
+                ProtoSerializer.Serialize(innerUncompressedData, saveGame);
                 innerUncompressedData.Position = 0;
                 innerUncompressedBytes = innerUncompressedData.ReadBytes((int)innerUncompressedData.Length);
             }
@@ -161,7 +143,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
 
             if (innerCompressedBytes.Length <= BlockSize)
             {
-                if (this.Platform == Platform.PC || this.Platform == Platform.X360)
+                if (compressionScheme == CompressionScheme.LZO)
                 {
                     compressedBytes = new byte[innerCompressedBytes.Length +
                                                (innerCompressedBytes.Length / 16) + 64 + 3];
@@ -181,7 +163,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
 
                     Array.Resize(ref compressedBytes, actualCompressedSize);
                 }
-                else if (this.Platform == Platform.PS3 || this.Platform == Platform.Android)
+                else if (compressionScheme == CompressionScheme.Zlib)
                 {
                     using (var temp = new MemoryStream())
                     {
@@ -189,19 +171,18 @@ namespace Gibbed.BorderlandsOz.FileFormats
                         zlib.WriteBytes(innerCompressedBytes);
                         zlib.Finish();
                         temp.Flush();
-
                         temp.Position = 0;
                         compressedBytes = temp.ReadBytes((int)temp.Length);
                     }
                 }
                 else
                 {
-                    throw new InvalidOperationException("unsupported platform");
+                    throw new InvalidOperationException("unsupported compression scheme");
                 }
             }
             else
             {
-                if (this.Platform == Platform.PC || this.Platform == Platform.X360)
+                if (compressionScheme == CompressionScheme.LZO)
                 {
                     int innerCompressedOffset = 0;
                     int innerCompressedSizeLeft = innerCompressedBytes.Length;
@@ -252,7 +233,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                         compressedBytes = blockData.ReadBytes((int)blockData.Length);
                     }
                 }
-                else if (this.Platform == Platform.PS3 || this.Platform == Platform.Android)
+                else if (compressionScheme == CompressionScheme.Zlib)
                 {
                     int innerCompressedOffset = 0;
                     int innerCompressedSizeLeft = innerCompressedBytes.Length;
@@ -351,6 +332,8 @@ namespace Gibbed.BorderlandsOz.FileFormats
             }
             input.Seek(-4, SeekOrigin.Current);
 
+            var compressionScheme = platform.GetCompressionScheme();
+
             var readSha1Hash = input.ReadBytes(20);
             using (var data = input.ReadToMemoryStream((int)(input.Length - 20)))
             {
@@ -372,7 +355,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                 var uncompressedBytes = new byte[uncompressedSize];
                 if (uncompressedSize <= BlockSize)
                 {
-                    if (platform == Platform.PC || platform == Platform.X360)
+                    if (compressionScheme == CompressionScheme.LZO)
                     {
                         var actualUncompressedSize = (int)uncompressedSize;
                         var compressedSize = (int)(data.Length - 4);
@@ -393,7 +376,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                             throw new SaveCorruptionException("LZO decompression failure (uncompressed size mismatch)");
                         }
                     }
-                    else if (platform == Platform.PS3 || platform == Platform.Android)
+                    else if (compressionScheme == CompressionScheme.Zlib)
                     {
                         var compressedSize = (int)(data.Length - 4);
                         using (var temp = data.ReadToMemoryStream(compressedSize))
@@ -410,20 +393,20 @@ namespace Gibbed.BorderlandsOz.FileFormats
                             }
                             catch (ICSharpCode.SharpZipLib.SharpZipBaseException e)
                             {
-                                throw new SaveCorruptionException(string.Format("zlib decompression failure ({0})",
-                                                                                e.Message),
-                                                                  e);
+                                throw new SaveCorruptionException(
+                                    string.Format("zlib decompression failure ({0})", e.Message),
+                                    e);
                             }
                         }
                     }
                     else
                     {
-                        throw new InvalidOperationException("unsupported platform");
+                        throw new InvalidOperationException("unsupported compression scheme");
                     }
                 }
                 else
                 {
-                    if (platform == Platform.PC || platform == Platform.X360)
+                    if (compressionScheme == CompressionScheme.LZO)
                     {
                         var blockCount = data.ReadValueU32(Endian.Big);
                         var blockInfos = new List<Tuple<uint, uint>>();
@@ -469,7 +452,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                             throw new SaveCorruptionException("LZO decompression failure (uncompressed size left != 0)");
                         }
                     }
-                    else if (platform == Platform.PS3 || platform == Platform.Android)
+                    else if (compressionScheme == CompressionScheme.Zlib)
                     {
                         var blockCount = data.ReadValueU32(Endian.Big);
                         var blockInfos = new List<Tuple<uint, uint>>();
@@ -528,7 +511,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
 
                 using (var outerData = new MemoryStream(uncompressedBytes))
                 {
-                    var endian = GetPlatformEndianness(platform);
+                    var endian = platform.GetEndian();
 
                     var innerSize = outerData.ReadValueU32(Endian.Big);
                     var magic = outerData.ReadString(3);
@@ -563,8 +546,8 @@ namespace Gibbed.BorderlandsOz.FileFormats
 
                     using (var innerUncompressedData = new MemoryStream(innerUncompressedBytes))
                     {
-                        var saveGame =
-                            ProtoBuf.Serializer.Deserialize<WillowTwoSave.WillowTwoPlayerSaveGame>(innerUncompressedData);
+                        var saveGame = ProtoSerializer.Deserialize<WillowTwoSave.WillowTwoPlayerSaveGame>(
+                            innerUncompressedData);
 
                         PlayerStats playerStats = null;
                         if (saveGame.StatsData != null &&
@@ -584,7 +567,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                                     saveGame.StatsData = playerStats.Serialize(endian);
                                 }
 
-                                ProtoBuf.Serializer.Serialize(testData, saveGame);
+                                ProtoSerializer.Serialize(testData, saveGame);
 
                                 if (playerStats != null)
                                 {

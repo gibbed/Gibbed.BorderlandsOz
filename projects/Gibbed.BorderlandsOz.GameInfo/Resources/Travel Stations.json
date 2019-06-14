@@ -164,7 +164,7 @@
     "$type": "FastTravelStationDefinition",
     "resource_name": "Laser",
     "level_name": "Laser_P",
-    "previous_station": "GD_LevelTravelStations.Zone_4.LaserToInnerHull",
+    "previous_station": "GD_LevelTravelStations.Zone_3.LaserToInnerHull",
     "station_display_name": "Lunar Launching Station",
     "mission_dependencies": [
       {
@@ -293,7 +293,7 @@
     "$type": "FastTravelStationDefinition",
     "resource_name": "RandDFacility",
     "level_name": "RandDFacility_P",
-    "previous_station": "GD_LevelTravelStations.Zone_4.RandDFacilityToCentralTerminal",
+    "previous_station": "GD_LevelTravelStations.Zone_3.RandDFacilityToCentralTerminal",
     "station_display_name": "Research and Development",
     "mission_dependencies": [
       {
@@ -367,7 +367,7 @@
     "initially_active": true,
     "send_only": false
   },
-  "GD_FastTravelStations.Zone_4.CentralTerminal": {
+  "GD_FastTravelStations.Zone_3.CentralTerminal": {
     "$type": "FastTravelStationDefinition",
     "resource_name": "CentralTerminal",
     "level_name": "centralterminal_p",
@@ -386,11 +386,11 @@
     "send_only": false,
     "accessible_objective": "GD_Cork_HeliosFoothold_Plot.M_Cork_HeliosFoothold.TravelToHelios"
   },
-  "GD_FastTravelStations.Zone_4.JacksOffice": {
+  "GD_FastTravelStations.Zone_3.JacksOffice": {
     "$type": "FastTravelStationDefinition",
     "resource_name": "JacksOffice",
     "level_name": "JacksOffice_P",
-    "previous_station": "GD_LevelTravelStations.Zone_4.JacksOfficeToCentralTerminal",
+    "previous_station": "GD_LevelTravelStations.Zone_3.JacksOfficeToCentralTerminal",
     "station_display_name": "Jack's Office",
     "mission_dependencies": [
       {
@@ -1377,11 +1377,11 @@
     ],
     "destination_station": "GD_LevelTravelStations.OutlandsToWreck"
   },
-  "GD_LevelTravelStations.Zone_4.CentralTerminalToInnerHull": {
+  "GD_LevelTravelStations.Zone_3.CentralTerminalToInnerHull": {
     "$type": "LevelTravelStationDefinition",
     "resource_name": "CentralTerminalToInnerHull",
     "level_name": "centralterminal_p",
-    "previous_station": "GD_FastTravelStations.Zone_4.CentralTerminal",
+    "previous_station": "GD_FastTravelStations.Zone_3.CentralTerminal",
     "station_display_name": "Hyperion Hub of Heroism",
     "mission_dependencies": [
       {
@@ -1392,13 +1392,13 @@
         "objective_status": "Complete"
       }
     ],
-    "destination_station": "GD_LevelTravelStations.Zone_4.InnerHullToCentralTerminal"
+    "destination_station": "GD_LevelTravelStations.Zone_3.InnerHullToCentralTerminal"
   },
-  "GD_LevelTravelStations.Zone_4.CentralTerminalToJacksOffice": {
+  "GD_LevelTravelStations.Zone_3.CentralTerminalToJacksOffice": {
     "$type": "LevelTravelStationDefinition",
     "resource_name": "CentralTerminalToJacksOffice",
     "level_name": "centralterminal_p",
-    "previous_station": "GD_FastTravelStations.Zone_4.CentralTerminal",
+    "previous_station": "GD_FastTravelStations.Zone_3.CentralTerminal",
     "station_display_name": "Hyperion Hub of Heroism",
     "mission_dependencies": [
       {
@@ -1409,13 +1409,13 @@
         "objective_status": "Complete"
       }
     ],
-    "destination_station": "GD_LevelTravelStations.Zone_4.JacksOfficeToCentralTerminal"
+    "destination_station": "GD_LevelTravelStations.Zone_3.JacksOfficeToCentralTerminal"
   },
-  "GD_LevelTravelStations.Zone_4.CentralTerminalToRandDFacility": {
+  "GD_LevelTravelStations.Zone_3.CentralTerminalToRandDFacility": {
     "$type": "LevelTravelStationDefinition",
     "resource_name": "CentralTerminalToRandDFacility",
     "level_name": "centralterminal_p",
-    "previous_station": "GD_FastTravelStations.Zone_4.CentralTerminal",
+    "previous_station": "GD_FastTravelStations.Zone_3.CentralTerminal",
     "station_display_name": "Hyperion Hub of Heroism",
     "mission_dependencies": [
       {
@@ -1426,13 +1426,13 @@
         "objective_status": "Active"
       }
     ],
-    "destination_station": "GD_LevelTravelStations.Zone_4.RandDFacilityToCentralTerminal"
+    "destination_station": "GD_LevelTravelStations.Zone_3.RandDFacilityToCentralTerminal"
   },
-  "GD_LevelTravelStations.Zone_4.InnerHullToCentralTerminal": {
+  "GD_LevelTravelStations.Zone_3.InnerHullToCentralTerminal": {
     "$type": "LevelTravelStationDefinition",
     "resource_name": "InnerHullToCentralTerminal",
     "level_name": "InnerHull_P",
-    "previous_station": "GD_LevelTravelStations.Zone_4.CentralTerminalToInnerHull",
+    "previous_station": "GD_LevelTravelStations.Zone_3.CentralTerminalToInnerHull",
     "station_display_name": "Veins of Helios",
     "mission_dependencies": [
       {
@@ -1443,13 +1443,13 @@
         "objective_status": "Complete"
       }
     ],
-    "destination_station": "GD_LevelTravelStations.Zone_4.CentralTerminalToInnerHull"
+    "destination_station": "GD_LevelTravelStations.Zone_3.CentralTerminalToInnerHull"
   },
-  "GD_LevelTravelStations.Zone_4.InnerHullToLaser": {
+  "GD_LevelTravelStations.Zone_3.InnerHullToLaser": {
     "$type": "LevelTravelStationDefinition",
     "resource_name": "InnerHullToLaser",
     "level_name": "InnerHull_P",
-    "previous_station": "GD_LevelTravelStations.Zone_4.InnerHullToCentralTerminal",
+    "previous_station": "GD_LevelTravelStations.Zone_3.InnerHullToCentralTerminal",
     "station_display_name": "Veins of Helios",
     "mission_dependencies": [
       {
@@ -1460,13 +1460,13 @@
         "objective_status": "Complete"
       }
     ],
-    "destination_station": "GD_LevelTravelStations.Zone_4.LaserToInnerHull"
+    "destination_station": "GD_LevelTravelStations.Zone_3.LaserToInnerHull"
   },
-  "GD_LevelTravelStations.Zone_4.JacksOfficeToCentralTerminal": {
+  "GD_LevelTravelStations.Zone_3.JacksOfficeToCentralTerminal": {
     "$type": "LevelTravelStationDefinition",
     "resource_name": "JacksOfficeToCentralTerminal",
     "level_name": "JacksOffice_P",
-    "previous_station": "GD_LevelTravelStations.Zone_4.CentralTerminalToJacksOffice",
+    "previous_station": "GD_LevelTravelStations.Zone_3.CentralTerminalToJacksOffice",
     "station_display_name": "Jack's Office",
     "mission_dependencies": [
       {
@@ -1477,13 +1477,13 @@
         "objective_status": "Complete"
       }
     ],
-    "destination_station": "GD_LevelTravelStations.Zone_4.CentralTerminalToJacksOffice"
+    "destination_station": "GD_LevelTravelStations.Zone_3.CentralTerminalToJacksOffice"
   },
-  "GD_LevelTravelStations.Zone_4.LaserToInnerHull": {
+  "GD_LevelTravelStations.Zone_3.LaserToInnerHull": {
     "$type": "LevelTravelStationDefinition",
     "resource_name": "LaserToInnerHull",
     "level_name": "Laser_P",
-    "previous_station": "GD_LevelTravelStations.Zone_4.InnerHullToLaser",
+    "previous_station": "GD_LevelTravelStations.Zone_3.InnerHullToLaser",
     "station_display_name": "Lunar Launching Station",
     "mission_dependencies": [
       {
@@ -1494,13 +1494,13 @@
         "objective_status": "Active"
       }
     ],
-    "destination_station": "GD_LevelTravelStations.Zone_4.InnerHullToLaser"
+    "destination_station": "GD_LevelTravelStations.Zone_3.InnerHullToLaser"
   },
-  "GD_LevelTravelStations.Zone_4.RandDFacilityToCentralTerminal": {
+  "GD_LevelTravelStations.Zone_3.RandDFacilityToCentralTerminal": {
     "$type": "LevelTravelStationDefinition",
     "resource_name": "RandDFacilityToCentralTerminal",
     "level_name": "RandDFacility_P",
-    "previous_station": "GD_LevelTravelStations.Zone_4.CentralTerminalToRandDFacility",
+    "previous_station": "GD_LevelTravelStations.Zone_3.CentralTerminalToRandDFacility",
     "station_display_name": "Research and Development",
     "mission_dependencies": [
       {
@@ -1511,7 +1511,7 @@
         "objective_status": "Active"
       }
     ],
-    "destination_station": "GD_LevelTravelStations.Zone_4.CentralTerminalToRandDFacility"
+    "destination_station": "GD_LevelTravelStations.Zone_3.CentralTerminalToRandDFacility"
   },
   "GD_Ma_FastTravelStations.Ma_Deck13_FT": {
     "$type": "FastTravelStationDefinition",

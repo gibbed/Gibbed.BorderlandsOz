@@ -1,4 +1,9 @@
 ﻿{
+  "GD_AilanthusPackageDef.PackageDef_Ailanthus": {
+    "id": 7,
+    "dlc_name": "Ailanthus",
+    "display_name": "Ailanthus"
+  },
   "GD_CrocusPackageDef.PackageDef_Crocus": {
     "id": 6,
     "dlc_name": "Crocus",

@@ -33,7 +33,7 @@
     "name": "Miss Moxxi's"
   },
   "GD_Cork_Weap_Lasers.Name.Prefix.Prefix__ZX1": {},
-  "GD_Cork_Weap_Lasers.Name.Prefix.Prefix_Bayonet_2": {
+  "GD_Cork_Weap_Lasers.Name.Prefix.Prefix_Bayonet_1": {
     "name": "Bladed"
   },
   "GD_Cork_Weap_Lasers.Name.Prefix.Prefix_EGun": {
@@ -656,7 +656,7 @@
   "GD_Weap_AssaultRifle.Name.Prefix.Prefix_Barrel_Torgue_Rocket": {
     "name": "Rocket"
   },
-  "GD_Weap_AssaultRifle.Name.Prefix.Prefix_Bayonet_2": {
+  "GD_Weap_AssaultRifle.Name.Prefix.Prefix_Bayonet_1": {
     "name": "Bladed"
   },
   "GD_Weap_AssaultRifle.Name.Prefix.Prefix_Box_BulletSpeed": {
@@ -698,7 +698,7 @@
   "GD_Weap_AssaultRifle.Name.Prefix_Dahl.Prefix_Barrel_Vladof_Minigun_Nonuple": {
     "name": "Nonuple"
   },
-  "GD_Weap_AssaultRifle.Name.Prefix_Dahl.Prefix_Bayonet_3": {
+  "GD_Weap_AssaultRifle.Name.Prefix_Dahl.Prefix_Bayonet_2": {
     "name": "Breach"
   },
   "GD_Weap_AssaultRifle.Name.Prefix_Dahl.Prefix_Box_BulletSpeed": {
@@ -737,7 +737,7 @@
   "GD_Weap_AssaultRifle.Name.Prefix_Jakobs.Prefix_BanditClamp_Wild": {
     "name": "Wild"
   },
-  "GD_Weap_AssaultRifle.Name.Prefix_Jakobs.Prefix_Bayonet_3": {
+  "GD_Weap_AssaultRifle.Name.Prefix_Jakobs.Prefix_Bayonet_2": {
     "name": "Razor"
   },
   "GD_Weap_AssaultRifle.Name.Prefix_Jakobs.Prefix_Box_BulletSpeed": {
@@ -773,7 +773,7 @@
   "GD_Weap_AssaultRifle.Name.Prefix_Scav.Prefix_Barrel_Torgue_Rocket": {
     "name": "Shoom"
   },
-  "GD_Weap_AssaultRifle.Name.Prefix_Scav.Prefix_Bayonet_3": {
+  "GD_Weap_AssaultRifle.Name.Prefix_Scav.Prefix_Bayonet_2": {
     "name": "Pointy"
   },
   "GD_Weap_AssaultRifle.Name.Prefix_Scav.Prefix_Box_BulletSpeed": {
@@ -812,7 +812,7 @@
   "GD_Weap_AssaultRifle.Name.Prefix_Torgue.Prefix_Barrel_Vladof_Blasting": {
     "name": "Sputtering"
   },
-  "GD_Weap_AssaultRifle.Name.Prefix_Torgue.Prefix_Bayonet_3": {
+  "GD_Weap_AssaultRifle.Name.Prefix_Torgue.Prefix_Bayonet_2": {
     "name": "Stabbing"
   },
   "GD_Weap_AssaultRifle.Name.Prefix_Torgue.Prefix_Box_BulletSpeed": {
@@ -836,7 +836,7 @@
   "GD_Weap_AssaultRifle.Name.Prefix_Vladof.Prefix_BanditClamp_Wild": {
     "name": "Rabid"
   },
-  "GD_Weap_AssaultRifle.Name.Prefix_Vladof.Prefix_Bayonet_3": {
+  "GD_Weap_AssaultRifle.Name.Prefix_Vladof.Prefix_Bayonet_2": {
     "name": "Skewering"
   },
   "GD_Weap_AssaultRifle.Name.Prefix_Vladof.Prefix_Box_BulletSpeed": {
@@ -1184,7 +1184,7 @@
   "GD_Weap_Launchers.Name.Title_Vladof.Title_Launcher": {
     "name": "RPG"
   },
-  "GD_Weap_Pistol.Name.Prefix.Prefix_Bayonet_2": {
+  "GD_Weap_Pistol.Name.Prefix.Prefix_Bayonet_1": {
     "name": "Bladed"
   },
   "GD_Weap_Pistol.Name.Prefix.Prefix_Elemental_Corrosive": {
@@ -1220,7 +1220,7 @@
   "GD_Weap_Pistol.Name.Prefix.Prefix_U_Crappy": {
     "name": "Basic"
   },
-  "GD_Weap_Pistol.Name.Prefix_Dahl.Prefix_Bayonet_2": {
+  "GD_Weap_Pistol.Name.Prefix_Dahl.Prefix_Bayonet_1": {
     "name": "Close Quarters"
   },
   "GD_Weap_Pistol.Name.Prefix_Dahl.Prefix_Elemental_Corrosive": {
@@ -1256,7 +1256,7 @@
   "GD_Weap_Pistol.Name.Prefix_Hyperion.Prefix__AutoCorrecting": {
     "name": "Auto Correcting"
   },
-  "GD_Weap_Pistol.Name.Prefix_Hyperion.Prefix_Bayonet_2": {
+  "GD_Weap_Pistol.Name.Prefix_Hyperion.Prefix_Bayonet_1": {
     "name": "Action"
   },
   "GD_Weap_Pistol.Name.Prefix_Hyperion.Prefix_Elemental_Corrosive": {
@@ -1289,7 +1289,7 @@
   "GD_Weap_Pistol.Name.Prefix_Hyperion.Prefix_Tech3_Firerate": {
     "name": "Dynamic"
   },
-  "GD_Weap_Pistol.Name.Prefix_Jakobs.Prefix_Bayonet_2": {
+  "GD_Weap_Pistol.Name.Prefix_Jakobs.Prefix_Bayonet_1": {
     "name": "Bowie"
   },
   "GD_Weap_Pistol.Name.Prefix_Jakobs.Prefix_Laser_Accuracy": {
@@ -1310,7 +1310,7 @@
   "GD_Weap_Pistol.Name.Prefix_Jakobs.Prefix_Tech3_Firerate": {
     "name": "Trick Shot"
   },
-  "GD_Weap_Pistol.Name.Prefix_Maliwan.Prefix_Bayonet_2": {
+  "GD_Weap_Pistol.Name.Prefix_Maliwan.Prefix_Bayonet_1": {
     "name": "Evisceration"
   },
   "GD_Weap_Pistol.Name.Prefix_Maliwan.Prefix_Elemental_Corrosive": {
@@ -1343,7 +1343,7 @@
   "GD_Weap_Pistol.Name.Prefix_Maliwan.Prefix_Tech3_Firerate": {
     "name": "Expeditious"
   },
-  "GD_Weap_Pistol.Name.Prefix_Old_Hyperion.Prefix_Bayonet_2": {
+  "GD_Weap_Pistol.Name.Prefix_Old_Hyperion.Prefix_Bayonet_1": {
     "name": "Multi-Purpose"
   },
   "GD_Weap_Pistol.Name.Prefix_Old_Hyperion.Prefix_Elemental_Corrosive": {
@@ -1379,7 +1379,7 @@
   "GD_Weap_Pistol.Name.Prefix_Scav.Prefix__Legendable": {
     "name": "Fantastical"
   },
-  "GD_Weap_Pistol.Name.Prefix_Scav.Prefix_Bayonet_3": {
+  "GD_Weap_Pistol.Name.Prefix_Scav.Prefix_Bayonet_2": {
     "name": "Pointy"
   },
   "GD_Weap_Pistol.Name.Prefix_Scav.Prefix_Elemental_Corrosive": {
@@ -1415,7 +1415,7 @@
   "GD_Weap_Pistol.Name.Prefix_Tediore.Prefix__Disposable": {
     "name": "Disposable"
   },
-  "GD_Weap_Pistol.Name.Prefix_Tediore.Prefix_Bayonet_2": {
+  "GD_Weap_Pistol.Name.Prefix_Tediore.Prefix_Bayonet_1": {
     "name": "Perma-Sharp"
   },
   "GD_Weap_Pistol.Name.Prefix_Tediore.Prefix_Elemental_Corrosive": {
@@ -1448,7 +1448,7 @@
   "GD_Weap_Pistol.Name.Prefix_Tediore.Prefix_Tech3_Firerate": {
     "name": "Peppy"
   },
-  "GD_Weap_Pistol.Name.Prefix_Torgue.Prefix_Bayonet_3": {
+  "GD_Weap_Pistol.Name.Prefix_Torgue.Prefix_Bayonet_2": {
     "name": "Thrusting"
   },
   "GD_Weap_Pistol.Name.Prefix_Torgue.Prefix_Laser_Accuracy": {
@@ -1469,7 +1469,7 @@
   "GD_Weap_Pistol.Name.Prefix_Torgue.Prefix_Tech3_Firerate": {
     "name": "Intense"
   },
-  "GD_Weap_Pistol.Name.Prefix_Vladof.Prefix_Bayonet_2": {
+  "GD_Weap_Pistol.Name.Prefix_Vladof.Prefix_Bayonet_1": {
     "name": "Patriot's"
   },
   "GD_Weap_Pistol.Name.Prefix_Vladof.Prefix_Elemental_Corrosive": {
@@ -1871,7 +1871,7 @@
   "GD_Weap_Shotgun.Name.Prefix_Bandit.Prefix_Barrel_Jakobs_DoubleBarrel": {
     "name": "Two-Shot"
   },
-  "GD_Weap_Shotgun.Name.Prefix_Bandit.Prefix_Bayonet_3": {
+  "GD_Weap_Shotgun.Name.Prefix_Bandit.Prefix_Bayonet_2": {
     "name": "Cutting"
   },
   "GD_Weap_Shotgun.Name.Prefix_Bandit.Prefix_Elemental_Corrosive": {
@@ -1913,7 +1913,7 @@
   "GD_Weap_Shotgun.Name.Prefix_Hyperion.Prefix_Barrel_Jakobs_DoubleBarrel": {
     "name": "Bilateral"
   },
-  "GD_Weap_Shotgun.Name.Prefix_Hyperion.Prefix_Bayonet_2": {
+  "GD_Weap_Shotgun.Name.Prefix_Hyperion.Prefix_Bayonet_1": {
     "name": "Restructuring"
   },
   "GD_Weap_Shotgun.Name.Prefix_Hyperion.Prefix_Elemental_Corrosive": {
@@ -1946,7 +1946,7 @@
   "GD_Weap_Shotgun.Name.Prefix_Hyperion.Prefix_VerticalGrip_Stability": {
     "name": "Practicable"
   },
-  "GD_Weap_Shotgun.Name.Prefix_Jakobs.Prefix_Bayonet_2": {
+  "GD_Weap_Shotgun.Name.Prefix_Jakobs.Prefix_Bayonet_1": {
     "name": "Barbed"
   },
   "GD_Weap_Shotgun.Name.Prefix_Jakobs.Prefix_MoonClip_MagSize": {
@@ -1976,7 +1976,7 @@
   "GD_Weap_Shotgun.Name.Prefix_Old_Hyperion.Prefix_Barrel_Jakobs_DoubleBarrel": {
     "name": "Parallel"
   },
-  "GD_Weap_Shotgun.Name.Prefix_Old_Hyperion.Prefix_Bayonet_2": {
+  "GD_Weap_Shotgun.Name.Prefix_Old_Hyperion.Prefix_Bayonet_1": {
     "name": "Downsizing"
   },
   "GD_Weap_Shotgun.Name.Prefix_Old_Hyperion.Prefix_Elemental_Corrosive": {
@@ -2009,7 +2009,7 @@
   "GD_Weap_Shotgun.Name.Prefix_Old_Hyperion.Prefix_VerticalGrip_Stability": {
     "name": "Enforceable"
   },
-  "GD_Weap_Shotgun.Name.Prefix_Tediore.Prefix_Bayonet_2": {
+  "GD_Weap_Shotgun.Name.Prefix_Tediore.Prefix_Bayonet_1": {
     "name": "Swiss"
   },
   "GD_Weap_Shotgun.Name.Prefix_Tediore.Prefix_Elemental_Corrosive": {
@@ -2051,7 +2051,7 @@
   "GD_Weap_Shotgun.Name.Prefix_Torgue.Prefix_Barrel_Jakobs_DoubleBarrel": {
     "name": "Double Lovin'"
   },
-  "GD_Weap_Shotgun.Name.Prefix_Torgue.Prefix_Bayonet_3": {
+  "GD_Weap_Shotgun.Name.Prefix_Torgue.Prefix_Bayonet_2": {
     "name": "Bad Touch"
   },
   "GD_Weap_Shotgun.Name.Prefix_Torgue.Prefix_MoonClip_MagSize": {
@@ -2168,7 +2168,7 @@
   "GD_Weap_SMG.Name.Prefix.Prefix__MissMoxxis": {
     "name": "Miss Moxxi's"
   },
-  "GD_Weap_SMG.Name.Prefix.Prefix_Bayonet_2": {
+  "GD_Weap_SMG.Name.Prefix.Prefix_Bayonet_1": {
     "name": "Bladed"
   },
   "GD_Weap_SMG.Name.Prefix.Prefix_Body1_Accurate": {
@@ -2198,7 +2198,7 @@
   "GD_Weap_SMG.Name.Prefix_Bandit.Prefix__JuryRigged": {
     "name": "Craftie"
   },
-  "GD_Weap_SMG.Name.Prefix_Bandit.Prefix_Bayonet_3": {
+  "GD_Weap_SMG.Name.Prefix_Bandit.Prefix_Bayonet_2": {
     "name": "Slicing"
   },
   "GD_Weap_SMG.Name.Prefix_Bandit.Prefix_Body1_Accurate": {
@@ -2231,7 +2231,7 @@
   "GD_Weap_SMG.Name.Prefix_Dahl.Prefix__Burst": {
     "name": "Burst Fire"
   },
-  "GD_Weap_SMG.Name.Prefix_Dahl.Prefix_Bayonet_2": {
+  "GD_Weap_SMG.Name.Prefix_Dahl.Prefix_Bayonet_1": {
     "name": "Bladed"
   },
   "GD_Weap_SMG.Name.Prefix_Dahl.Prefix_Body1_Accurate": {
@@ -2264,7 +2264,7 @@
   "GD_Weap_SMG.Name.Prefix_Hyperion.Prefix__Stabilizing": {
     "name": "Stabilizing"
   },
-  "GD_Weap_SMG.Name.Prefix_Hyperion.Prefix_Bayonet_2": {
+  "GD_Weap_SMG.Name.Prefix_Hyperion.Prefix_Bayonet_1": {
     "name": "Cutting Edge"
   },
   "GD_Weap_SMG.Name.Prefix_Hyperion.Prefix_Body1_Accurate": {
@@ -2297,7 +2297,7 @@
   "GD_Weap_SMG.Name.Prefix_Maliwan.Prefix__Technetronic": {
     "name": "Technetronic"
   },
-  "GD_Weap_SMG.Name.Prefix_Maliwan.Prefix_Bayonet_2": {
+  "GD_Weap_SMG.Name.Prefix_Maliwan.Prefix_Bayonet_1": {
     "name": "Acuminous"
   },
   "GD_Weap_SMG.Name.Prefix_Maliwan.Prefix_Body1_Accurate": {
@@ -2327,7 +2327,7 @@
   "GD_Weap_SMG.Name.Prefix_Maliwan.Prefix_Stock2_Reload": {
     "name": "Apt"
   },
-  "GD_Weap_SMG.Name.Prefix_Old_Hyperion.Prefix_Bayonet_2": {
+  "GD_Weap_SMG.Name.Prefix_Old_Hyperion.Prefix_Bayonet_1": {
     "name": "Forthright"
   },
   "GD_Weap_SMG.Name.Prefix_Old_Hyperion.Prefix_Body1_Accurate": {
@@ -2360,7 +2360,7 @@
   "GD_Weap_SMG.Name.Prefix_Tediore.Prefix__Disposable": {
     "name": "Disposable"
   },
-  "GD_Weap_SMG.Name.Prefix_Tediore.Prefix_Bayonet_2": {
+  "GD_Weap_SMG.Name.Prefix_Tediore.Prefix_Bayonet_1": {
     "name": "Perma-Sharp"
   },
   "GD_Weap_SMG.Name.Prefix_Tediore.Prefix_Body1_Accurate": {

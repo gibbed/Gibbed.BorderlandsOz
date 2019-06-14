@@ -9,21 +9,21 @@
     ],
     "body_parts": [
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Dahl",
+      "GD_Cork_Weap_Lasers.Body.Laser_Body_Dahl_2",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Dahl_3",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Dahl_4",
-      "GD_Cork_Weap_Lasers.Body.Laser_Body_Dahl_5",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Hyperion",
+      "GD_Cork_Weap_Lasers.Body.Laser_Body_Hyperion_2",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Hyperion_3",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Hyperion_4",
-      "GD_Cork_Weap_Lasers.Body.Laser_Body_Hyperion_5",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Maliwan",
+      "GD_Cork_Weap_Lasers.Body.Laser_Body_Maliwan_2",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Maliwan_3",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Maliwan_4",
-      "GD_Cork_Weap_Lasers.Body.Laser_Body_Maliwan_5",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore",
+      "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore_2",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore_3",
-      "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore_4",
-      "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore_5"
+      "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore_4"
     ],
     "grip_parts": [
       "GD_Cork_Weap_Lasers.FrontGrip.Laser_FrontGrip_Dahl",
@@ -58,10 +58,10 @@
       "GD_Cork_Weap_Lasers.elemental.Laser_Elemental_Shock"
     ],
     "material_parts": [
+      "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Dahl_1",
       "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Dahl_2",
       "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Dahl_3",
       "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Dahl_4",
-      "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Dahl_5",
       "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Dahl_5_Legendary"
     ]
   },
@@ -75,21 +75,21 @@
     ],
     "body_parts": [
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Dahl",
+      "GD_Cork_Weap_Lasers.Body.Laser_Body_Dahl_2",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Dahl_3",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Dahl_4",
-      "GD_Cork_Weap_Lasers.Body.Laser_Body_Dahl_5",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Hyperion",
+      "GD_Cork_Weap_Lasers.Body.Laser_Body_Hyperion_2",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Hyperion_3",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Hyperion_4",
-      "GD_Cork_Weap_Lasers.Body.Laser_Body_Hyperion_5",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Maliwan",
+      "GD_Cork_Weap_Lasers.Body.Laser_Body_Maliwan_2",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Maliwan_3",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Maliwan_4",
-      "GD_Cork_Weap_Lasers.Body.Laser_Body_Maliwan_5",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore",
+      "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore_2",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore_3",
-      "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore_4",
-      "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore_5"
+      "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore_4"
     ],
     "grip_parts": [
       "GD_Cork_Weap_Lasers.FrontGrip.Laser_FrontGrip_Dahl",
@@ -124,10 +124,10 @@
       "GD_Cork_Weap_Lasers.elemental.Laser_Elemental_Shock"
     ],
     "material_parts": [
+      "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Hyperion_1",
       "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Hyperion_2",
       "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Hyperion_3",
       "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Hyperion_4",
-      "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Hyperion_5",
       "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Hyperion_5_Legendary"
     ]
   },
@@ -141,21 +141,21 @@
     ],
     "body_parts": [
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Dahl",
+      "GD_Cork_Weap_Lasers.Body.Laser_Body_Dahl_2",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Dahl_3",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Dahl_4",
-      "GD_Cork_Weap_Lasers.Body.Laser_Body_Dahl_5",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Hyperion",
+      "GD_Cork_Weap_Lasers.Body.Laser_Body_Hyperion_2",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Hyperion_3",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Hyperion_4",
-      "GD_Cork_Weap_Lasers.Body.Laser_Body_Hyperion_5",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Maliwan",
+      "GD_Cork_Weap_Lasers.Body.Laser_Body_Maliwan_2",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Maliwan_3",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Maliwan_4",
-      "GD_Cork_Weap_Lasers.Body.Laser_Body_Maliwan_5",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore",
+      "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore_2",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore_3",
-      "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore_4",
-      "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore_5"
+      "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore_4"
     ],
     "grip_parts": [
       "GD_Cork_Weap_Lasers.FrontGrip.Laser_FrontGrip_Dahl",
@@ -190,10 +190,10 @@
       "GD_Cork_Weap_Lasers.elemental.Laser_Elemental_Shock"
     ],
     "material_parts": [
+      "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Maliwan_1",
       "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Maliwan_2",
       "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Maliwan_3",
       "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Maliwan_4",
-      "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Maliwan_5",
       "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Maliwan_5_Legendary"
     ]
   },
@@ -207,21 +207,21 @@
     ],
     "body_parts": [
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Dahl",
+      "GD_Cork_Weap_Lasers.Body.Laser_Body_Dahl_2",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Dahl_3",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Dahl_4",
-      "GD_Cork_Weap_Lasers.Body.Laser_Body_Dahl_5",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Hyperion",
+      "GD_Cork_Weap_Lasers.Body.Laser_Body_Hyperion_2",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Hyperion_3",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Hyperion_4",
-      "GD_Cork_Weap_Lasers.Body.Laser_Body_Hyperion_5",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Maliwan",
+      "GD_Cork_Weap_Lasers.Body.Laser_Body_Maliwan_2",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Maliwan_3",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Maliwan_4",
-      "GD_Cork_Weap_Lasers.Body.Laser_Body_Maliwan_5",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore",
+      "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore_2",
       "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore_3",
-      "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore_4",
-      "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore_5"
+      "GD_Cork_Weap_Lasers.Body.Laser_Body_Tediore_4"
     ],
     "grip_parts": [
       "GD_Cork_Weap_Lasers.FrontGrip.Laser_FrontGrip_Dahl",
@@ -256,10 +256,10 @@
       "GD_Cork_Weap_Lasers.elemental.Laser_Elemental_Shock"
     ],
     "material_parts": [
+      "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Tediore_1",
       "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Tediore_2",
       "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Tediore_3",
       "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Tediore_4",
-      "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Tediore_5",
       "GD_Cork_Weap_Lasers.ManufacturerMaterials.Mat_Tediore_5_Legendary"
     ]
   },
@@ -936,8 +936,8 @@
     "body_parts": [
       "GD_Weap_SniperRifles.Body.SR_Body_Dahl",
       "GD_Weap_SniperRifles.Body.SR_Body_Hyperion",
+      "GD_Weap_SniperRifles.Body.SR_Body_Hyperion_2",
       "GD_Weap_SniperRifles.Body.SR_Body_Hyperion_3",
-      "GD_Weap_SniperRifles.Body.SR_Body_Hyperion_4",
       "GD_Weap_SniperRifles.Body.SR_Body_Jakobs",
       "GD_Weap_SniperRifles.Body.SR_Body_Maliwan",
       "GD_Weap_SniperRifles.Body.SR_Body_Vladof"
@@ -972,8 +972,8 @@
     "body_parts": [
       "GD_Weap_SniperRifles.Body.SR_Body_Dahl",
       "GD_Weap_SniperRifles.Body.SR_Body_Hyperion",
+      "GD_Weap_SniperRifles.Body.SR_Body_Hyperion_2",
       "GD_Weap_SniperRifles.Body.SR_Body_Hyperion_3",
-      "GD_Weap_SniperRifles.Body.SR_Body_Hyperion_4",
       "GD_Weap_SniperRifles.Body.SR_Body_Jakobs",
       "GD_Weap_SniperRifles.Body.SR_Body_Maliwan",
       "GD_Weap_SniperRifles.Body.SR_Body_Vladof"
@@ -1008,8 +1008,8 @@
     "body_parts": [
       "GD_Weap_SniperRifles.Body.SR_Body_Dahl",
       "GD_Weap_SniperRifles.Body.SR_Body_Hyperion",
+      "GD_Weap_SniperRifles.Body.SR_Body_Hyperion_2",
       "GD_Weap_SniperRifles.Body.SR_Body_Hyperion_3",
-      "GD_Weap_SniperRifles.Body.SR_Body_Hyperion_4",
       "GD_Weap_SniperRifles.Body.SR_Body_Jakobs",
       "GD_Weap_SniperRifles.Body.SR_Body_Maliwan",
       "GD_Weap_SniperRifles.Body.SR_Body_Vladof"
@@ -1044,8 +1044,8 @@
     "body_parts": [
       "GD_Weap_SniperRifles.Body.SR_Body_Dahl",
       "GD_Weap_SniperRifles.Body.SR_Body_Hyperion",
+      "GD_Weap_SniperRifles.Body.SR_Body_Hyperion_2",
       "GD_Weap_SniperRifles.Body.SR_Body_Hyperion_3",
-      "GD_Weap_SniperRifles.Body.SR_Body_Hyperion_4",
       "GD_Weap_SniperRifles.Body.SR_Body_Jakobs",
       "GD_Weap_SniperRifles.Body.SR_Body_Maliwan",
       "GD_Weap_SniperRifles.Body.SR_Body_Vladof"
@@ -1080,8 +1080,8 @@
     "body_parts": [
       "GD_Weap_SniperRifles.Body.SR_Body_Dahl",
       "GD_Weap_SniperRifles.Body.SR_Body_Hyperion",
+      "GD_Weap_SniperRifles.Body.SR_Body_Hyperion_2",
       "GD_Weap_SniperRifles.Body.SR_Body_Hyperion_3",
-      "GD_Weap_SniperRifles.Body.SR_Body_Hyperion_4",
       "GD_Weap_SniperRifles.Body.SR_Body_Jakobs",
       "GD_Weap_SniperRifles.Body.SR_Body_Maliwan",
       "GD_Weap_SniperRifles.Body.SR_Body_Vladof"

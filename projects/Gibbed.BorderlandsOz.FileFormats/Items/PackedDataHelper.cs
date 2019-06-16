@@ -22,6 +22,7 @@
 
 using System;
 using Gibbed.BorderlandsOz.GameInfo;
+using Gibbed.Gearbox.Common;
 using Gibbed.IO;
 
 namespace Gibbed.BorderlandsOz.FileFormats.Items

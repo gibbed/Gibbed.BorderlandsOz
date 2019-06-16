@@ -6,3 +6,6 @@
 	path = projects/Gibbed.IO
 	url = https://github.com/gibbed/Gibbed.IO
 	branch = vs2017
+[submodule "projects/Gearbox"]
+	path = projects/Gearbox
+	url = https://github.com/gibbed/Gibbed.Gearbox.git

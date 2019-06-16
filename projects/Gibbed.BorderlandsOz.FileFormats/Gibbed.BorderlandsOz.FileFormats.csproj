@@ -12,6 +12,7 @@
     <RepositoryType>Git</RepositoryType>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Gearbox\Gibbed.Gearbox.Common\Gibbed.Gearbox.Common.csproj" />
     <ProjectReference Include="..\Gibbed.BorderlandsOz.GameInfo\Gibbed.BorderlandsOz.GameInfo.csproj" />
     <ProjectReference Include="..\Gibbed.BorderlandsOz.ProtoBufFormats\Gibbed.BorderlandsOz.ProtoBufFormats.csproj" />
     <ProjectReference Include="..\Gibbed.IO\Gibbed.IO.csproj" />

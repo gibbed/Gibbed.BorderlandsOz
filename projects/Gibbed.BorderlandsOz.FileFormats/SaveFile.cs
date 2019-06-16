@@ -26,6 +26,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using Gibbed.BorderlandsOz.GameInfo;
+using Gibbed.Gearbox.Common;
 using Gibbed.IO;
 using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
 using ProtoSerializer = ProtoBuf.Serializer;

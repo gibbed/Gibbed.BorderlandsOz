@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Game", "Game", "{B4DBC961-3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Formats", "Formats", "{B4BE450E-8103-4AF2-9FDF-64ED3B1D95C6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{DC20B65F-EC7A-4164-AEA0-44BA1213EC18}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Saves", "Saves", "{DC20B65F-EC7A-4164-AEA0-44BA1213EC18}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{2A0E7026-F7AD-448B-BB02-B63603210EBD}"
 EndProject
@@ -24,6 +24,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.BorderlandsOz.SaveEdit", "projects\Gibbed.BorderlandsOz.SaveEdit\Gibbed.BorderlandsOz.SaveEdit.csproj", "{582B962B-9A50-4B27-AE99-CB16B8DB0C7E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VerifySaves", "projects\VerifySaves\VerifySaves.csproj", "{E040D0B3-355C-4787-8F64-549EE898307E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{93B973A9-B3AE-4B6A-B631-5DD4E0070451}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.Gearbox.Common", "projects\Gearbox\Gibbed.Gearbox.Common\Gibbed.Gearbox.Common.csproj", "{D9129034-11E7-4034-96BB-D866F4D57F2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +76,12 @@ Global
 		{E040D0B3-355C-4787-8F64-549EE898307E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E040D0B3-355C-4787-8F64-549EE898307E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E040D0B3-355C-4787-8F64-549EE898307E}.SaveEdit Packaging|Any CPU.ActiveCfg = Release|Any CPU
+		{D9129034-11E7-4034-96BB-D866F4D57F2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9129034-11E7-4034-96BB-D866F4D57F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9129034-11E7-4034-96BB-D866F4D57F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9129034-11E7-4034-96BB-D866F4D57F2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9129034-11E7-4034-96BB-D866F4D57F2B}.SaveEdit Packaging|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9129034-11E7-4034-96BB-D866F4D57F2B}.SaveEdit Packaging|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +96,8 @@ Global
 		{C98A6CD6-9422-4B35-8B7A-F520D75534D1} = {2A0E7026-F7AD-448B-BB02-B63603210EBD}
 		{582B962B-9A50-4B27-AE99-CB16B8DB0C7E} = {DC20B65F-EC7A-4164-AEA0-44BA1213EC18}
 		{E040D0B3-355C-4787-8F64-549EE898307E} = {DC20B65F-EC7A-4164-AEA0-44BA1213EC18}
+		{93B973A9-B3AE-4B6A-B631-5DD4E0070451} = {B4DBC961-36BD-404D-B9FA-B948CB5E9C05}
+		{D9129034-11E7-4034-96BB-D866F4D57F2B} = {93B973A9-B3AE-4B6A-B631-5DD4E0070451}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E500463B-D70F-4973-8697-95AC3E8CB08C}

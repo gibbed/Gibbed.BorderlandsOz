@@ -33,7 +33,7 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
             try
             {
                 var raws = LoaderHelper
-                    .DeserializeJson<Dictionary<string, Raw.ItemTypeDefinition>>("Item Types");
+                    .Deserialize<Dictionary<string, Raw.ItemTypeDefinition>>("Item Types");
                 return new InfoDictionary<ItemTypeDefinition>(
                     raws.ToDictionary(kv => kv.Key, GetItemTypeDefinition));
             }

@@ -24,6 +24,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Gibbed.BorderlandsOz.GameInfo.Loaders
 {
@@ -33,7 +34,7 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
         {
             if (embeddedResourceName == null)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(embeddedResourceName));
             }
 
             var path = "Gibbed.BorderlandsOz.GameInfo.Resources." + embeddedResourceName + ".json";
@@ -42,22 +43,23 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
             var stream = (UnmanagedMemoryStream)assembly.GetManifestResourceStream(path);
             if (stream == null)
             {
-                throw new ArgumentException("The specified embedded resource could not be found.",
-                                            "embeddedResourceName");
+                throw new ArgumentException(
+                    $"The embedded resource '{path}' could not be found.",
+                    nameof(embeddedResourceName));
             }
             return stream;
         }
 
-        public static TType DeserializeJson<TType>(string embeddedResourceName)
+        public static TType Deserialize<TType>(string embeddedResourceName)
         {
             var settings = new JsonSerializerSettings()
             {
                 MissingMemberHandling = MissingMemberHandling.Error,
                 TypeNameHandling = TypeNameHandling.Auto,
-                SerializationBinder =
-                    new TypeNameSerializationBinder("Gibbed.BorderlandsOz.GameInfo.Raw.{0}, Gibbed.BorderlandsOz.GameInfo")
+                SerializationBinder = new TypeNameSerializationBinder(
+                    "Gibbed.BorderlandsOz.GameInfo.Raw.{0}, Gibbed.BorderlandsOz.GameInfo")
             };
-            settings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+            settings.Converters.Add(new StringEnumConverter());
 
             try
             {

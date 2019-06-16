@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{93B973
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.Gearbox.Common", "projects\Gearbox\Gibbed.Gearbox.Common\Gibbed.Gearbox.Common.csproj", "{D9129034-11E7-4034-96BB-D866F4D57F2B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gibbed.Gearbox.WPF", "projects\Gearbox\Gibbed.Gearbox.WPF\Gibbed.Gearbox.WPF.csproj", "{A1523E58-C297-4E69-ADE5-16866C266AAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,6 +84,12 @@ Global
 		{D9129034-11E7-4034-96BB-D866F4D57F2B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D9129034-11E7-4034-96BB-D866F4D57F2B}.SaveEdit Packaging|Any CPU.ActiveCfg = Debug|Any CPU
 		{D9129034-11E7-4034-96BB-D866F4D57F2B}.SaveEdit Packaging|Any CPU.Build.0 = Debug|Any CPU
+		{A1523E58-C297-4E69-ADE5-16866C266AAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1523E58-C297-4E69-ADE5-16866C266AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1523E58-C297-4E69-ADE5-16866C266AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1523E58-C297-4E69-ADE5-16866C266AAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1523E58-C297-4E69-ADE5-16866C266AAD}.SaveEdit Packaging|Any CPU.ActiveCfg = Release|Any CPU
+		{A1523E58-C297-4E69-ADE5-16866C266AAD}.SaveEdit Packaging|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -98,6 +106,7 @@ Global
 		{E040D0B3-355C-4787-8F64-549EE898307E} = {DC20B65F-EC7A-4164-AEA0-44BA1213EC18}
 		{93B973A9-B3AE-4B6A-B631-5DD4E0070451} = {B4DBC961-36BD-404D-B9FA-B948CB5E9C05}
 		{D9129034-11E7-4034-96BB-D866F4D57F2B} = {93B973A9-B3AE-4B6A-B631-5DD4E0070451}
+		{A1523E58-C297-4E69-ADE5-16866C266AAD} = {93B973A9-B3AE-4B6A-B631-5DD4E0070451}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E500463B-D70F-4973-8697-95AC3E8CB08C}

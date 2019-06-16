@@ -40,9 +40,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
 
         #region Serialization
         [ProtoAfterDeserialization]
-        // ReSharper disable UnusedMember.Local
         private void OnDeserialization()
-        // ReSharper restore UnusedMember.Local
         {
             this._ObjectivesProgress = this._ObjectivesProgress ?? new List<int>();
         }
@@ -64,7 +62,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
                 if (value != this._Mission)
                 {
                     this._Mission = value;
-                    this.NotifyPropertyChanged("Mission");
+                    this.NotifyOfPropertyChange(nameof(Mission));
                 }
             }
         }
@@ -78,7 +76,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
                 if (value != this._SparkMissionNumber)
                 {
                     this._SparkMissionNumber = value;
-                    this.NotifyPropertyChanged("SparkMissionNumber");
+                    this.NotifyOfPropertyChange(nameof(SparkMissionNumber));
                 }
             }
         }
@@ -92,7 +90,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
                 if (value != this._ObjectivesProgress)
                 {
                     this._ObjectivesProgress = value;
-                    this.NotifyPropertyChanged("ObjectivesProgress");
+                    this.NotifyOfPropertyChange(nameof(ObjectivesProgress));
                 }
             }
         }
@@ -106,7 +104,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
                 if (value != this._ActiveObjectiveSetIndex)
                 {
                     this._ActiveObjectiveSetIndex = value;
-                    this.NotifyPropertyChanged("ActiveObjectiveSetIndex");
+                    this.NotifyOfPropertyChange(nameof(ActiveObjectiveSetIndex));
                 }
             }
         }
@@ -120,7 +118,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
                 if (value != this._Status)
                 {
                     this._Status = value;
-                    this.NotifyPropertyChanged("Status");
+                    this.NotifyOfPropertyChange(nameof(Status));
                 }
             }
         }
@@ -134,7 +132,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
                 if (value != this._NeedsRewards)
                 {
                     this._NeedsRewards = value;
-                    this.NotifyPropertyChanged("NeedsRewards");
+                    this.NotifyOfPropertyChange(nameof(NeedsRewards));
                 }
             }
         }
@@ -143,12 +141,9 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
         #region INotifyPropertyChanged Members
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void NotifyPropertyChanged(string propertyName)
+        private void NotifyOfPropertyChange(string propertyName)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
 

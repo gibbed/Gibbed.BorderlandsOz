@@ -31,7 +31,11 @@ using Caliburn.Micro.Contrib;
 using Caliburn.Micro.Contrib.Results;
 using Gibbed.BorderlandsOz.GameInfo;
 using Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave;
-using Guid = Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave.Guid;
+using Gibbed.Gearbox.WPF;
+using DeserializeSettings = Gibbed.BorderlandsOz.FileFormats.SaveFile.DeserializeSettings;
+using GameGuid = Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave.Guid;
+using SaveFile = Gibbed.BorderlandsOz.FileFormats.SaveFile;
+using SystemGuid = System.Guid;
 
 namespace Gibbed.BorderlandsOz.SaveEdit
 {
@@ -49,7 +53,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Shell = value;
-                this.NotifyOfPropertyChange(() => this.Shell);
+                this.NotifyOfPropertyChange(nameof(Shell));
             }
         }
 
@@ -60,14 +64,14 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._SaveLoad = value;
-                this.NotifyOfPropertyChange(() => this.SaveLoad);
+                this.NotifyOfPropertyChange(nameof(SaveLoad));
             }
         }
         #endregion
 
         #region Fields
         private Platform _Platform;
-        private System.Guid _SaveGuid;
+        private SystemGuid _SaveGuid;
         private int _SaveGameId;
         #endregion
 
@@ -80,18 +84,18 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 if (this._Platform != value)
                 {
                     this._Platform = value;
-                    this.NotifyOfPropertyChange(() => this.Platform);
+                    this.NotifyOfPropertyChange(nameof(Platform));
                 }
             }
         }
 
-        public System.Guid SaveGuid
+        public SystemGuid SaveGuid
         {
             get { return this._SaveGuid; }
             set
             {
                 this._SaveGuid = value;
-                this.NotifyOfPropertyChange(() => this.SaveGuid);
+                this.NotifyOfPropertyChange(nameof(SaveGuid));
             }
         }
 
@@ -101,7 +105,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._SaveGameId = value;
-                this.NotifyOfPropertyChange(() => this.SaveGameId);
+                this.NotifyOfPropertyChange(nameof(SaveGameId));
             }
         }
 
@@ -122,7 +126,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
 
         public void RandomizeSaveGuid()
         {
-            this.SaveGuid = System.Guid.NewGuid();
+            this.SaveGuid = SystemGuid.NewGuid();
         }
 
         public IEnumerable<IResult> DoImportSkills()
@@ -140,30 +144,29 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 yield break;
             }
 
-            FileFormats.SaveFile saveFile = null;
+            SaveFile saveFile = null;
 
             yield return new DelegateResult(() =>
             {
                 using (var input = File.OpenRead(fileName))
                 {
-                    saveFile = FileFormats.SaveFile.Deserialize(input,
-                                                                platform,
-                                                                FileFormats.SaveFile.DeserializeSettings.None);
+                    saveFile = SaveFile.Deserialize(input, platform, DeserializeSettings.None);
                 }
             })
                 .Rescue<DllNotFoundException>().Execute(
-                    x => new MyMessageBox("Failed to load save: " + x.Message, "Error")
+                    x => new MyMessageBox($"Failed to load save: {x.Message}", "Error")
                              .WithIcon(MessageBoxImage.Error).AsCoroutine())
                 .Rescue<FileFormats.SaveFormatException>().Execute(
-                    x => new MyMessageBox("Failed to load save: " + x.Message, "Error")
+                    x => new MyMessageBox($"Failed to load save: {x.Message}", "Error")
                              .WithIcon(MessageBoxImage.Error).AsCoroutine())
                 .Rescue<FileFormats.SaveCorruptionException>().Execute(
-                    x => new MyMessageBox("Failed to load save: " + x.Message, "Error")
+                    x => new MyMessageBox($"Failed to load save: {x.Message}", "Error")
                              .WithIcon(MessageBoxImage.Error).AsCoroutine())
                 .Rescue().Execute(
                     x =>
-                    new MyMessageBox("An exception was thrown (press Ctrl+C to copy):\n\n" + x.ToString(),
-                                     "Error")
+                    new MyMessageBox(
+                        $"An exception was thrown (press Ctrl+C to copy):\n\n{x.ToString()}",
+                        "Error")
                         .WithIcon(MessageBoxImage.Error).AsCoroutine());
 
             if (saveFile != null)
@@ -198,24 +201,23 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             {
                 using (var input = File.OpenRead(fileName))
                 {
-                    saveFile = FileFormats.SaveFile.Deserialize(input,
-                                                                platform,
-                                                                FileFormats.SaveFile.DeserializeSettings.None);
+                    saveFile = SaveFile.Deserialize(input, platform, DeserializeSettings.None);
                 }
             })
                 .Rescue<DllNotFoundException>().Execute(
-                    x => new MyMessageBox("Failed to load save: " + x.Message, "Error")
+                    x => new MyMessageBox($"Failed to load save: {x.Message}", "Error")
                              .WithIcon(MessageBoxImage.Error).AsCoroutine())
                 .Rescue<FileFormats.SaveFormatException>().Execute(
-                    x => new MyMessageBox("Failed to load save: " + x.Message, "Error")
+                    x => new MyMessageBox($"Failed to load save: {x.Message}", "Error")
                              .WithIcon(MessageBoxImage.Error).AsCoroutine())
                 .Rescue<FileFormats.SaveCorruptionException>().Execute(
-                    x => new MyMessageBox("Failed to load save: " + x.Message, "Error")
+                    x => new MyMessageBox($"Failed to load save: {x.Message}", "Error")
                              .WithIcon(MessageBoxImage.Error).AsCoroutine())
                 .Rescue().Execute(
                     x =>
-                    new MyMessageBox("An exception was thrown (press Ctrl+C to copy):\n\n" + x.ToString(),
-                                     "Error")
+                    new MyMessageBox(
+                        $"An exception was thrown (press Ctrl+C to copy):\n\n{x.ToString()}",
+                        "Error")
                         .WithIcon(MessageBoxImage.Error).AsCoroutine());
 
             if (saveFile != null)
@@ -244,30 +246,29 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 yield break;
             }
 
-            FileFormats.SaveFile saveFile = null;
+            SaveFile saveFile = null;
 
             yield return new DelegateResult(() =>
             {
                 using (var input = File.OpenRead(fileName))
                 {
-                    saveFile = FileFormats.SaveFile.Deserialize(input,
-                                                                platform,
-                                                                FileFormats.SaveFile.DeserializeSettings.None);
+                    saveFile = SaveFile.Deserialize(input, platform, DeserializeSettings.None);
                 }
             })
                 .Rescue<DllNotFoundException>().Execute(
-                    x => new MyMessageBox("Failed to load save: " + x.Message, "Error")
+                    x => new MyMessageBox($"Failed to load save: {x.Message}", "Error")
                              .WithIcon(MessageBoxImage.Error).AsCoroutine())
                 .Rescue<FileFormats.SaveFormatException>().Execute(
-                    x => new MyMessageBox("Failed to load save: " + x.Message, "Error")
+                    x => new MyMessageBox($"Failed to load save: {x.Message}", "Error")
                              .WithIcon(MessageBoxImage.Error).AsCoroutine())
                 .Rescue<FileFormats.SaveCorruptionException>().Execute(
-                    x => new MyMessageBox("Failed to load save: " + x.Message, "Error")
+                    x => new MyMessageBox($"Failed to load save: {x.Message}", "Error")
                              .WithIcon(MessageBoxImage.Error).AsCoroutine())
                 .Rescue().Execute(
                     x =>
-                    new MyMessageBox("An exception was thrown (press Ctrl+C to copy):\n\n" + x.ToString(),
-                                     "Error")
+                    new MyMessageBox(
+                        $"An exception was thrown (press Ctrl+C to copy):\n\n{x.ToString()}",
+                        "Error")
                         .WithIcon(MessageBoxImage.Error).AsCoroutine());
 
             if (saveFile != null)
@@ -298,30 +299,29 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 yield break;
             }
 
-            FileFormats.SaveFile saveFile = null;
+            SaveFile saveFile = null;
 
             yield return new DelegateResult(() =>
             {
                 using (var input = File.OpenRead(fileName))
                 {
-                    saveFile = FileFormats.SaveFile.Deserialize(input,
-                                                                platform,
-                                                                FileFormats.SaveFile.DeserializeSettings.None);
+                    saveFile = SaveFile.Deserialize(input, platform, DeserializeSettings.None);
                 }
             })
                 .Rescue<DllNotFoundException>().Execute(
-                    x => new MyMessageBox("Failed to load save: " + x.Message, "Error")
+                    x => new MyMessageBox($"Failed to load save: {x.Message}", "Error")
                              .WithIcon(MessageBoxImage.Error).AsCoroutine())
                 .Rescue<FileFormats.SaveFormatException>().Execute(
-                    x => new MyMessageBox("Failed to load save: " + x.Message, "Error")
+                    x => new MyMessageBox($"Failed to load save: {x.Message}", "Error")
                              .WithIcon(MessageBoxImage.Error).AsCoroutine())
                 .Rescue<FileFormats.SaveCorruptionException>().Execute(
-                    x => new MyMessageBox("Failed to load save: " + x.Message, "Error")
+                    x => new MyMessageBox($"Failed to load save: {x.Message}", "Error")
                              .WithIcon(MessageBoxImage.Error).AsCoroutine())
                 .Rescue().Execute(
                     x =>
-                    new MyMessageBox("An exception was thrown (press Ctrl+C to copy):\n\n" + x.ToString(),
-                                     "Error")
+                    new MyMessageBox(
+                        $"An exception was thrown (press Ctrl+C to copy):\n\n{x.ToString()}",
+                        "Error")
                         .WithIcon(MessageBoxImage.Error).AsCoroutine());
 
             if (saveFile != null)
@@ -338,14 +338,14 @@ namespace Gibbed.BorderlandsOz.SaveEdit
         public void ImportData(WillowTwoPlayerSaveGame saveGame, Platform platform)
         {
             this.Platform = platform;
-            this.SaveGuid = (System.Guid)saveGame.SaveGuid;
+            this.SaveGuid = (SystemGuid)saveGame.SaveGuid;
             this.SaveGameId = saveGame.SaveGameId;
         }
 
         public void ExportData(WillowTwoPlayerSaveGame saveGame, out Platform platform)
         {
             platform = this.Platform;
-            saveGame.SaveGuid = (Guid)this.SaveGuid;
+            saveGame.SaveGuid = (GameGuid)this.SaveGuid;
             saveGame.SaveGameId = this.SaveGameId;
         }
 

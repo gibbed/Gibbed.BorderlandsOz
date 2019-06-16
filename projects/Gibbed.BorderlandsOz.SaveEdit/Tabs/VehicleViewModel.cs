@@ -53,7 +53,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._SelectedMoonBuggy1 = value;
-                this.NotifyOfPropertyChange(() => this.SelectedMoonBuggy1);
+                this.NotifyOfPropertyChange(nameof(SelectedMoonBuggy1));
             }
         }
 
@@ -63,7 +63,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._SelectedMoonBuggy2 = value;
-                this.NotifyOfPropertyChange(() => this.SelectedMoonBuggy2);
+                this.NotifyOfPropertyChange(nameof(SelectedMoonBuggy2));
             }
         }
 
@@ -78,7 +78,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._SelectedStingRay1 = value;
-                this.NotifyOfPropertyChange(() => this.SelectedStingRay1);
+                this.NotifyOfPropertyChange(nameof(SelectedStingRay1));
             }
         }
 
@@ -88,7 +88,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._SelectedStingRay2 = value;
-                this.NotifyOfPropertyChange(() => this.SelectedStingRay2);
+                this.NotifyOfPropertyChange(nameof(SelectedStingRay2));
             }
         }
 
@@ -98,7 +98,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._SelectedStingRay3 = value;
-                this.NotifyOfPropertyChange(() => this.SelectedStingRay3);
+                this.NotifyOfPropertyChange(nameof(SelectedStingRay3));
             }
         }
 
@@ -108,7 +108,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._SelectedStingRay4 = value;
-                this.NotifyOfPropertyChange(() => this.SelectedStingRay4);
+                this.NotifyOfPropertyChange(nameof(SelectedStingRay4));
             }
         }
 
@@ -153,7 +153,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                     }
                     else
                     {
-                        group = "??? " + kv.Value.DLC.ResourcePath + " ???";
+                        group = $"??? {kv.Value.DLC.ResourcePath} ???";
                         priority = int.MaxValue;
                     }
                 }
@@ -169,10 +169,11 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             assets.OrderBy(kv => kv.Value).Apply(kv => target.Add(kv.Key));
         }
 
-        private static void ImportTarget(string name,
-                                         IEnumerable<ChosenVehicleCustomization> customizations,
-                                         Action<string> extra,
-                                         params Action<string>[] skins)
+        private static void ImportTarget(
+            string name,
+            IEnumerable<ChosenVehicleCustomization> customizations,
+            Action<string> extra,
+            params Action<string>[] skins)
         {
             int count = skins.Length;
 
@@ -197,26 +198,29 @@ namespace Gibbed.BorderlandsOz.SaveEdit
         public void ImportData(WillowTwoPlayerSaveGame saveGame)
         {
             this.ExtraMoonBuggy.Clear();
-            ImportTarget("GD_Globals.VehicleSpawnStation.VehicleFamily_MoonBuggy",
-                         saveGame.ChosenVehicleCustomizations,
-                         s => this.ExtraMoonBuggy.Add(s),
-                         s => this.SelectedMoonBuggy1 = s,
-                         s => this.SelectedMoonBuggy2 = s);
+            ImportTarget(
+                "GD_Globals.VehicleSpawnStation.VehicleFamily_MoonBuggy",
+                saveGame.ChosenVehicleCustomizations,
+                s => this.ExtraMoonBuggy.Add(s),
+                s => this.SelectedMoonBuggy1 = s,
+                s => this.SelectedMoonBuggy2 = s);
 
             this.ExtraStingRay.Clear();
-            ImportTarget("GD_Globals.VehicleSpawnStation.VehicleFamily_StingRay",
-                         saveGame.ChosenVehicleCustomizations,
-                         s => this.ExtraStingRay.Add(s),
-                         s => this.SelectedStingRay1 = s,
-                         s => this.SelectedStingRay2 = s,
-                         s => this.SelectedStingRay3 = s,
-                         s => this.SelectedStingRay4 = s);
+            ImportTarget(
+                "GD_Globals.VehicleSpawnStation.VehicleFamily_StingRay",
+                saveGame.ChosenVehicleCustomizations,
+                s => this.ExtraStingRay.Add(s),
+                s => this.SelectedStingRay1 = s,
+                s => this.SelectedStingRay2 = s,
+                s => this.SelectedStingRay3 = s,
+                s => this.SelectedStingRay4 = s);
         }
 
-        private static void ExportTarget(string name,
-                                         List<ChosenVehicleCustomization> customizations,
-                                         IEnumerable<string> extras,
-                                         params string[] skins)
+        private static void ExportTarget(
+            string name,
+                List<ChosenVehicleCustomization> customizations,
+                IEnumerable<string> extras,
+                params string[] skins)
         {
             customizations.RemoveAll(c => c.Family == name);
 
@@ -235,18 +239,20 @@ namespace Gibbed.BorderlandsOz.SaveEdit
 
         public void ExportData(WillowTwoPlayerSaveGame saveGame)
         {
-            ExportTarget("GD_Globals.VehicleSpawnStation.VehicleFamily_MoonBuggy",
-                         saveGame.ChosenVehicleCustomizations,
-                         this.ExtraMoonBuggy,
-                         this.SelectedMoonBuggy1,
-                         this.SelectedMoonBuggy2);
-            ExportTarget("GD_Globals.VehicleSpawnStation.VehicleFamily_StingRay",
-                         saveGame.ChosenVehicleCustomizations,
-                         this.ExtraStingRay,
-                         this.SelectedStingRay1,
-                         this.SelectedStingRay2,
-                         this.SelectedStingRay3,
-                         this.SelectedStingRay4);
+            ExportTarget(
+                "GD_Globals.VehicleSpawnStation.VehicleFamily_MoonBuggy",
+                saveGame.ChosenVehicleCustomizations,
+                this.ExtraMoonBuggy,
+                this.SelectedMoonBuggy1,
+                this.SelectedMoonBuggy2);
+            ExportTarget(
+                "GD_Globals.VehicleSpawnStation.VehicleFamily_StingRay",
+                saveGame.ChosenVehicleCustomizations,
+                this.ExtraStingRay,
+                this.SelectedStingRay1,
+                this.SelectedStingRay2,
+                this.SelectedStingRay3,
+                this.SelectedStingRay4);
         }
     }
 }

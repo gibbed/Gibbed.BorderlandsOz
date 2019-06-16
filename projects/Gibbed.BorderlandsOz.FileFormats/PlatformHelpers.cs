@@ -45,7 +45,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                 }
             }
 
-            throw new ArgumentException("unsupported platform", "platform");
+            throw new ArgumentException("unsupported platform", nameof(platform));
         }
 
         public static CompressionScheme GetCompressionScheme(this Platform platform)
@@ -65,7 +65,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                 }
             }
 
-            throw new ArgumentException("unsupported platform", "platform");
+            throw new ArgumentException("unsupported platform", nameof(platform));
         }
     }
 }

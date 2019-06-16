@@ -49,46 +49,44 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
 
         public void Read(BitReader reader, Platform platform)
         {
-            var alm = InfoManager.AssetLibraryManager;
-
-            this.Type = alm.Decode(reader, platform, AssetGroup.WeaponTypes);
-            this.Balance = alm.Decode(reader, platform, AssetGroup.BalanceDefs);
-            this.Manufacturer = alm.Decode(reader, platform, AssetGroup.Manufacturers);
+            var m = InfoManager.AssetLibraryManager;
+            this.Type = m.Decode(reader, platform, AssetGroup.WeaponTypes);
+            this.Balance = m.Decode(reader, platform, AssetGroup.BalanceDefs);
+            this.Manufacturer = m.Decode(reader, platform, AssetGroup.Manufacturers);
             this.ManufacturerGradeIndex = reader.ReadInt32(7);
             this.GameStage = reader.ReadInt32(7);
-            this.BodyPart = alm.Decode(reader, platform, AssetGroup.WeaponParts);
-            this.GripPart = alm.Decode(reader, platform, AssetGroup.WeaponParts);
-            this.BarrelPart = alm.Decode(reader, platform, AssetGroup.WeaponParts);
-            this.SightPart = alm.Decode(reader, platform, AssetGroup.WeaponParts);
-            this.StockPart = alm.Decode(reader, platform, AssetGroup.WeaponParts);
-            this.ElementalPart = alm.Decode(reader, platform, AssetGroup.WeaponParts);
-            this.Accessory1Part = alm.Decode(reader, platform, AssetGroup.WeaponParts);
-            this.Accessory2Part = alm.Decode(reader, platform, AssetGroup.WeaponParts);
-            this.MaterialPart = alm.Decode(reader, platform, AssetGroup.WeaponParts);
-            this.PrefixPart = alm.Decode(reader, platform, AssetGroup.WeaponParts);
-            this.TitlePart = alm.Decode(reader, platform, AssetGroup.WeaponParts);
+            this.BodyPart = m.Decode(reader, platform, AssetGroup.WeaponParts);
+            this.GripPart = m.Decode(reader, platform, AssetGroup.WeaponParts);
+            this.BarrelPart = m.Decode(reader, platform, AssetGroup.WeaponParts);
+            this.SightPart = m.Decode(reader, platform, AssetGroup.WeaponParts);
+            this.StockPart = m.Decode(reader, platform, AssetGroup.WeaponParts);
+            this.ElementalPart = m.Decode(reader, platform, AssetGroup.WeaponParts);
+            this.Accessory1Part = m.Decode(reader, platform, AssetGroup.WeaponParts);
+            this.Accessory2Part = m.Decode(reader, platform, AssetGroup.WeaponParts);
+            this.MaterialPart = m.Decode(reader, platform, AssetGroup.WeaponParts);
+            this.PrefixPart = m.Decode(reader, platform, AssetGroup.WeaponParts);
+            this.TitlePart = m.Decode(reader, platform, AssetGroup.WeaponParts);
         }
 
         public void Write(BitWriter writer, Platform platform)
         {
-            var alm = InfoManager.AssetLibraryManager;
-
-            alm.Encode(writer, platform, AssetGroup.WeaponTypes, this.Type);
-            alm.Encode(writer, platform, AssetGroup.BalanceDefs, this.Balance);
-            alm.Encode(writer, platform, AssetGroup.Manufacturers, this.Manufacturer);
+            var m = InfoManager.AssetLibraryManager;
+            m.Encode(writer, platform, AssetGroup.WeaponTypes, this.Type);
+            m.Encode(writer, platform, AssetGroup.BalanceDefs, this.Balance);
+            m.Encode(writer, platform, AssetGroup.Manufacturers, this.Manufacturer);
             writer.WriteInt32(this.ManufacturerGradeIndex, 7);
             writer.WriteInt32(this.GameStage, 7);
-            alm.Encode(writer, platform, AssetGroup.WeaponParts, this.BodyPart);
-            alm.Encode(writer, platform, AssetGroup.WeaponParts, this.GripPart);
-            alm.Encode(writer, platform, AssetGroup.WeaponParts, this.BarrelPart);
-            alm.Encode(writer, platform, AssetGroup.WeaponParts, this.SightPart);
-            alm.Encode(writer, platform, AssetGroup.WeaponParts, this.StockPart);
-            alm.Encode(writer, platform, AssetGroup.WeaponParts, this.ElementalPart);
-            alm.Encode(writer, platform, AssetGroup.WeaponParts, this.Accessory1Part);
-            alm.Encode(writer, platform, AssetGroup.WeaponParts, this.Accessory2Part);
-            alm.Encode(writer, platform, AssetGroup.WeaponParts, this.MaterialPart);
-            alm.Encode(writer, platform, AssetGroup.WeaponParts, this.PrefixPart);
-            alm.Encode(writer, platform, AssetGroup.WeaponParts, this.TitlePart);
+            m.Encode(writer, platform, AssetGroup.WeaponParts, this.BodyPart);
+            m.Encode(writer, platform, AssetGroup.WeaponParts, this.GripPart);
+            m.Encode(writer, platform, AssetGroup.WeaponParts, this.BarrelPart);
+            m.Encode(writer, platform, AssetGroup.WeaponParts, this.SightPart);
+            m.Encode(writer, platform, AssetGroup.WeaponParts, this.StockPart);
+            m.Encode(writer, platform, AssetGroup.WeaponParts, this.ElementalPart);
+            m.Encode(writer, platform, AssetGroup.WeaponParts, this.Accessory1Part);
+            m.Encode(writer, platform, AssetGroup.WeaponParts, this.Accessory2Part);
+            m.Encode(writer, platform, AssetGroup.WeaponParts, this.MaterialPart);
+            m.Encode(writer, platform, AssetGroup.WeaponParts, this.PrefixPart);
+            m.Encode(writer, platform, AssetGroup.WeaponParts, this.TitlePart);
         }
 
         #region Properties
@@ -100,7 +98,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._Type)
                 {
                     this._Type = value;
-                    this.NotifyPropertyChanged("Type");
+                    this.NotifyOfPropertyChange(nameof(Type));
                 }
             }
         }
@@ -113,7 +111,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._Balance)
                 {
                     this._Balance = value;
-                    this.NotifyPropertyChanged("Balance");
+                    this.NotifyOfPropertyChange(nameof(Balance));
                 }
             }
         }
@@ -126,7 +124,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._Manufacturer)
                 {
                     this._Manufacturer = value;
-                    this.NotifyPropertyChanged("Manufacturer");
+                    this.NotifyOfPropertyChange(nameof(Manufacturer));
                 }
             }
         }
@@ -139,7 +137,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._ManufacturerGradeIndex)
                 {
                     this._ManufacturerGradeIndex = value;
-                    this.NotifyPropertyChanged("ManufacturerGradeIndex");
+                    this.NotifyOfPropertyChange(nameof(ManufacturerGradeIndex));
                 }
             }
         }
@@ -152,7 +150,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._BodyPart)
                 {
                     this._BodyPart = value;
-                    this.NotifyPropertyChanged("BodyPart");
+                    this.NotifyOfPropertyChange(nameof(BodyPart));
                 }
             }
         }
@@ -165,7 +163,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._GripPart)
                 {
                     this._GripPart = value;
-                    this.NotifyPropertyChanged("GripPart");
+                    this.NotifyOfPropertyChange(nameof(GripPart));
                 }
             }
         }
@@ -178,7 +176,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._BarrelPart)
                 {
                     this._BarrelPart = value;
-                    this.NotifyPropertyChanged("BarrelPart");
+                    this.NotifyOfPropertyChange(nameof(BarrelPart));
                 }
             }
         }
@@ -191,7 +189,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._SightPart)
                 {
                     this._SightPart = value;
-                    this.NotifyPropertyChanged("SightPart");
+                    this.NotifyOfPropertyChange(nameof(SightPart));
                 }
             }
         }
@@ -204,7 +202,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._StockPart)
                 {
                     this._StockPart = value;
-                    this.NotifyPropertyChanged("StockPart");
+                    this.NotifyOfPropertyChange(nameof(StockPart));
                 }
             }
         }
@@ -217,7 +215,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._ElementalPart)
                 {
                     this._ElementalPart = value;
-                    this.NotifyPropertyChanged("ElementalPart");
+                    this.NotifyOfPropertyChange(nameof(ElementalPart));
                 }
             }
         }
@@ -230,7 +228,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._Accessory1Part)
                 {
                     this._Accessory1Part = value;
-                    this.NotifyPropertyChanged("Accessory1Part");
+                    this.NotifyOfPropertyChange(nameof(Accessory1Part));
                 }
             }
         }
@@ -243,7 +241,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._Accessory2Part)
                 {
                     this._Accessory2Part = value;
-                    this.NotifyPropertyChanged("Accessory2Part");
+                    this.NotifyOfPropertyChange(nameof(Accessory2Part));
                 }
             }
         }
@@ -256,7 +254,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._MaterialPart)
                 {
                     this._MaterialPart = value;
-                    this.NotifyPropertyChanged("MaterialPart");
+                    this.NotifyOfPropertyChange(nameof(MaterialPart));
                 }
             }
         }
@@ -269,7 +267,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._PrefixPart)
                 {
                     this._PrefixPart = value;
-                    this.NotifyPropertyChanged("PrefixPart");
+                    this.NotifyOfPropertyChange(nameof(PrefixPart));
                 }
             }
         }
@@ -282,7 +280,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._TitlePart)
                 {
                     this._TitlePart = value;
-                    this.NotifyPropertyChanged("TitlePart");
+                    this.NotifyOfPropertyChange(nameof(TitlePart));
                 }
             }
         }
@@ -295,7 +293,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._GameStage)
                 {
                     this._GameStage = value;
-                    this.NotifyPropertyChanged("GameStage");
+                    this.NotifyOfPropertyChange(nameof(GameStage));
                 }
             }
         }
@@ -329,12 +327,9 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
         #region INotifyPropertyChanged Members
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void NotifyPropertyChanged(string propertyName)
+        protected void NotifyOfPropertyChange(string propertyName)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

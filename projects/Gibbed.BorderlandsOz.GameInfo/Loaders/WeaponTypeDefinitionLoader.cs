@@ -33,7 +33,7 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
             try
             {
                 var raws = LoaderHelper
-                    .DeserializeJson<Dictionary<string, Raw.WeaponTypeDefinition>>("Weapon Types");
+                    .Deserialize<Dictionary<string, Raw.WeaponTypeDefinition>>("Weapon Types");
                 return new InfoDictionary<WeaponTypeDefinition>(
                     raws.ToDictionary(kv => kv.Key, GetWeaponTypeDefinition));
             }

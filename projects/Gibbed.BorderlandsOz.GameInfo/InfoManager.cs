@@ -59,8 +59,8 @@ namespace Gibbed.BorderlandsOz.GameInfo
             Customizations = Loaders.CustomizationDefinitionLoader.Load(DownloadableContents);
 
             TravelStations = Loaders.TravelStationDefinitionLoader.Load(DownloadableContents);
-            FastTravelStationOrdering = Loaders.FastTravelStationOrderingLoader.Load(TravelStations,
-                                                                                     DownloadableContents);
+            FastTravelStationOrdering = Loaders.FastTravelStationOrderingLoader.Load(
+                TravelStations, DownloadableContents);
         }
 
         // Just a way to get the static initializer called.

@@ -34,7 +34,7 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
             try
             {
                 var raws = LoaderHelper
-                    .DeserializeJson<Dictionary<string, Raw.CustomizationDefinition>>("Customizations");
+                    .Deserialize<Dictionary<string, Raw.CustomizationDefinition>>("Customizations");
                 return new InfoDictionary<CustomizationDefinition>(
                     raws.ToDictionary(kv => kv.Key,
                                       kv => GetCustomizationDefinition(downloadableContents, kv)));

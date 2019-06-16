@@ -43,7 +43,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
                 if (value != this._TombstoneList)
                 {
                     this._TombstoneList = value;
-                    this.NotifyPropertyChanged("TombstoneList");
+                    this.NotifyOfPropertyChange(nameof(TombstoneList));
                 }
             }
         }
@@ -52,12 +52,9 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
         #region INotifyPropertyChanged Members
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void NotifyPropertyChanged(string propertyName)
+        private void NotifyOfPropertyChange(string propertyName)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

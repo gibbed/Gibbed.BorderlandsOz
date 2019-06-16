@@ -102,7 +102,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._Type)
                 {
                     this._Type = value;
-                    this.NotifyPropertyChanged("Type");
+                    this.NotifyOfPropertyChange(nameof(Type));
                 }
             }
         }
@@ -115,7 +115,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._Balance)
                 {
                     this._Balance = value;
-                    this.NotifyPropertyChanged("Balance");
+                    this.NotifyOfPropertyChange(nameof(Balance));
                 }
             }
         }
@@ -128,7 +128,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._Manufacturer)
                 {
                     this._Manufacturer = value;
-                    this.NotifyPropertyChanged("Manufacturer");
+                    this.NotifyOfPropertyChange(nameof(Manufacturer));
                 }
             }
         }
@@ -141,7 +141,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._ManufacturerGradeIndex)
                 {
                     this._ManufacturerGradeIndex = value;
-                    this.NotifyPropertyChanged("ManufacturerGradeIndex");
+                    this.NotifyOfPropertyChange(nameof(ManufacturerGradeIndex));
                 }
             }
         }
@@ -154,7 +154,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._AlphaPart)
                 {
                     this._AlphaPart = value;
-                    this.NotifyPropertyChanged("AlphaPart");
+                    this.NotifyOfPropertyChange(nameof(AlphaPart));
                 }
             }
         }
@@ -167,7 +167,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._BetaPart)
                 {
                     this._BetaPart = value;
-                    this.NotifyPropertyChanged("BetaPart");
+                    this.NotifyOfPropertyChange(nameof(BetaPart));
                 }
             }
         }
@@ -180,7 +180,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._GammaPart)
                 {
                     this._GammaPart = value;
-                    this.NotifyPropertyChanged("GammaPart");
+                    this.NotifyOfPropertyChange(nameof(GammaPart));
                 }
             }
         }
@@ -193,7 +193,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._DeltaPart)
                 {
                     this._DeltaPart = value;
-                    this.NotifyPropertyChanged("DeltaPart");
+                    this.NotifyOfPropertyChange(nameof(DeltaPart));
                 }
             }
         }
@@ -206,7 +206,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._EpsilonPart)
                 {
                     this._EpsilonPart = value;
-                    this.NotifyPropertyChanged("EpsilonPart");
+                    this.NotifyOfPropertyChange(nameof(EpsilonPart));
                 }
             }
         }
@@ -219,7 +219,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._ZetaPart)
                 {
                     this._ZetaPart = value;
-                    this.NotifyPropertyChanged("ZetaPart");
+                    this.NotifyOfPropertyChange(nameof(ZetaPart));
                 }
             }
         }
@@ -232,7 +232,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._EtaPart)
                 {
                     this._EtaPart = value;
-                    this.NotifyPropertyChanged("EtaPart");
+                    this.NotifyOfPropertyChange(nameof(EtaPart));
                 }
             }
         }
@@ -245,7 +245,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._ThetaPart)
                 {
                     this._ThetaPart = value;
-                    this.NotifyPropertyChanged("ThetaPart");
+                    this.NotifyOfPropertyChange(nameof(ThetaPart));
                 }
             }
         }
@@ -258,7 +258,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._MaterialPart)
                 {
                     this._MaterialPart = value;
-                    this.NotifyPropertyChanged("MaterialPart");
+                    this.NotifyOfPropertyChange(nameof(MaterialPart));
                 }
             }
         }
@@ -271,7 +271,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._PrefixPart)
                 {
                     this._PrefixPart = value;
-                    this.NotifyPropertyChanged("PrefixPart");
+                    this.NotifyOfPropertyChange(nameof(PrefixPart));
                 }
             }
         }
@@ -284,7 +284,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._TitlePart)
                 {
                     this._TitlePart = value;
-                    this.NotifyPropertyChanged("TitlePart");
+                    this.NotifyOfPropertyChange(nameof(TitlePart));
                 }
             }
         }
@@ -297,7 +297,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 if (value != this._GameStage)
                 {
                     this._GameStage = value;
-                    this.NotifyPropertyChanged("GameStage");
+                    this.NotifyOfPropertyChange(nameof(GameStage));
                 }
             }
         }
@@ -331,12 +331,9 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
         #region INotifyPropertyChanged Members
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void NotifyPropertyChanged(string propertyName)
+        protected void NotifyOfPropertyChange(string propertyName)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

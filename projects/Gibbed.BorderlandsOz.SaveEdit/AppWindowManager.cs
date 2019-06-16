@@ -44,27 +44,27 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 window.Title = _WindowTitle;
 
                 // ReSharper disable ConditionIsAlwaysTrueOrFalse
-                if (string.IsNullOrEmpty(Version.Configuration) == false)
+                if (string.IsNullOrEmpty(VersionInfo.Configuration) == false)
                 {
                     window.Title += " [";
-                    window.Title += Version.Configuration.ToUpperInvariant();
+                    window.Title += VersionInfo.Configuration.ToUpperInvariant();
                     window.Title += " ]";
                 }
-                if (string.IsNullOrEmpty(Version.Commit) == false)
+                if (string.IsNullOrEmpty(VersionInfo.Commit) == false)
                 {
                     window.Title += " (";
-                    window.Title += Version.Commit.Substring(0, 7);
-                    if (string.IsNullOrEmpty(Version.Timestamp) == false)
+                    window.Title += VersionInfo.Commit.Substring(0, 7);
+                    if (string.IsNullOrEmpty(VersionInfo.Timestamp) == false)
                     {
                         window.Title += " @ ";
-                        window.Title += MakeFriendlyTimestamp(Version.Timestamp);
+                        window.Title += MakeFriendlyTimestamp(VersionInfo.Timestamp);
                     }
                     window.Title += ")";
                 }
-                else if (string.IsNullOrEmpty(Version.Timestamp) == false)
+                else if (string.IsNullOrEmpty(VersionInfo.Timestamp) == false)
                 {
                     window.Title += " (@ ";
-                    window.Title += MakeFriendlyTimestamp(Version.Timestamp);
+                    window.Title += MakeFriendlyTimestamp(VersionInfo.Timestamp);
                     window.Title += ")";
                 }
                 // ReSharper restore ConditionIsAlwaysTrueOrFalse

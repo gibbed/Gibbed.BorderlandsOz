@@ -34,7 +34,7 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
             try
             {
                 var raws = LoaderHelper
-                    .DeserializeJson<Dictionary<string, Raw.TravelStationDefinition>>("Travel Stations");
+                    .Deserialize<Dictionary<string, Raw.TravelStationDefinition>>("Travel Stations");
                 var defs = new InfoDictionary<TravelStationDefinition>(
                     raws.ToDictionary(kv => kv.Key,
                                       kv => GetTravelStationDefinition(downloadableContents, kv)));
@@ -55,8 +55,9 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
                     var rawLevelTravelStation = (Raw.LevelTravelStationDefinition)kv.Value;
                     if (defs.ContainsKey(rawLevelTravelStation.DestinationStation) == false)
                     {
-                        throw ResourceNotFoundException.Create("level travel station",
-                                                               rawLevelTravelStation.DestinationStation);
+                        throw ResourceNotFoundException.Create(
+                            "level travel station",
+                            rawLevelTravelStation.DestinationStation);
                     }
                     var levelTravelStation = (LevelTravelStationDefinition)defs[kv.Key];
                     levelTravelStation.DestinationStation =

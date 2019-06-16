@@ -20,22 +20,12 @@
  *    distribution.
  */
 
-using System;
-using System.Globalization;
-using System.Windows.Data;
-
 namespace Gibbed.BorderlandsOz.SaveEdit
 {
-    internal class NullToBooleanConverter : IValueConverter
+    internal static class VersionInfo
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return (value == null) ^ (parameter != null);
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return value;
-        }
+        public const string Configuration = null;
+        public const string Commit = null;
+        public const string Timestamp = null;
     }
 }

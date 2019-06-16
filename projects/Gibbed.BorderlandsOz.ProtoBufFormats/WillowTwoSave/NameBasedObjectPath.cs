@@ -44,7 +44,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
                 if (value != this._PathComponentNames)
                 {
                     this._PathComponentNames = value;
-                    this.NotifyPropertyChanged("PathComponentNames");
+                    this.NotifyOfPropertyChange(nameof(PathComponentNames));
                 }
             }
         }
@@ -58,7 +58,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
                 if (value != this._IsSubobjectMask)
                 {
                     this._IsSubobjectMask = value;
-                    this.NotifyPropertyChanged("IsSubobjectMask");
+                    this.NotifyOfPropertyChange(nameof(IsSubobjectMask));
                 }
             }
         }
@@ -67,12 +67,9 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
         #region INotifyPropertyChanged Members
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void NotifyPropertyChanged(string propertyName)
+        private void NotifyOfPropertyChange(string propertyName)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

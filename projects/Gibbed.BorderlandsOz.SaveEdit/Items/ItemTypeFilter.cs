@@ -50,7 +50,6 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             get { return this._Value; }
         }
 
-
         public GameInfo.ItemType SecondValue
         {
             get { return this._SecondValue; }

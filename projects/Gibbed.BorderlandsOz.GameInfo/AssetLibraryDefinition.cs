@@ -51,8 +51,11 @@ namespace Gibbed.BorderlandsOz.GameInfo
             {
                 "None"
             }.Concat(
-                this.Sublibraries.SelectMany(sl => sl.Assets.Select(a => sl.Package + "." + a)).Distinct().
-                    OrderBy(a => a)).ToArray();
+                this.Sublibraries
+                    .SelectMany(sl => sl.Assets.Select(a => sl.Package + "." + a))
+                    .Distinct()
+                    .OrderBy(a => a))
+             .ToArray();
         }
     }
 }

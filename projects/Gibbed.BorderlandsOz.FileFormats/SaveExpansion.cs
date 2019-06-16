@@ -59,10 +59,11 @@ namespace Gibbed.BorderlandsOz.FileFormats
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
         };
 
-        private static void AddExpansionSavedataToUnloadableItemData(this WillowTwoPlayerSaveGame saveGame,
-                                                                     byte id,
-                                                                     int value1,
-                                                                     int value2)
+        private static void AddExpansionSavedataToUnloadableItemData(
+            this WillowTwoPlayerSaveGame saveGame,
+            byte id,
+            int value1,
+            int value2)
         {
             saveGame.PackedItemData.Add(new PackedItemData()
             {
@@ -72,9 +73,10 @@ namespace Gibbed.BorderlandsOz.FileFormats
             });
         }
 
-        private static void AddExpansionSavedataToUnloadableItemData(this WillowTwoPlayerSaveGame saveGame,
-                                                                     byte id,
-                                                                     int value1)
+        private static void AddExpansionSavedataToUnloadableItemData(
+            this WillowTwoPlayerSaveGame saveGame,
+            byte id,
+            int value1)
         {
             // ReSharper disable IntroduceOptionalParameters.Local
             AddExpansionSavedataToUnloadableItemData(saveGame, id, value1, 0);
@@ -85,7 +87,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
         {
             if (saveGame == null)
             {
-                throw new ArgumentNullException("saveGame");
+                throw new ArgumentNullException(nameof(saveGame));
             }
 
             if (saveGame.PackedItemData == null)
@@ -118,9 +120,10 @@ namespace Gibbed.BorderlandsOz.FileFormats
             {
                 var extraLastPlaythroughNumber = saveGame.LastPlaythroughNumber - 1;
                 var extraPlaythroughsCompleted = (byte)(saveGame.PlaythroughsCompleted - 1);
-                saveGame.AddExpansionSavedataToUnloadableItemData(2,
-                                                                  extraLastPlaythroughNumber,
-                                                                  extraPlaythroughsCompleted);
+                saveGame.AddExpansionSavedataToUnloadableItemData(
+                    2,
+                    extraLastPlaythroughNumber,
+                    extraPlaythroughsCompleted);
                 saveGame.LastPlaythroughNumber = saveGame.LastPlaythroughNumber >= 1 ? 1 : 0;
                 saveGame.PlaythroughsCompleted = 1;
             }
@@ -146,10 +149,11 @@ namespace Gibbed.BorderlandsOz.FileFormats
             */
         }
 
-        private static void ExtractExpansionSavedataFromUnloadableItemData(PackedItemData packedItemData,
-                                                                           out byte id,
-                                                                           out int value1,
-                                                                           out int value2)
+        private static void ExtractExpansionSavedataFromUnloadableItemData(
+            PackedItemData packedItemData,
+            out byte id,
+            out int value1,
+            out int value2)
         {
             var dummy = -packedItemData.Quantity;
             id = (byte)(dummy & 0xFF);
@@ -161,7 +165,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
         {
             if (saveGame == null)
             {
-                throw new ArgumentNullException("saveGame");
+                throw new ArgumentNullException(nameof(saveGame));
             }
 
             if (saveGame.PackedItemData != null)
@@ -169,9 +173,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                 var hacks = saveGame.PackedItemData.Where(pid => pid.Quantity < 0).ToArray();
                 foreach (var hack in hacks)
                 {
-                    byte id;
-                    int value1, value2;
-                    ExtractExpansionSavedataFromUnloadableItemData(hack, out id, out value1, out value2);
+                    ExtractExpansionSavedataFromUnloadableItemData(hack, out var id, out var value1, out var value2);
 
                     if (id == 1)
                     {

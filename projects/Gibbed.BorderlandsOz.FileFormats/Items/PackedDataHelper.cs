@@ -31,11 +31,12 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
         where TWeapon : IPackableWeapon, new()
         where TItem : IPackableItem, new()
     {
-        private static byte[] Encode(IPackedSlot packed,
-                                     int uniqueId,
-                                     bool isWeapon,
-                                     int assetLibrarySetId,
-                                     Platform platform)
+        private static byte[] Encode(
+            IPackedSlot packed,
+            int uniqueId,
+            bool isWeapon,
+            int assetLibrarySetId,
+            Platform platform)
         {
             var writer = new BitWriter();
             writer.WriteInt32(InfoManager.AssetLibraryManager.Version, 7);
@@ -86,7 +87,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
         {
             if (packable == null)
             {
-                throw new ArgumentNullException("packable");
+                throw new ArgumentNullException(nameof(packable));
             }
 
             /*
@@ -98,15 +99,12 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
             }
             */
 
-            var weapon = packable as IPackableWeapon;
-            if (weapon != null)
+            if (packable is IPackableWeapon weapon)
             {
                 var packed = weapon.Pack(platform);
                 return Encode(packed, weapon.UniqueId, true, weapon.AssetLibrarySetId, platform);
             }
-
-            var item = packable as IPackableItem;
-            if (item != null)
+            else if (packable is IPackableItem item)
             {
                 var packed = item.Pack(platform);
                 return Encode(packed, item.UniqueId, false, item.AssetLibrarySetId, platform);
@@ -146,7 +144,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
         {
             if (data.Length < 5 || data.Length > 40)
             {
-                throw new ArgumentOutOfRangeException("data");
+                throw new ArgumentOutOfRangeException(nameof(data));
             }
 
             var seed = BitConverter.ToUInt32(data, 1).Swap();
@@ -208,10 +206,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
             var set = InfoManager.AssetLibraryManager.GetSet(setId);
             if (set == null)
             {
-                throw new FormatException(
-                    string.Format(
-                        "unknown asset library set {0} in packed data (this generally means new DLC that is not supported yet)",
-                        setId));
+                throw new FormatException($"unknown asset library set {setId} in packed data (this generally means new DLC that is not supported yet)");
             }
             */
 
@@ -220,7 +215,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 var packed = new PackedWeapon();
                 packed.Read(reader, platform);
 
-                var weapon = new TWeapon
+                var weapon = new TWeapon()
                 {
                     UniqueId = uniqueId,
                     AssetLibrarySetId = setId,
@@ -233,7 +228,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
                 var packed = new PackedItem();
                 packed.Read(reader, platform);
 
-                var item = new TItem
+                var item = new TItem()
                 {
                     UniqueId = uniqueId,
                     AssetLibrarySetId = setId,

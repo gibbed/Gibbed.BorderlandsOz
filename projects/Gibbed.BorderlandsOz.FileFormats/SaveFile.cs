@@ -52,7 +52,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                 if (value != this._Platform)
                 {
                     this._Platform = value;
-                    this.NotifyPropertyChanged("Platform");
+                    this.NotifyOfPropertyChange(nameof(Platform));
                 }
             }
         }
@@ -65,7 +65,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                 if (value != this._SaveGame)
                 {
                     this._SaveGame = value;
-                    this.NotifyPropertyChanged("SaveGame");
+                    this.NotifyOfPropertyChange(nameof(SaveGame));
                 }
             }
         }
@@ -78,7 +78,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                 if (value != this._PlayerStats)
                 {
                     this._PlayerStats = value;
-                    this.NotifyPropertyChanged("PlayerStats");
+                    this.NotifyOfPropertyChange(nameof(PlayerStats));
                 }
             }
         }
@@ -160,7 +160,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                         new MiniLZO.CompressWorkBuffer());
                     if (result != MiniLZO.ErrorCode.Success)
                     {
-                        throw new SaveCorruptionException(string.Format("LZO compression failure ({0})", result));
+                        throw new SaveCorruptionException($"LZO compression failure ({result})");
                     }
 
                     Array.Resize(ref compressedBytes, actualCompressedSize);
@@ -214,7 +214,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                                 new MiniLZO.CompressWorkBuffer());
                             if (result != MiniLZO.ErrorCode.Success)
                             {
-                                throw new SaveCorruptionException(string.Format("LZO compression failure ({0})", result));
+                                throw new SaveCorruptionException($"LZO compression failure ({result})");
                             }
 
                             blockData.Write(compressedBytes, 0, actualCompressedSize);
@@ -319,7 +319,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
         {
             if (IsSupportedPlatform(platform) == false)
             {
-                throw new ArgumentException("unsupported platform", "platform");
+                throw new ArgumentException("unsupported platform", nameof(platform));
             }
 
             if (input.Position + 20 > input.Length)
@@ -371,7 +371,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                             ref actualUncompressedSize);
                         if (result != MiniLZO.ErrorCode.Success)
                         {
-                            throw new SaveCorruptionException(string.Format("LZO decompression failure ({0})", result));
+                            throw new SaveCorruptionException($"LZO decompression failure ({result})");
                         }
 
                         if (actualUncompressedSize != (int)uncompressedSize)
@@ -396,9 +396,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                             }
                             catch (ICSharpCode.SharpZipLib.SharpZipBaseException e)
                             {
-                                throw new SaveCorruptionException(
-                                    string.Format("zlib decompression failure ({0})", e.Message),
-                                    e);
+                                throw new SaveCorruptionException($"zlib decompression failure ({e.Message})", e);
                             }
                         }
                     }
@@ -421,7 +419,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                         }
 
                         int uncompressedOffset = 0;
-                        var uncompressedSizeLeft = (int)uncompressedSize;
+                        int uncompressedSizeLeft = (int)uncompressedSize;
                         foreach (var blockInfo in blockInfos)
                         {
                             var blockUncompressedSize = Math.Min((int)blockInfo.Item2, uncompressedSizeLeft);
@@ -437,8 +435,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                                 ref actualUncompressedSize);
                             if (result != MiniLZO.ErrorCode.Success)
                             {
-                                throw new SaveCorruptionException(string.Format("LZO decompression failure ({0})",
-                                                                                result));
+                                throw new SaveCorruptionException($"LZO decompression failure ({result})");
                             }
 
                             if (actualUncompressedSize != blockUncompressedSize)
@@ -468,7 +465,7 @@ namespace Gibbed.BorderlandsOz.FileFormats
                         }
 
                         int uncompressedOffset = 0;
-                        var uncompressedSizeLeft = (int)uncompressedSize;
+                        int uncompressedSizeLeft = (int)uncompressedSize;
                         foreach (var blockInfo in blockInfos)
                         {
                             var blockUncompressedSize = Math.Min((int)blockInfo.Item2, uncompressedSizeLeft);
@@ -480,15 +477,14 @@ namespace Gibbed.BorderlandsOz.FileFormats
                                 var zlib = new InflaterInputStream(temp);
                                 try
                                 {
-                                    actualUncompressedSize = zlib.Read(uncompressedBytes,
-                                                                       uncompressedOffset,
-                                                                       uncompressedBytes.Length);
+                                    actualUncompressedSize = zlib.Read(
+                                        uncompressedBytes,
+                                        uncompressedOffset,
+                                        uncompressedBytes.Length);
                                 }
                                 catch (ICSharpCode.SharpZipLib.SharpZipBaseException e)
                                 {
-                                    throw new SaveCorruptionException(string.Format("zlib decompression failure ({0})",
-                                                                                    e.Message),
-                                                                      e);
+                                    throw new SaveCorruptionException($"zlib decompression failure ({e.Message})", e);
                                 }
                             }
 
@@ -601,12 +597,9 @@ namespace Gibbed.BorderlandsOz.FileFormats
         #region INotifyPropertyChanged Members
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void NotifyPropertyChanged(string propertyName)
+        private void NotifyOfPropertyChange(string propertyName)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

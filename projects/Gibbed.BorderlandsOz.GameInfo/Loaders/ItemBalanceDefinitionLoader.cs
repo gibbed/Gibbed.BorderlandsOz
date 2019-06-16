@@ -33,7 +33,7 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
             try
             {
                 var raws = LoaderHelper
-                    .DeserializeJson<Dictionary<string, Raw.ItemBalanceDefinition>>("Item Balance");
+                    .Deserialize<Dictionary<string, Raw.ItemBalanceDefinition>>("Item Balance");
                 var defs = new InfoDictionary<ItemBalanceDefinition>(
                     raws.ToDictionary(kv => kv.Key,
                                       kv => GetItemBalanceDefinition(itemTypes, kv)));

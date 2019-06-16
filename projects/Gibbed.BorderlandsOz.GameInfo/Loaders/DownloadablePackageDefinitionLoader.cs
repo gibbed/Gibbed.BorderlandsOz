@@ -33,10 +33,9 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
             try
             {
                 var raws = LoaderHelper
-                    .DeserializeJson<Dictionary<string, Raw.DownloadablePackage>>("Downloadable Packages");
+                    .Deserialize<Dictionary<string, Raw.DownloadablePackage>>("Downloadable Packages");
                 return new InfoDictionary<DownloadablePackageDefinition>(
-                    raws.ToDictionary(kv => kv.Key,
-                                      GetDownloadablePackage));
+                    raws.ToDictionary(kv => kv.Key, GetDownloadablePackage));
             }
             catch (Exception e)
             {

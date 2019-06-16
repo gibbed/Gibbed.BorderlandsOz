@@ -40,6 +40,7 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
             var resolvedTypeName = string.Format(CultureInfo.InvariantCulture, TypeFormat, typeName);
             return Type.GetType(resolvedTypeName, true);
         }
+
         public void BindToName(Type serializedType, out string assemblyName, out string typeName)
         {
             assemblyName = null;

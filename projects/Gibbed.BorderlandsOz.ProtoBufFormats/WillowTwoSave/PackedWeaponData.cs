@@ -44,7 +44,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
                 if (value != this._InventorySerialNumber)
                 {
                     this._InventorySerialNumber = value;
-                    this.NotifyPropertyChanged("InventorySerialNumber");
+                    this.NotifyOfPropertyChange(nameof(InventorySerialNumber));
                 }
             }
         }
@@ -58,7 +58,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
                 if (value != this._QuickSlot)
                 {
                     this._QuickSlot = value;
-                    this.NotifyPropertyChanged("QuickSlot");
+                    this.NotifyOfPropertyChange(nameof(QuickSlot));
                 }
             }
         }
@@ -72,7 +72,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
                 if (value != this._Mark)
                 {
                     this._Mark = value;
-                    this.NotifyPropertyChanged("Mark");
+                    this.NotifyOfPropertyChange(nameof(Mark));
                 }
             }
         }
@@ -81,12 +81,9 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
         #region INotifyPropertyChanged Members
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void NotifyPropertyChanged(string propertyName)
+        private void NotifyOfPropertyChange(string propertyName)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

@@ -41,18 +41,12 @@ namespace Gibbed.BorderlandsOz.SaveEdit
 
         public BaseItemViewModel(BaseItem item)
         {
-            if (item == null)
-            {
-                throw new ArgumentNullException("item");
-            }
-
-            this._Item = item;
+            this._Item = item ?? throw new ArgumentNullException(nameof(item));
 
             IEnumerable<ItemTypeDefinition> resources;
             resources = InfoManager.ItemBalance.Items.Where(kv => kv.Value.Type != null).Select(kv => kv.Value.Type);
-            resources =
-                resources.Concat(
-                    InfoManager.ItemBalance.Items.Where(kv => kv.Value.Types != null).SelectMany(bd => bd.Value.Types));
+            resources = resources.Concat(
+                InfoManager.ItemBalance.Items.Where(kv => kv.Value.Types != null).SelectMany(bd => bd.Value.Types));
 
             var itemTypeFilters = new List<ItemTypeFilter>()
             {
@@ -115,8 +109,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 return true;
             }
 
-            if (selectedSecondItemType != ItemType.Unknown &&
-                selectedSecondItemType == itemType.Type)
+            if (selectedSecondItemType != ItemType.Unknown && selectedSecondItemType == itemType.Type)
             {
                 return true;
             }
@@ -170,7 +163,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Item.Type = value;
-                this.NotifyOfPropertyChange(() => this.Type);
+                this.NotifyOfPropertyChange(nameof(Type));
                 this.BuildBalanceAssets();
                 this.UpdateDisplayName();
             }
@@ -182,7 +175,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Item.Balance = value;
-                this.NotifyOfPropertyChange(() => this.Balance);
+                this.NotifyOfPropertyChange(nameof(Balance));
                 this.BuildPartAssets();
             }
         }
@@ -193,7 +186,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Item.Manufacturer = value;
-                this.NotifyOfPropertyChange(() => this.Manufacturer);
+                this.NotifyOfPropertyChange(nameof(Manufacturer));
             }
         }
 
@@ -203,7 +196,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Item.ManufacturerGradeIndex = value;
-                this.NotifyOfPropertyChange(() => this.ManufacturerGradeIndex);
+                this.NotifyOfPropertyChange(nameof(ManufacturerGradeIndex));
             }
         }
 
@@ -213,7 +206,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Item.AlphaPart = value;
-                this.NotifyOfPropertyChange(() => this.AlphaPart);
+                this.NotifyOfPropertyChange(nameof(AlphaPart));
             }
         }
 
@@ -223,7 +216,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Item.BetaPart = value;
-                this.NotifyOfPropertyChange(() => this.BetaPart);
+                this.NotifyOfPropertyChange(nameof(BetaPart));
             }
         }
 
@@ -233,7 +226,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Item.GammaPart = value;
-                this.NotifyOfPropertyChange(() => this.GammaPart);
+                this.NotifyOfPropertyChange(nameof(GammaPart));
             }
         }
 
@@ -243,7 +236,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Item.DeltaPart = value;
-                this.NotifyOfPropertyChange(() => this.DeltaPart);
+                this.NotifyOfPropertyChange(nameof(DeltaPart));
             }
         }
 
@@ -253,7 +246,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Item.EpsilonPart = value;
-                this.NotifyOfPropertyChange(() => this.EpsilonPart);
+                this.NotifyOfPropertyChange(nameof(EpsilonPart));
             }
         }
 
@@ -263,7 +256,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Item.ZetaPart = value;
-                this.NotifyOfPropertyChange(() => this.ZetaPart);
+                this.NotifyOfPropertyChange(nameof(ZetaPart));
             }
         }
 
@@ -273,7 +266,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Item.EtaPart = value;
-                this.NotifyOfPropertyChange(() => this.EtaPart);
+                this.NotifyOfPropertyChange(nameof(EtaPart));
             }
         }
 
@@ -283,7 +276,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Item.ThetaPart = value;
-                this.NotifyOfPropertyChange(() => this.ThetaPart);
+                this.NotifyOfPropertyChange(nameof(ThetaPart));
             }
         }
 
@@ -293,7 +286,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Item.MaterialPart = value;
-                this.NotifyOfPropertyChange(() => this.MaterialPart);
+                this.NotifyOfPropertyChange(nameof(MaterialPart));
             }
         }
 
@@ -303,7 +296,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Item.PrefixPart = value;
-                this.NotifyOfPropertyChange(() => this.PrefixPart);
+                this.NotifyOfPropertyChange(nameof(PrefixPart));
                 this.UpdateDisplayName();
             }
         }
@@ -314,7 +307,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Item.TitlePart = value;
-                this.NotifyOfPropertyChange(() => this.TitlePart);
+                this.NotifyOfPropertyChange(nameof(TitlePart));
                 this.UpdateDisplayName();
             }
         }
@@ -325,7 +318,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Item.GameStage = value;
-                this.NotifyOfPropertyChange(() => this.GameStage);
+                this.NotifyOfPropertyChange(nameof(GameStage));
             }
         }
 
@@ -335,7 +328,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Item.UniqueId = value;
-                this.NotifyOfPropertyChange(() => this.UniqueId);
+                this.NotifyOfPropertyChange(nameof(UniqueId));
             }
         }
 
@@ -345,7 +338,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Item.AssetLibrarySetId = value;
-                this.NotifyOfPropertyChange(() => this.AssetLibrarySetId);
+                this.NotifyOfPropertyChange(nameof(AssetLibrarySetId));
             }
         }
         #endregion Properties
@@ -365,12 +358,10 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                                          .FirstOrDefault(dp => dp.Id == this.AssetLibrarySetId);
                 if (package == null)
                 {
-                    return string.Format("(unknown #{0})", this.AssetLibrarySetId);
+                    return $"(unknown #{this.AssetLibrarySetId})";
                 }
 
-                return string.Format("{1} (#{0})",
-                                     this.AssetLibrarySetId,
-                                     package.DisplayName);
+                return $"{package.DisplayName} (#{this.AssetLibrarySetId})";
             }
         }
 
@@ -380,7 +371,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             private set
             {
                 this._DisplayName = value;
-                this.NotifyOfPropertyChange(() => this.DisplayName);
+                this.NotifyOfPropertyChange(nameof(DisplayName));
             }
         }
 
@@ -489,7 +480,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._SelectedItemTypeFilter = value;
-                this.NotifyOfPropertyChange(() => this.SelectedItemTypeFilter);
+                this.NotifyOfPropertyChange(nameof(SelectedItemTypeFilter));
                 this.FilteredTypeAssets.Refresh();
             }
         }
@@ -500,7 +491,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             private set
             {
                 this._TypeAssets = value;
-                this.NotifyOfPropertyChange(() => this.TypeAssets);
+                this.NotifyOfPropertyChange(nameof(TypeAssets));
             }
         }
 
@@ -515,7 +506,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             private set
             {
                 this._BalanceAssets = value;
-                this.NotifyOfPropertyChange(() => this.BalanceAssets);
+                this.NotifyOfPropertyChange(nameof(BalanceAssets));
             }
         }
 
@@ -525,7 +516,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             private set
             {
                 this._ManufacturerAssets = value;
-                this.NotifyOfPropertyChange(() => this.ManufacturerAssets);
+                this.NotifyOfPropertyChange(nameof(ManufacturerAssets));
             }
         }
 
@@ -535,7 +526,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             private set
             {
                 this._AlphaPartAssets = value;
-                this.NotifyOfPropertyChange(() => this.AlphaPartAssets);
+                this.NotifyOfPropertyChange(nameof(AlphaPartAssets));
             }
         }
 
@@ -545,7 +536,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             private set
             {
                 this._BetaPartAssets = value;
-                this.NotifyOfPropertyChange(() => this.BetaPartAssets);
+                this.NotifyOfPropertyChange(nameof(BetaPartAssets));
             }
         }
 
@@ -555,7 +546,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             private set
             {
                 this._GammaPartAssets = value;
-                this.NotifyOfPropertyChange(() => this.GammaPartAssets);
+                this.NotifyOfPropertyChange(nameof(GammaPartAssets));
             }
         }
 
@@ -565,7 +556,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             private set
             {
                 this._DeltaPartAssets = value;
-                this.NotifyOfPropertyChange(() => this.DeltaPartAssets);
+                this.NotifyOfPropertyChange(nameof(DeltaPartAssets));
             }
         }
 
@@ -575,7 +566,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             private set
             {
                 this._EpsilonPartAssets = value;
-                this.NotifyOfPropertyChange(() => this.EpsilonPartAssets);
+                this.NotifyOfPropertyChange(nameof(EpsilonPartAssets));
             }
         }
 
@@ -585,7 +576,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             private set
             {
                 this._ZetaPartAssets = value;
-                this.NotifyOfPropertyChange(() => this.ZetaPartAssets);
+                this.NotifyOfPropertyChange(nameof(ZetaPartAssets));
             }
         }
 
@@ -595,7 +586,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             private set
             {
                 this._EtaPartAssets = value;
-                this.NotifyOfPropertyChange(() => this.EtaPartAssets);
+                this.NotifyOfPropertyChange(nameof(EtaPartAssets));
             }
         }
 
@@ -605,7 +596,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             private set
             {
                 this._ThetaPartAssets = value;
-                this.NotifyOfPropertyChange(() => this.ThetaPartAssets);
+                this.NotifyOfPropertyChange(nameof(ThetaPartAssets));
             }
         }
 
@@ -615,7 +606,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             private set
             {
                 this._MaterialPartAssets = value;
-                this.NotifyOfPropertyChange(() => this.MaterialPartAssets);
+                this.NotifyOfPropertyChange(nameof(MaterialPartAssets));
             }
         }
         #endregion
@@ -634,10 +625,10 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             else
             {
                 var type = InfoManager.ItemTypes[this.Type];
-                this.BalanceAssets = CreateAssetList(
-                    InfoManager.ItemBalance.Items
-                               .Where(kv => kv.Value.IsSuitableFor(type) == true)
-                               .Select(kv => kv.Key).OrderBy(s => s));
+                this.BalanceAssets = CreateAssetList(InfoManager.ItemBalance.Items
+                    .Where(kv => kv.Value.IsSuitableFor(type) == true)
+                    .Select(kv => kv.Key)
+                    .OrderBy(s => s));
             }
 
             this.BuildPartAssets();
@@ -665,7 +656,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             else
             {
                 var type = InfoManager.ItemTypes[this.Type];
-                var balance = InfoManager.ItemBalance[this.Balance].Merge(type);
+                var balance = InfoManager.ItemBalance[this.Balance].Create(type);
                 this.ManufacturerAssets = CreateAssetList(balance.Manufacturers.OrderBy(s => s).Distinct());
                 this.AlphaPartAssets = CreateAssetList(balance.Parts.AlphaParts.OrderBy(s => s).Distinct());
                 this.BetaPartAssets = CreateAssetList(balance.Parts.BetaParts.OrderBy(s => s).Distinct());

@@ -23,29 +23,29 @@
 -->
 <UserControl x:Class="Gibbed.BorderlandsOz.SaveEdit.ShellView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:c="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:gbx="clr-namespace:Gibbed.Gearbox.WPF;assembly=Gibbed.Gearbox.WPF"
+             xmlns:gi="clr-namespace:Gibbed.BorderlandsOz.GameInfo;assembly=Gibbed.BorderlandsOz.GameInfo"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d"
              d:DesignWidth="800"
-             d:DesignHeight="560"
-             xmlns:se="clr-namespace:Gibbed.BorderlandsOz.SaveEdit"
-             xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
-             xmlns:gameInfo="clr-namespace:Gibbed.BorderlandsOz.GameInfo;assembly=Gibbed.BorderlandsOz.GameInfo">
+             d:DesignHeight="560">
     <UserControl.Resources>
-        <se:NullToBooleanConverter x:Key="NullToBooleanConverter1" />
+        <gbx:NullToBooleanConverter x:Key="NullToBooleanConverter1" />
     </UserControl.Resources>
     <DockPanel>
-        <cal:Message.Attach>
+        <c:Message.Attach>
             [Shortcut Control+N] = [Action NewSave];
             [Shortcut Control+O] = [Action ReadSave];
             [Shortcut Control+S] = [Action WriteSave];
-        </cal:Message.Attach>
+        </c:Message.Attach>
         <ToolBar Name="ButtonBar"
                  DockPanel.Dock="Top">
             <Button>
-                <cal:Message.Attach>[Event Click] = [Action NewSave]</cal:Message.Attach>
+                <c:Message.Attach>[Event Click] = [Action NewSave]</c:Message.Attach>
                 <StackPanel Orientation="Horizontal">
                     <Image Width="16"
                            Height="16"
@@ -60,7 +60,7 @@
                                   Width="Auto"
                                   Height="Auto">
                         <ItemsControl.ItemTemplate>
-                            <DataTemplate DataType="gameInfo:PlayerClassDefinition">
+                            <DataTemplate DataType="gi:PlayerClassDefinition">
                                 <Button Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ItemsControl}}, Path=DataContext.NewSaveFromPlayerClass}"
                                         CommandParameter="{Binding}">
                                     <Label Content="{Binding Path=Name}" />
@@ -71,7 +71,7 @@
                 </xctk:DropDownButton.DropDownContent>
             </xctk:DropDownButton>
             <Button>
-                <cal:Message.Attach>[Event Click] = [Action ReadSave]</cal:Message.Attach>
+                <c:Message.Attach>[Event Click] = [Action ReadSave]</c:Message.Attach>
                 <StackPanel Orientation="Horizontal">
                     <Image Width="16"
                            Height="16"
@@ -81,7 +81,7 @@
                 <Button.ToolTip>Open (Ctrl+O)</Button.ToolTip>
             </Button>
             <Button IsEnabled="{Binding Path=SaveFile, Converter={StaticResource NullToBooleanConverter1}, ConverterParameter=true}">
-                <cal:Message.Attach>[Event Click] = [Action WriteSave]</cal:Message.Attach>
+                <c:Message.Attach>[Event Click] = [Action WriteSave]</c:Message.Attach>
                 <StackPanel Orientation="Horizontal">
                     <Image Width="16"
                            Height="16"
@@ -170,7 +170,8 @@
                         <Image Height="24"
                                Source="Resources\backpack.png" />
                         <Label VerticalAlignment="Center"
-                               Content="{Binding Path=Backpack.Slots.Count}" ContentStringFormat="Backpack ({0})"/>
+                               Content="{Binding Path=Backpack.Slots.Count}"
+                               ContentStringFormat="Backpack ({0})" />
                     </StackPanel>
                 </TabItem.Header>
                 <ContentControl x:Name="Backpack"
@@ -182,7 +183,8 @@
                         <Image Height="24"
                                Source="Resources\bank.png" />
                         <Label VerticalAlignment="Center"
-                               Content="{Binding Path=Bank.Slots.Count}" ContentStringFormat="Bank ({0})"/>
+                               Content="{Binding Path=Bank.Slots.Count}"
+                               ContentStringFormat="Bank ({0})" />
                     </StackPanel>
                 </TabItem.Header>
                 <ContentControl x:Name="Bank"

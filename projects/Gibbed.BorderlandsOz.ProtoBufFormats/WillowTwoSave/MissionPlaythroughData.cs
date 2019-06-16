@@ -42,9 +42,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
 
         #region Serialization
         [ProtoAfterDeserialization]
-        // ReSharper disable UnusedMember.Local
         private void OnDeserialization()
-            // ReSharper restore UnusedMember.Local
         {
             this._MissionList = this._MissionList ?? new List<MissionData>();
             this._PendingMissionRewards = this._PendingMissionRewards ?? new List<PendingMissionRewards>();
@@ -94,7 +92,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
                 if (value != this._PlayThroughNumber)
                 {
                     this._PlayThroughNumber = value;
-                    this.NotifyPropertyChanged("PlayThroughNumber");
+                    this.NotifyOfPropertyChange(nameof(PlayThroughNumber));
                 }
             }
         }
@@ -108,7 +106,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
                 if (value != this._ActiveMission)
                 {
                     this._ActiveMission = value;
-                    this.NotifyPropertyChanged("ActiveMission");
+                    this.NotifyOfPropertyChange(nameof(ActiveMission));
                 }
             }
         }
@@ -122,7 +120,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
                 if (value != this._MissionList)
                 {
                     this._MissionList = value;
-                    this.NotifyPropertyChanged("MissionList");
+                    this.NotifyOfPropertyChange(nameof(MissionList));
                 }
             }
         }
@@ -136,7 +134,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
                 if (value != this._PendingMissionRewards)
                 {
                     this._PendingMissionRewards = value;
-                    this.NotifyPropertyChanged("PendingMissionRewards");
+                    this.NotifyOfPropertyChange(nameof(PendingMissionRewards));
                 }
             }
         }
@@ -150,7 +148,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
                 if (value != this._FilteredMissions)
                 {
                     this._FilteredMissions = value;
-                    this.NotifyPropertyChanged("FilteredMissions");
+                    this.NotifyOfPropertyChange(nameof(FilteredMissions));
                 }
             }
         }
@@ -164,7 +162,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
                 if (value != this._SparkMissionList)
                 {
                     this._SparkMissionList = value;
-                    this.NotifyPropertyChanged("SparkMissionList");
+                    this.NotifyOfPropertyChange(nameof(SparkMissionList));
                 }
             }
         }
@@ -178,7 +176,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
                 if (value != this._ActivatedTeleportersList)
                 {
                     this._ActivatedTeleportersList = value;
-                    this.NotifyPropertyChanged("ActivatedTeleportersList");
+                    this.NotifyOfPropertyChange(nameof(ActivatedTeleportersList));
                 }
             }
         }
@@ -192,7 +190,7 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
                 if (value != this._LastVisitedTeleporterName)
                 {
                     this._LastVisitedTeleporterName = value;
-                    this.NotifyPropertyChanged("LastVisitedTeleporterName");
+                    this.NotifyOfPropertyChange(nameof(LastVisitedTeleporterName));
                 }
             }
         }
@@ -201,12 +199,9 @@ namespace Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave
         #region INotifyPropertyChanged Members
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void NotifyPropertyChanged(string propertyName)
+        private void NotifyOfPropertyChange(string propertyName)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

@@ -35,7 +35,7 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
             try
             {
                 var raws = LoaderHelper
-                    .DeserializeJson<Dictionary<string, Raw.FastTravelStationOrdering>>("Fast Travel Station Ordering");
+                    .Deserialize<Dictionary<string, Raw.FastTravelStationOrdering>>("Fast Travel Station Ordering");
                 return new InfoDictionary<FastTravelStationOrdering>(
                     raws.ToDictionary(kv => kv.Key,
                                       kv => GetFastTravelStationOrdering(travelStations, downloadableContents, kv)));
@@ -85,12 +85,11 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
                 }
 
                 var travelStation = travelStations[raw];
-                if ((travelStation is FastTravelStationDefinition) == false)
+                if (travelStation is FastTravelStationDefinition fastTravelStation)
                 {
-                    throw new InvalidOperationException(string.Format("'{0}' is not a FastTravelStationDefinition", raw));
+                    return fastTravelStation;
                 }
-
-                return (FastTravelStationDefinition)travelStation;
+                throw new InvalidOperationException($"'{raw}' is not a FastTravelStationDefinition");
             }).ToList();
         }
     }

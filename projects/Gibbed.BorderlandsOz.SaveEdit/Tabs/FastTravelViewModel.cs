@@ -43,7 +43,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._LastVisitedTeleporter = value;
-                this.NotifyOfPropertyChange(() => this.LastVisitedTeleporter);
+                this.NotifyOfPropertyChange(nameof(LastVisitedTeleporter));
             }
         }
 
@@ -61,26 +61,29 @@ namespace Gibbed.BorderlandsOz.SaveEdit
 
             this.VisitedTeleporters = new ObservableCollection<VisitedTeleporterDisplay>();
 
-            var fastTravelStations = InfoManager.TravelStations.Items
-                                                .Where(kv => kv.Value is FastTravelStationDefinition)
-                                                .Select(kv => kv.Value)
-                                                .Cast<FastTravelStationDefinition>()
-                                                .ToList();
+            var fastTravelStations = InfoManager.TravelStations
+                .Items
+                .Where(kv => kv.Value is FastTravelStationDefinition)
+                .Select(kv => kv.Value)
+                .Cast<FastTravelStationDefinition>()
+                .ToList();
 
-            var levelTravelStations = InfoManager.TravelStations.Items
-                                                 .Where(kv => kv.Value is LevelTravelStationDefinition)
-                                                 .Select(kv => kv.Value)
-                                                 .Cast<LevelTravelStationDefinition>()
-                                                 .ToList();
+            var levelTravelStations = InfoManager.TravelStations
+                .Items
+                .Where(kv => kv.Value is LevelTravelStationDefinition)
+                .Select(kv => kv.Value)
+                .Cast<LevelTravelStationDefinition>()
+                .ToList();
 
-            foreach (var kv in InfoManager.FastTravelStationOrdering.Items
-                                          .OrderBy(
-                                              fsto =>
-                                              fsto.Value.DLCExpansion == null
-                                                  ? 0
-                                                  : (fsto.Value.DLCExpansion.Package != null
-                                                         ? fsto.Value.DLCExpansion.Package.Id
-                                                         : int.MaxValue)))
+            foreach (var kv in InfoManager.FastTravelStationOrdering
+                .Items
+                .OrderBy(
+                    fsto =>
+                    fsto.Value.DLCExpansion == null
+                        ? 0
+                        : (fsto.Value.DLCExpansion.Package != null
+                               ? fsto.Value.DLCExpansion.Package.Id
+                               : int.MaxValue)))
             {
                 string group = kv.Value.DLCExpansion == null ? "Base Game" : kv.Value.DLCExpansion.Package.DisplayName;
                 foreach (var station in kv.Value.Stations)
@@ -101,32 +104,31 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 }
             }
 
-            foreach (var fastTravelStation in fastTravelStations
-                .OrderBy(fts =>
-                         fts.DLCExpansion == null
-                             ? 0
-                             : (fts.DLCExpansion.Package != null
-                                    ? fts.DLCExpansion.Package.Id
-                                    : int.MaxValue)))
+            foreach (var station in fastTravelStations
+                .OrderBy(
+                    fts =>
+                    fts.DLCExpansion == null
+                        ? 0
+                        : (fts.DLCExpansion.Package != null
+                               ? fts.DLCExpansion.Package.Id
+                               : int.MaxValue)))
             {
-                string displayName = string.IsNullOrEmpty(fastTravelStation.Sign) == false
-                                         ? fastTravelStation.Sign
-                                         : fastTravelStation.StationDisplayName;
+                string displayName = string.IsNullOrEmpty(station.Sign) == false
+                                         ? station.Sign
+                                         : station.StationDisplayName;
                 const string group = "Unknown";
-                this.AvailableTeleporters.Add(new AssetDisplay(fastTravelStation.StationDisplayName,
-                                                               fastTravelStation.ResourceName,
-                                                               group));
+                this.AvailableTeleporters.Add(new AssetDisplay(displayName, station.ResourceName, group));
                 this.VisitedTeleporters.Add(new VisitedTeleporterDisplay()
                 {
                     DisplayName = displayName,
-                    ResourceName = fastTravelStation.ResourceName,
+                    ResourceName = station.ResourceName,
                     Visited = false,
                     Custom = false,
                     Group = group,
                 });
             }
 
-            foreach (var levelTravelStation in levelTravelStations
+            foreach (var station in levelTravelStations
                 .OrderBy(
                     lts =>
                     lts.DLCExpansion == null
@@ -136,15 +138,16 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                                : int.MaxValue))
                 .ThenBy(lts => lts.ResourceName))
             {
-                string group = levelTravelStation.DLCExpansion == null
+                string group = station.DLCExpansion == null
                                    ? "Base Game"
-                                   : levelTravelStation.DLCExpansion.Package.DisplayName;
-                var displayName = string.IsNullOrEmpty(levelTravelStation.DisplayName) == false
-                                      ? levelTravelStation.DisplayName
-                                      : levelTravelStation.ResourceName;
-                this.AvailableTeleporters.Add(new AssetDisplay(displayName,
-                                                               levelTravelStation.ResourceName,
-                                                               "Level Transitions (" + group + ")"));
+                                   : station.DLCExpansion.Package.DisplayName;
+                var displayName = string.IsNullOrEmpty(station.DisplayName) == false
+                                      ? station.DisplayName
+                                      : station.ResourceName;
+                this.AvailableTeleporters.Add(new AssetDisplay(
+                    displayName,
+                    station.ResourceName,
+                    $"Level Transitions ({group})"));
             }
         }
 
@@ -157,38 +160,39 @@ namespace Gibbed.BorderlandsOz.SaveEdit
 
             if (this.AvailableTeleporters.Any(t => t.Path == saveGame.LastVisitedTeleporter) == false)
             {
-                this.AvailableTeleporters.Add(new AssetDisplay(saveGame.LastVisitedTeleporter,
-                                                               saveGame.LastVisitedTeleporter,
-                                                               "Unknown",
-                                                               true));
+                this.AvailableTeleporters.Add(new AssetDisplay(
+                    saveGame.LastVisitedTeleporter,
+                    saveGame.LastVisitedTeleporter,
+                    "Unknown",
+                    true));
             }
 
             this.LastVisitedTeleporter = saveGame.LastVisitedTeleporter;
 
             var visitedStations = saveGame.VisitedTeleporters.ToList();
-            foreach (var travelStation in this.VisitedTeleporters.ToArray())
+            foreach (var station in this.VisitedTeleporters.ToArray())
             {
-                if (visitedStations.Contains(travelStation.ResourceName) == true)
+                if (visitedStations.Contains(station.ResourceName) == true)
                 {
-                    travelStation.Visited = true;
-                    visitedStations.Remove(travelStation.ResourceName);
+                    station.Visited = true;
+                    visitedStations.Remove(station.ResourceName);
                 }
-                else if (travelStation.Custom == true)
+                else if (station.Custom == true)
                 {
-                    this.VisitedTeleporters.Remove(travelStation);
+                    this.VisitedTeleporters.Remove(station);
                 }
                 else
                 {
-                    travelStation.Visited = false;
+                    station.Visited = false;
                 }
             }
 
-            foreach (var visitedStation in visitedStations)
+            foreach (var station in visitedStations)
             {
                 this.VisitedTeleporters.Add(new VisitedTeleporterDisplay()
                 {
-                    DisplayName = visitedStation,
-                    ResourceName = visitedStation,
+                    DisplayName = station,
+                    ResourceName = station,
                     Visited = true,
                     Custom = true,
                     Group = "Unknown",
@@ -200,11 +204,11 @@ namespace Gibbed.BorderlandsOz.SaveEdit
         {
             saveGame.LastVisitedTeleporter = this.LastVisitedTeleporter;
             saveGame.VisitedTeleporters.Clear();
-            foreach (var travelStation in this.VisitedTeleporters)
+            foreach (var station in this.VisitedTeleporters)
             {
-                if (travelStation.Visited == true)
+                if (station.Visited == true)
                 {
-                    saveGame.VisitedTeleporters.Add(travelStation.ResourceName);
+                    saveGame.VisitedTeleporters.Add(station.ResourceName);
                 }
             }
         }
@@ -243,7 +247,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 set
                 {
                     this._DisplayName = value;
-                    this.NotifyOfPropertyChange(() => this.DisplayName);
+                    this.NotifyOfPropertyChange(nameof(DisplayName));
                 }
             }
 
@@ -253,7 +257,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 set
                 {
                     this._ResourceName = value;
-                    this.NotifyOfPropertyChange(() => this.ResourceName);
+                    this.NotifyOfPropertyChange(nameof(ResourceName));
                 }
             }
 
@@ -263,7 +267,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 set
                 {
                     this._Visited = value;
-                    this.NotifyOfPropertyChange(() => this.Visited);
+                    this.NotifyOfPropertyChange(nameof(Visited));
                 }
             }
 
@@ -273,7 +277,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 set
                 {
                     this._Custom = value;
-                    this.NotifyOfPropertyChange(() => this.Custom);
+                    this.NotifyOfPropertyChange(nameof(Custom));
                 }
             }
 
@@ -283,7 +287,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 set
                 {
                     this._Group = value;
-                    this.NotifyOfPropertyChange(() => this.Group);
+                    this.NotifyOfPropertyChange(nameof(Group));
                 }
             }
             #endregion

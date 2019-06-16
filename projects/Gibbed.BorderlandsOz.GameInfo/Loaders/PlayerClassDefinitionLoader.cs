@@ -34,7 +34,7 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
             try
             {
                 var raws = LoaderHelper
-                    .DeserializeJson<Dictionary<string, Raw.PlayerClassDefinition>>("Player Classes");
+                    .Deserialize<Dictionary<string, Raw.PlayerClassDefinition>>("Player Classes");
                 return new InfoDictionary<PlayerClassDefinition>(
                     raws.ToDictionary(kv => kv.Key,
                                       kv => GetPlayerClassDefinition(downloadableContents, kv)));

@@ -32,6 +32,11 @@ using Caliburn.Micro;
 using Caliburn.Micro.Contrib;
 using Caliburn.Micro.Contrib.Results;
 using Gibbed.BorderlandsOz.GameInfo;
+using Gibbed.Gearbox.WPF;
+using DeserializeSettings = Gibbed.BorderlandsOz.FileFormats.SaveFile.DeserializeSettings;
+using GameGuid = Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave.Guid;
+using SaveFile = Gibbed.BorderlandsOz.FileFormats.SaveFile;
+using SystemGuid = System.Guid;
 
 namespace Gibbed.BorderlandsOz.SaveEdit
 {
@@ -56,7 +61,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._General = value;
-                this.NotifyOfPropertyChange(() => this.General);
+                this.NotifyOfPropertyChange(nameof(General));
             }
         }
 
@@ -68,7 +73,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Character = value;
-                this.NotifyOfPropertyChange(() => this.Character);
+                this.NotifyOfPropertyChange(nameof(Character));
             }
         }
 
@@ -80,7 +85,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Vehicle = value;
-                this.NotifyOfPropertyChange(() => this.Vehicle);
+                this.NotifyOfPropertyChange(nameof(Vehicle));
             }
         }
 
@@ -92,7 +97,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._CurrencyOnHand = value;
-                this.NotifyOfPropertyChange(() => this.CurrencyOnHand);
+                this.NotifyOfPropertyChange(nameof(CurrencyOnHand));
             }
         }
 
@@ -104,7 +109,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Backpack = value;
-                this.NotifyOfPropertyChange(() => this.Backpack);
+                this.NotifyOfPropertyChange(nameof(Backpack));
             }
         }
 
@@ -116,7 +121,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._Bank = value;
-                this.NotifyOfPropertyChange(() => this.Bank);
+                this.NotifyOfPropertyChange(nameof(Bank));
             }
         }
 
@@ -128,7 +133,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._FastTravel = value;
-                this.NotifyOfPropertyChange(() => this.FastTravel);
+                this.NotifyOfPropertyChange(nameof(FastTravel));
             }
         }
 
@@ -140,14 +145,14 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._About = value;
-                this.NotifyOfPropertyChange(() => this.About);
+                this.NotifyOfPropertyChange(nameof(About));
             }
         }
         #endregion
 
         #region Fields
         private SaveLoad _SaveLoad;
-        private FileFormats.SaveFile _SaveFile;
+        private SaveFile _SaveFile;
         private readonly ICommand _NewSaveFromPlayerClass;
 
         private bool _IsGeneralSelected;
@@ -167,7 +172,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             }
         }
 
-        public FileFormats.SaveFile SaveFile
+        public SaveFile SaveFile
         {
             get { return this._SaveFile; }
             private set
@@ -175,7 +180,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 if (this._SaveFile != value)
                 {
                     this._SaveFile = value;
-                    this.NotifyOfPropertyChange(() => this.SaveFile);
+                    this.NotifyOfPropertyChange(nameof(SaveFile));
                 }
             }
         }
@@ -188,7 +193,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             set
             {
                 this._SaveLoad = value;
-                this.NotifyOfPropertyChange(() => this.SaveLoad);
+                this.NotifyOfPropertyChange(nameof(SaveLoad));
             }
         }
 
@@ -200,7 +205,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 if (this._IsGeneralSelected != value)
                 {
                     this._IsGeneralSelected = value;
-                    this.NotifyOfPropertyChange(() => this.IsGeneralSelected);
+                    this.NotifyOfPropertyChange(nameof(IsGeneralSelected));
                 }
             }
         }
@@ -214,7 +219,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 {
                     this._IsFirstAboutSelection = false;
                     this._IsAboutSelected = value;
-                    this.NotifyOfPropertyChange(() => this.IsAboutSelected);
+                    this.NotifyOfPropertyChange(nameof(IsAboutSelected));
                 }
             }
         }
@@ -243,13 +248,13 @@ namespace Gibbed.BorderlandsOz.SaveEdit
 
         private void DoNewSaveFromPlayerClass(PlayerClassDefinition playerClass)
         {
-            var saveFile = new FileFormats.SaveFile()
+            var saveFile = new SaveFile()
             {
                 Platform = Platform.PC,
                 SaveGame = new ProtoBufFormats.WillowTwoSave.WillowTwoPlayerSaveGame()
                 {
                     SaveGameId = 1,
-                    SaveGuid = (ProtoBufFormats.WillowTwoSave.Guid)Guid.NewGuid(),
+                    SaveGuid = (GameGuid)SystemGuid.NewGuid(),
                     PlayerClass = playerClass.ResourcePath,
                     UIPreferences = new ProtoBufFormats.WillowTwoSave.UIPreferencesData()
                     {
@@ -292,18 +297,19 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                     this.DoNewSaveFromPlayerClass(playerClass);
                 })
                 .Rescue<DllNotFoundException>().Execute(
-                    x => new MyMessageBox("Failed to create save: " + x.Message, "Error")
+                    x => new MyMessageBox($"Failed to create save: {x.Message}", "Error")
                              .WithIcon(MessageBoxImage.Error).AsCoroutine())
                 .Rescue<FileFormats.SaveFormatException>().Execute(
-                    x => new MyMessageBox("Failed to create save: " + x.Message, "Error")
+                    x => new MyMessageBox($"Failed to create save: {x.Message}", "Error")
                              .WithIcon(MessageBoxImage.Error).AsCoroutine())
                 .Rescue<FileFormats.SaveCorruptionException>().Execute(
-                    x => new MyMessageBox("Failed to create save: " + x.Message, "Error")
+                    x => new MyMessageBox($"Failed to create save: {x.Message}", "Error")
                              .WithIcon(MessageBoxImage.Error).AsCoroutine())
                 .Rescue().Execute(
                     x =>
-                    new MyMessageBox("An exception was thrown (press Ctrl+C to copy):\n\n" + x.ToString(),
-                                     "Error")
+                    new MyMessageBox(
+                        $"An exception was thrown (press Ctrl+C to copy):\n\n{x.ToString()}",
+                        "Error")
                         .WithIcon(MessageBoxImage.Error).AsCoroutine());
         }
 
@@ -322,17 +328,14 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 yield break;
             }
 
-            FileFormats.SaveFile saveFile = null;
+            SaveFile saveFile = null;
 
             yield return new DelegateResult(
                 () =>
                 {
                     using (var input = File.OpenRead(fileName))
                     {
-                        saveFile = FileFormats.SaveFile.Deserialize(
-                            input,
-                            platform,
-                            FileFormats.SaveFile.DeserializeSettings.None);
+                        saveFile = SaveFile.Deserialize(input, platform, DeserializeSettings.None);
                     }
 
                     try
@@ -357,18 +360,19 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                     }
                 })
                 .Rescue<DllNotFoundException>().Execute(
-                    x => new MyMessageBox("Failed to load save: " + x.Message, "Error")
+                    x => new MyMessageBox($"Failed to load save: {x.Message}", "Error")
                              .WithIcon(MessageBoxImage.Error).AsCoroutine())
                 .Rescue<FileFormats.SaveFormatException>().Execute(
-                    x => new MyMessageBox("Failed to load save: " + x.Message, "Error")
+                    x => new MyMessageBox($"Failed to load save: {x.Message}", "Error")
                              .WithIcon(MessageBoxImage.Error).AsCoroutine())
                 .Rescue<FileFormats.SaveCorruptionException>().Execute(
-                    x => new MyMessageBox("Failed to load save: " + x.Message, "Error")
+                    x => new MyMessageBox($"Failed to load save: {x.Message}", "Error")
                              .WithIcon(MessageBoxImage.Error).AsCoroutine())
                 .Rescue().Execute(
                     x =>
-                    new MyMessageBox("An exception was thrown (press Ctrl+C to copy):\n\n" + x.ToString(),
-                                     "Error")
+                    new MyMessageBox(
+                        $"An exception was thrown (press Ctrl+C to copy):\n\n{x.ToString()}",
+                        "Error")
                         .WithIcon(MessageBoxImage.Error).AsCoroutine());
 
 
@@ -377,9 +381,10 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             {
                 saveFile.SaveGame.IsBadassModeSaveGame = false;
                 yield return
-                    new MyMessageBox("Your save file was set as 'Badass Mode', and this has now been cleared.\n\n" +
-                                     "See http://bit.ly/graveyardsav for more details.",
-                                     "Information")
+                    new MyMessageBox(
+                        "Your save file was set as 'Badass Mode', and this has now been cleared.\n\n" +
+                        "See http://bit.ly/graveyardsav for more details.",
+                        "Information")
                         .WithIcon(MessageBoxImage.Information);
             }
 
@@ -532,8 +537,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             yield return new DelegateResult(
                 () =>
                 {
-                    Platform platform;
-                    this.General.ExportData(saveFile.SaveGame, out platform);
+                    this.General.ExportData(saveFile.SaveGame, out var platform);
                     this.Character.ExportData(saveFile.SaveGame);
                     this.Vehicle.ExportData(saveFile.SaveGame);
                     this.CurrencyOnHand.ExportData(saveFile.SaveGame);
@@ -572,7 +576,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 }).Rescue().Execute(
                     x =>
                     new MyMessageBox(
-                        "An exception was thrown (press Ctrl+C to copy):\n\n" + x.ToString(),
+                        $"An exception was thrown (press Ctrl+C to copy):\n\n{x.ToString()}",
                         "Error")
                         .WithIcon(MessageBoxImage.Error).AsCoroutine());
         }

@@ -5,8 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              mc:Ignorable="d">
-    <StackPanel Orientation="Horizontal"
-                Visibility="Collapsed">
+    <StackPanel Orientation="Horizontal">
         <TextBlock>
             <Hyperlink NavigateUri="http://thegearcalculator.appspot.com/"
                        gbx:HyperlinkExtensions.IsExternal="true">duncanfogg's Gear Calculator</Hyperlink> (<Hyperlink NavigateUri="http://forums.gearboxsoftware.com/showthread.php?t=192473"

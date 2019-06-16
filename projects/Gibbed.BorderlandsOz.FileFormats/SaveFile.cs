@@ -29,6 +29,7 @@ using Gibbed.BorderlandsOz.GameInfo;
 using Gibbed.Gearbox.Common;
 using Gibbed.IO;
 using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
+using Huffman = Gibbed.Gearbox.Common.Huffman;
 using ProtoSerializer = ProtoBuf.Serializer;
 using WillowTwoSave = Gibbed.BorderlandsOz.ProtoBufFormats.WillowTwoSave;
 

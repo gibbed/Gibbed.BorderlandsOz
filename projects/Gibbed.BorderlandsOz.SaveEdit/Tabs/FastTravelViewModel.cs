@@ -20,6 +20,7 @@
  *    distribution.
  */
 
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -75,6 +76,17 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 .Cast<LevelTravelStationDefinition>()
                 .ToList();
 
+            var displayNames = new Dictionary<string, int>();
+            foreach (var station in fastTravelStations)
+            {
+                string displayName = string.IsNullOrEmpty(station.Sign) == false
+                                         ? station.Sign
+                                         : station.StationDisplayName;
+                displayNames.TryGetValue(displayName, out int count);
+                count++;
+                displayNames[displayName] = count;
+            }
+
             foreach (var kv in InfoManager.FastTravelStationOrdering
                 .Items
                 .OrderBy(
@@ -91,6 +103,12 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                     string displayName = string.IsNullOrEmpty(station.Sign) == false
                                              ? station.Sign
                                              : station.StationDisplayName;
+                    displayNames.TryGetValue(displayName, out var displayCount);
+                    if (displayCount > 1 && string.IsNullOrEmpty(station.ResourceName) == false)
+                    {
+                        displayName += $" ({station.ResourceName})";
+                    }
+
                     this.AvailableTeleporters.Add(new AssetDisplay(displayName, station.ResourceName, group));
                     this.VisitedTeleporters.Add(new VisitedTeleporterDisplay()
                     {
@@ -116,6 +134,12 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 string displayName = string.IsNullOrEmpty(station.Sign) == false
                                          ? station.Sign
                                          : station.StationDisplayName;
+                displayNames.TryGetValue(displayName, out var displayCount);
+                if (displayCount > 1 && string.IsNullOrEmpty(station.ResourceName) == false)
+                {
+                    displayName += $" ({station.ResourceName})";
+                }
+
                 const string group = "Unknown";
                 this.AvailableTeleporters.Add(new AssetDisplay(displayName, station.ResourceName, group));
                 this.VisitedTeleporters.Add(new VisitedTeleporterDisplay()
@@ -144,6 +168,12 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 var displayName = string.IsNullOrEmpty(station.DisplayName) == false
                                       ? station.DisplayName
                                       : station.ResourceName;
+                displayNames.TryGetValue(displayName, out var displayCount);
+                if (displayCount > 1 && string.IsNullOrEmpty(station.ResourceName) == false)
+                {
+                    displayName += $" ({station.ResourceName})";
+                }
+
                 this.AvailableTeleporters.Add(new AssetDisplay(
                     displayName,
                     station.ResourceName,

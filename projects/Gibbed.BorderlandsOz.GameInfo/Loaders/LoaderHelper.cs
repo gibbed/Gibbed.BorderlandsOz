@@ -54,7 +54,7 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
             {
                 MissingMemberHandling = MissingMemberHandling.Error,
                 TypeNameHandling = TypeNameHandling.Auto,
-                Binder =
+                SerializationBinder =
                     new TypeNameSerializationBinder("Gibbed.BorderlandsOz.GameInfo.Raw.{0}, Gibbed.BorderlandsOz.GameInfo")
             };
             settings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());

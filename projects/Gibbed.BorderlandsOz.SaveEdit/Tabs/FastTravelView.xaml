@@ -23,10 +23,10 @@
 -->
 <UserControl x:Class="Gibbed.BorderlandsOz.SaveEdit.FastTravelView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:c="http://www.caliburnproject.org"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              mc:Ignorable="d"
              d:DesignWidth="720"
              d:DesignHeight="480">
@@ -36,78 +36,19 @@
                     Value="White" />
         </Style>
     </d:DesignerProperties.DesignStyle>
-    <UserControl.Resources>
-        <CollectionViewSource x:Key="GroupedAvailableTeleporters"
-                              Source="{Binding Path=AvailableTeleporters}">
-            <CollectionViewSource.GroupDescriptions>
-                <PropertyGroupDescription PropertyName="Group" />
-            </CollectionViewSource.GroupDescriptions>
-        </CollectionViewSource>
-        <CollectionViewSource x:Key="GroupedVisitedTeleporters"
-                              Source="{Binding Path=VisitedTeleporters}">
-            <CollectionViewSource.GroupDescriptions>
-                <PropertyGroupDescription PropertyName="Group" />
-            </CollectionViewSource.GroupDescriptions>
-        </CollectionViewSource>
-    </UserControl.Resources>
-    <DockPanel LastChildFill="True">
-        <GroupBox DockPanel.Dock="Top"
-                  Header="Last Visited Teleporter">
-            <ComboBox ItemsSource="{Binding Source={StaticResource GroupedAvailableTeleporters}}"
-                      SelectedValue="{Binding Path=LastVisitedTeleporter}"
-                      DisplayMemberPath="Name"
-                      SelectedValuePath="Path">
-                <ComboBox.GroupStyle>
-                    <GroupStyle>
-                        <GroupStyle.HeaderTemplate>
-                            <DataTemplate>
-                                <TextBlock FontSize="15"
-                                           FontWeight="Bold"
-                                           Text="{Binding Path=Name}" />
-                            </DataTemplate>
-                        </GroupStyle.HeaderTemplate>
-                    </GroupStyle>
-                </ComboBox.GroupStyle>
-            </ComboBox>
-        </GroupBox>
-        <ToolBar Name="ButtonBar"
-                 DockPanel.Dock="Bottom">
-            <Button>
-                <cal:Message.Attach>[Event Click] = [Action VisitedCheckAll]</cal:Message.Attach>
+    <TabControl ItemsSource="{Binding Path=Playthroughs}">
+        <TabControl.ItemTemplate>
+            <DataTemplate>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Check All" />
+                    <TextBlock Text="{Binding Path=DisplayName}"
+                               VerticalAlignment="Center" />
                 </StackPanel>
-            </Button>
-            <Button>
-                <cal:Message.Attach>[Event Click] = [Action VisitedUncheckAll]</cal:Message.Attach>
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Uncheck All" />
-                </StackPanel>
-            </Button>
-        </ToolBar>
-        <GroupBox Header="Visited Teleporters">
-            <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                          VerticalScrollBarVisibility="Auto">
-                <ItemsControl ItemsSource="{Binding Source={StaticResource GroupedVisitedTeleporters}}">
-                    <ItemsControl.GroupStyle>
-                        <GroupStyle>
-                            <GroupStyle.HeaderTemplate>
-                                <DataTemplate>
-                                    <TextBlock FontSize="15"
-                                               FontWeight="Bold"
-                                               Text="{Binding Path=Name}" />
-                                </DataTemplate>
-                            </GroupStyle.HeaderTemplate>
-                        </GroupStyle>
-                    </ItemsControl.GroupStyle>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <CheckBox IsChecked="{Binding Path=Visited}"
-                                      Content="{Binding Path=DisplayName}" />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
-        </GroupBox>
-    </DockPanel>
+            </DataTemplate>
+        </TabControl.ItemTemplate>
+        <TabControl.ContentTemplate>
+            <DataTemplate>
+                <ContentControl c:View.Model="{Binding}" />
+            </DataTemplate>
+        </TabControl.ContentTemplate>
+    </TabControl>
 </UserControl>

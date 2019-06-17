@@ -20,6 +20,7 @@
  *    distribution.
  */
 
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
@@ -34,22 +35,17 @@ namespace Gibbed.BorderlandsOz.SaveEdit
     internal class FastTravelViewModel : PropertyChangedBase
     {
         #region Fields
-        private string _LastVisitedTeleporter;
+        private readonly ObservableCollection<FastTravelPlaythroughViewModel> _Playthroughs;
         #endregion
 
         #region Properties
-        public string LastVisitedTeleporter
-        {
-            get { return this._LastVisitedTeleporter; }
-            set
-            {
-                this._LastVisitedTeleporter = value;
-                this.NotifyOfPropertyChange(nameof(LastVisitedTeleporter));
-            }
-        }
-
         public ObservableCollection<AssetDisplay> AvailableTeleporters { get; private set; }
-        public ObservableCollection<VisitedTeleporterDisplay> VisitedTeleporters { get; private set; }
+        public ObservableCollection<AssetDisplay> VisitedTeleporters { get; private set; }
+
+        public ObservableCollection<FastTravelPlaythroughViewModel> Playthroughs
+        {
+            get { return this._Playthroughs; }
+        }
         #endregion
 
         [ImportingConstructor]
@@ -60,7 +56,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 new AssetDisplay("None", "None", "Base Game")
             };
 
-            this.VisitedTeleporters = new ObservableCollection<VisitedTeleporterDisplay>();
+            this.VisitedTeleporters = new ObservableCollection<AssetDisplay>();
 
             var fastTravelStations = InfoManager.TravelStations
                 .Items
@@ -100,6 +96,11 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 string group = kv.Value.DLCExpansion == null ? "Base Game" : kv.Value.DLCExpansion.Package.DisplayName;
                 foreach (var station in kv.Value.Stations)
                 {
+                    if (fastTravelStations.Remove(station) == false)
+                    {
+                        continue;
+                    }
+
                     string displayName = string.IsNullOrEmpty(station.Sign) == false
                                              ? station.Sign
                                              : station.StationDisplayName;
@@ -110,46 +111,8 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                     }
 
                     this.AvailableTeleporters.Add(new AssetDisplay(displayName, station.ResourceName, group));
-                    this.VisitedTeleporters.Add(new VisitedTeleporterDisplay()
-                    {
-                        DisplayName = displayName,
-                        ResourceName = station.ResourceName,
-                        Visited = false,
-                        Custom = false,
-                        Group = group,
-                    });
-                    fastTravelStations.Remove(station);
+                    this.VisitedTeleporters.Add(new AssetDisplay(displayName, station.ResourceName, group));
                 }
-            }
-
-            foreach (var station in fastTravelStations
-                .OrderBy(
-                    fts =>
-                    fts.DLCExpansion == null
-                        ? 0
-                        : (fts.DLCExpansion.Package != null
-                               ? fts.DLCExpansion.Package.Id
-                               : int.MaxValue)))
-            {
-                string displayName = string.IsNullOrEmpty(station.Sign) == false
-                                         ? station.Sign
-                                         : station.StationDisplayName;
-                displayNames.TryGetValue(displayName, out var displayCount);
-                if (displayCount > 1 && string.IsNullOrEmpty(station.ResourceName) == false)
-                {
-                    displayName += $" ({station.ResourceName})";
-                }
-
-                const string group = "Unknown";
-                this.AvailableTeleporters.Add(new AssetDisplay(displayName, station.ResourceName, group));
-                this.VisitedTeleporters.Add(new VisitedTeleporterDisplay()
-                {
-                    DisplayName = displayName,
-                    ResourceName = station.ResourceName,
-                    Visited = false,
-                    Custom = false,
-                    Group = group,
-                });
             }
 
             foreach (var station in levelTravelStations
@@ -179,149 +142,32 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                     station.ResourceName,
                     $"Level Transitions ({group})"));
             }
+
+            this._Playthroughs = new ObservableCollection<FastTravelPlaythroughViewModel>();
         }
 
         public void ImportData(WillowTwoPlayerSaveGame saveGame)
         {
-            foreach (var teleporter in this.AvailableTeleporters.Where(t => t.Custom == true).ToList())
+            this.Playthroughs.Clear();
+            int index = 0;
+            foreach (var missionPlaythrough in saveGame.MissionPlaythroughs)
             {
-                this.AvailableTeleporters.Remove(teleporter);
-            }
-
-            if (this.AvailableTeleporters.Any(t => t.Path == saveGame.LastVisitedTeleporter) == false)
-            {
-                this.AvailableTeleporters.Add(new AssetDisplay(
-                    saveGame.LastVisitedTeleporter,
-                    saveGame.LastVisitedTeleporter,
-                    "Unknown",
-                    true));
-            }
-
-            this.LastVisitedTeleporter = saveGame.LastVisitedTeleporter;
-
-            var visitedStations = saveGame.VisitedTeleporters.ToList();
-            foreach (var station in this.VisitedTeleporters.ToArray())
-            {
-                if (visitedStations.Contains(station.ResourceName) == true)
-                {
-                    station.Visited = true;
-                    visitedStations.Remove(station.ResourceName);
-                }
-                else if (station.Custom == true)
-                {
-                    this.VisitedTeleporters.Remove(station);
-                }
-                else
-                {
-                    station.Visited = false;
-                }
-            }
-
-            foreach (var station in visitedStations)
-            {
-                this.VisitedTeleporters.Add(new VisitedTeleporterDisplay()
-                {
-                    DisplayName = station,
-                    ResourceName = station,
-                    Visited = true,
-                    Custom = true,
-                    Group = "Unknown",
-                });
+                var viewModel = new FastTravelPlaythroughViewModel($"Playthrough #{index + 1}", this);
+                viewModel.ImportData(missionPlaythrough);
+                this.Playthroughs.Add(viewModel);
+                index++;
             }
         }
 
         public void ExportData(WillowTwoPlayerSaveGame saveGame)
         {
-            saveGame.LastVisitedTeleporter = this.LastVisitedTeleporter;
-            saveGame.VisitedTeleporters.Clear();
-            foreach (var station in this.VisitedTeleporters)
+            var count = Math.Min(this.Playthroughs.Count, saveGame.MissionPlaythroughs.Count);
+            for (int i = 0; i < count; i++)
             {
-                if (station.Visited == true)
-                {
-                    saveGame.VisitedTeleporters.Add(station.ResourceName);
-                }
+                var viewModel = this.Playthroughs[i];
+                var missionPlaythrough = saveGame.MissionPlaythroughs[i];
+                viewModel.ExportData(missionPlaythrough);
             }
         }
-
-        public void VisitedCheckAll()
-        {
-            foreach (var visitedTeleporter in this.VisitedTeleporters)
-            {
-                visitedTeleporter.Visited = true;
-            }
-        }
-
-        public void VisitedUncheckAll()
-        {
-            foreach (var visitedTeleporter in this.VisitedTeleporters)
-            {
-                visitedTeleporter.Visited = false;
-            }
-        }
-
-        #region TravelStationDisplay
-        public class VisitedTeleporterDisplay : PropertyChangedBase
-        {
-            #region Fields
-            private string _DisplayName;
-            private string _ResourceName;
-            private bool _Visited;
-            private bool _Custom;
-            private string _Group;
-            #endregion
-
-            #region Properties
-            public string DisplayName
-            {
-                get { return this._DisplayName; }
-                set
-                {
-                    this._DisplayName = value;
-                    this.NotifyOfPropertyChange(nameof(DisplayName));
-                }
-            }
-
-            public string ResourceName
-            {
-                get { return this._ResourceName; }
-                set
-                {
-                    this._ResourceName = value;
-                    this.NotifyOfPropertyChange(nameof(ResourceName));
-                }
-            }
-
-            public bool Visited
-            {
-                get { return this._Visited; }
-                set
-                {
-                    this._Visited = value;
-                    this.NotifyOfPropertyChange(nameof(Visited));
-                }
-            }
-
-            public bool Custom
-            {
-                get { return this._Custom; }
-                set
-                {
-                    this._Custom = value;
-                    this.NotifyOfPropertyChange(nameof(Custom));
-                }
-            }
-
-            public string Group
-            {
-                get { return this._Group; }
-                set
-                {
-                    this._Group = value;
-                    this.NotifyOfPropertyChange(nameof(Group));
-                }
-            }
-            #endregion
-        }
-        #endregion
     }
 }

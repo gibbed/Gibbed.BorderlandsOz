@@ -46,12 +46,12 @@ before_build:
   - nuget restore
   - echo namespace Gibbed.BorderlandsOz.SaveEdit > projects/Gibbed.BorderlandsOz.SaveEdit/VersionInfo.cs
   - echo { >> projects/Gibbed.BorderlandsOz.SaveEdit/VersionInfo.cs
-  - echo   using System; >> projects/Gibbed.Borderlands2.SaveEdit/VersionInfo.cs
+  - echo   using System; >> projects/Gibbed.BorderlandsOz.SaveEdit/VersionInfo.cs
   - echo   internal static class VersionInfo >> projects/Gibbed.BorderlandsOz.SaveEdit/VersionInfo.cs
   - echo   { >> projects/Gibbed.BorderlandsOz.SaveEdit/VersionInfo.cs
   - if "%CONFIGURATION%"=="SaveEdit Packaging" echo public const string Configuration = null; >> projects/Gibbed.BorderlandsOz.SaveEdit/VersionInfo.cs
   - if NOT "%CONFIGURATION%"=="SaveEdit Packaging" echo public const string Configuration = "%CONFIGURATION%"; >> projects/Gibbed.BorderlandsOz.SaveEdit/VersionInfo.cs
-  - echo     public static readonly Version Version = new Version("%APPVEYOR_BUILD_VERSION%"); >> projects/Gibbed.Borderlands2.SaveEdit/VersionInfo.cs
+  - echo     public static readonly Version Version = new Version("%APPVEYOR_BUILD_VERSION%"); >> projects/Gibbed.BorderlandsOz.SaveEdit/VersionInfo.cs
   - echo     public const string Commit = "%APPVEYOR_REPO_COMMIT%"; >> projects/Gibbed.BorderlandsOz.SaveEdit/VersionInfo.cs
   - echo     public const string Timestamp = "%APPVEYOR_REPO_COMMIT_TIMESTAMP%"; >> projects/Gibbed.BorderlandsOz.SaveEdit/VersionInfo.cs
   - echo   } >> projects/Gibbed.BorderlandsOz.SaveEdit/VersionInfo.cs

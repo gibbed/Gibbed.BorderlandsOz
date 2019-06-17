@@ -29,7 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{93B973
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.Gearbox.Common", "projects\Gearbox\Gibbed.Gearbox.Common\Gibbed.Gearbox.Common.csproj", "{D9129034-11E7-4034-96BB-D866F4D57F2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gibbed.Gearbox.WPF", "projects\Gearbox\Gibbed.Gearbox.WPF\Gibbed.Gearbox.WPF.csproj", "{A1523E58-C297-4E69-ADE5-16866C266AAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gibbed.Gearbox.WPF", "projects\Gearbox\Gibbed.Gearbox.WPF\Gibbed.Gearbox.WPF.csproj", "{A1523E58-C297-4E69-ADE5-16866C266AAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,8 +71,8 @@ Global
 		{582B962B-9A50-4B27-AE99-CB16B8DB0C7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{582B962B-9A50-4B27-AE99-CB16B8DB0C7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{582B962B-9A50-4B27-AE99-CB16B8DB0C7E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{582B962B-9A50-4B27-AE99-CB16B8DB0C7E}.SaveEdit Packaging|Any CPU.ActiveCfg = Release|Any CPU
-		{582B962B-9A50-4B27-AE99-CB16B8DB0C7E}.SaveEdit Packaging|Any CPU.Build.0 = Release|Any CPU
+		{582B962B-9A50-4B27-AE99-CB16B8DB0C7E}.SaveEdit Packaging|Any CPU.ActiveCfg = SaveEdit Packaging|Any CPU
+		{582B962B-9A50-4B27-AE99-CB16B8DB0C7E}.SaveEdit Packaging|Any CPU.Build.0 = SaveEdit Packaging|Any CPU
 		{E040D0B3-355C-4787-8F64-549EE898307E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E040D0B3-355C-4787-8F64-549EE898307E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E040D0B3-355C-4787-8F64-549EE898307E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -82,8 +82,8 @@ Global
 		{D9129034-11E7-4034-96BB-D866F4D57F2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9129034-11E7-4034-96BB-D866F4D57F2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9129034-11E7-4034-96BB-D866F4D57F2B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D9129034-11E7-4034-96BB-D866F4D57F2B}.SaveEdit Packaging|Any CPU.ActiveCfg = Debug|Any CPU
-		{D9129034-11E7-4034-96BB-D866F4D57F2B}.SaveEdit Packaging|Any CPU.Build.0 = Debug|Any CPU
+		{D9129034-11E7-4034-96BB-D866F4D57F2B}.SaveEdit Packaging|Any CPU.ActiveCfg = Release|Any CPU
+		{D9129034-11E7-4034-96BB-D866F4D57F2B}.SaveEdit Packaging|Any CPU.Build.0 = Release|Any CPU
 		{A1523E58-C297-4E69-ADE5-16866C266AAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A1523E58-C297-4E69-ADE5-16866C266AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1523E58-C297-4E69-ADE5-16866C266AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU

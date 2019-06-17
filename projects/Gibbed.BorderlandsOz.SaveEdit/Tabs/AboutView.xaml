@@ -50,18 +50,20 @@
                                                                                                   Foreground="{StaticResource Gibbed}" /></Hyperlink><Run Text=" for use with Borderlands: The Pre-Sequel!" />
             <LineBreak />
             <LineBreak />
-            <Run Text="Want to support the developer?"
-                 FontSize="15"
-                 FontWeight="Bold" />
+            <TextBlock TextWrapping="Wrap"
+                       FontSize="15"
+                       FontWeight="Bold">
+            <Run Text="Like what " /><Run Text="gibbed"
+                                          Foreground="{StaticResource Gibbed}" /><Run Text=" has done?" />
             <LineBreak />
-            <Hyperlink NavigateUri="http://www.patreon.com/gibbed"
-                       Foreground="{StaticResource Gibbed}"
-                       gbx:HyperlinkExtensions.IsExternal="true"><Run Text="Contribute to gibbed's Patreon"
-                                                                      FontSize="15"
-                                                                      FontWeight="Bold"
-                                                                      Foreground="{StaticResource Gibbed}" /></Hyperlink><Run Text="."
-                                                                                                                              FontSize="15"
-                                                                                                                              FontWeight="Bold" />
+            <Run Text="Consider supporting the developer on " /><Hyperlink Foreground="{StaticResource Gibbed}"
+                                                                           NavigateUri="https://patreon.com/gibbed"
+                                                                           gbx:HyperlinkExtensions.IsExternal="true">Patreon</Hyperlink><Run Text=", " /><Hyperlink Foreground="{StaticResource Gibbed}"
+                                                                                                                                                                    NavigateUri="https://ko-fi.com/gibbed"
+                                                                                                                                                                    gbx:HyperlinkExtensions.IsExternal="true">Ko-fi</Hyperlink><Run Text=", or " /><Hyperlink Foreground="{StaticResource Gibbed}"
+                                                                                                                                                                                                                                                              NavigateUri="https://paypal.me/gibbed"
+                                                                                                                                                                                                                                                              gbx:HyperlinkExtensions.IsExternal="true">PayPal</Hyperlink><Run Text="." />
+            </TextBlock>
             <LineBreak />
             <LineBreak />
             <Run Text="With special thanks to..." />

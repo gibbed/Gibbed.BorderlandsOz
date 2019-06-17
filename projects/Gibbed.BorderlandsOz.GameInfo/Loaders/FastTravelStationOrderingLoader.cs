@@ -34,8 +34,8 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
         {
             try
             {
-                var raws = LoaderHelper
-                    .Deserialize<Dictionary<string, Raw.FastTravelStationOrdering>>("Fast Travel Station Ordering");
+                var raws = LoaderHelper.DeserializeDump<Dictionary<string, Raw.FastTravelStationOrdering>>(
+                    "Fast Travel Station Ordering");
                 return new InfoDictionary<FastTravelStationOrdering>(
                     raws.ToDictionary(kv => kv.Key,
                                       kv => GetFastTravelStationOrdering(travelStations, downloadableContents, kv)));

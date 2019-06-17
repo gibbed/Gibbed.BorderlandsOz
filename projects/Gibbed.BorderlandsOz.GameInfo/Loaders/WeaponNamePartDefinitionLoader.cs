@@ -32,8 +32,8 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
         {
             try
             {
-                var raws = LoaderHelper
-                    .Deserialize<Dictionary<string, Raw.WeaponNamePartDefinition>>("Weapon Name Parts");
+                var raws = LoaderHelper.DeserializeDump<Dictionary<string, Raw.WeaponNamePartDefinition>>(
+                    "Weapon Name Parts");
                 return new InfoDictionary<WeaponNamePartDefinition>(
                     raws.ToDictionary(kv => kv.Key, GetWeaponNamePartDefinition));
             }

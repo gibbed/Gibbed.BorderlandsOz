@@ -32,8 +32,8 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
         {
             try
             {
-                var raws = LoaderHelper
-                    .Deserialize<Dictionary<Platform, Raw.PlatformConfiguration>>("Platform Configurations");
+                var raws = LoaderHelper.Deserialize<Dictionary<Platform, Raw.PlatformConfiguration>>(
+                    "Platform Configurations");
                 return new InfoDictionary<Platform, PlatformConfiguration>(
                     raws.ToDictionary(kv => kv.Key, GetPlatformConfiguration));
             }

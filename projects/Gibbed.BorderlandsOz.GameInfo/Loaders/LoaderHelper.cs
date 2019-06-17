@@ -77,5 +77,10 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
                 throw;
             }
         }
+
+        public static TType DeserializeDump<TType>(string embeddedResourceName)
+        {
+            return Deserialize<TType>("Dumps." + embeddedResourceName);
+        }
     }
 }

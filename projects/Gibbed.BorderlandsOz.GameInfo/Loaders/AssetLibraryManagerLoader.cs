@@ -32,8 +32,8 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
         {
             try
             {
-                var raw = LoaderHelper
-                    .Deserialize<Raw.AssetLibraryManager>("Asset Library Manager");
+                var raw = LoaderHelper.DeserializeDump<Raw.AssetLibraryManager>(
+                    "Asset Library Manager");
                 return GetAssetLibraryManager(raw);
             }
             catch (Exception e)

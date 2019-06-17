@@ -9,3 +9,6 @@
 [submodule "projects/Gearbox"]
 	path = projects/Gearbox
 	url = https://github.com/gibbed/Gibbed.Gearbox.git
+[submodule "projects/Gibbed.BorderlandsOz.GameInfo/Resources/Dumps"]
+	path = projects/Gibbed.BorderlandsOz.GameInfo/Resources/Dumps
+	url = https://github.com/gibbed/BorderlandsOzDumps.git

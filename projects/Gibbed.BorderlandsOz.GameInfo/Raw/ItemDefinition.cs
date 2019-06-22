@@ -28,21 +28,12 @@ using Newtonsoft.Json;
 namespace Gibbed.BorderlandsOz.GameInfo.Raw
 {
     [JsonObject(MemberSerialization.OptIn)]
-    internal sealed class ItemTypeDefinition
+    internal sealed class ItemDefinition
     {
-        internal ItemTypeDefinition()
+        internal ItemDefinition()
         {
             this.Titles = new List<string>();
             this.Prefixes = new List<string>();
-            this.AlphaParts = new List<string>();
-            this.BetaParts = new List<string>();
-            this.GammaParts = new List<string>();
-            this.DeltaParts = new List<string>();
-            this.EpsilonParts = new List<string>();
-            this.ZetaParts = new List<string>();
-            this.EtaParts = new List<string>();
-            this.ThetaParts = new List<string>();
-            this.MaterialParts = new List<string>();
         }
 
         [JsonProperty(PropertyName = "type", Required = Required.Always)]
@@ -61,31 +52,31 @@ namespace Gibbed.BorderlandsOz.GameInfo.Raw
         public List<string> Prefixes { get; set; }
 
         [JsonProperty(PropertyName = "alpha_parts")]
-        public List<string> AlphaParts { get; set; }
+        public string AlphaParts { get; set; }
 
         [JsonProperty(PropertyName = "beta_parts")]
-        public List<string> BetaParts { get; set; }
+        public string BetaParts { get; set; }
 
         [JsonProperty(PropertyName = "gamma_parts")]
-        public List<string> GammaParts { get; set; }
+        public string GammaParts { get; set; }
 
         [JsonProperty(PropertyName = "delta_parts")]
-        public List<string> DeltaParts { get; set; }
+        public string DeltaParts { get; set; }
 
         [JsonProperty(PropertyName = "epsilon_parts")]
-        public List<string> EpsilonParts { get; set; }
+        public string EpsilonParts { get; set; }
 
         [JsonProperty(PropertyName = "zeta_parts")]
-        public List<string> ZetaParts { get; set; }
+        public string ZetaParts { get; set; }
 
         [JsonProperty(PropertyName = "eta_parts")]
-        public List<string> EtaParts { get; set; }
+        public string EtaParts { get; set; }
 
         [JsonProperty(PropertyName = "theta_parts")]
-        public List<string> ThetaParts { get; set; }
+        public string ThetaParts { get; set; }
 
         [JsonProperty(PropertyName = "material_parts")]
-        public List<string> MaterialParts { get; set; }
+        public string MaterialParts { get; set; }
     }
 }
 

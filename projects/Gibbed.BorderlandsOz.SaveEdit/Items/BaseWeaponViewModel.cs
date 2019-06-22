@@ -23,6 +23,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Caliburn.Micro;
 using Gibbed.BorderlandsOz.FileFormats.Items;
 using Gibbed.BorderlandsOz.GameInfo;
@@ -31,6 +32,13 @@ namespace Gibbed.BorderlandsOz.SaveEdit
 {
     internal class BaseWeaponViewModel : PropertyChangedBase, IBaseSlotViewModel
     {
+        private static readonly EnumerableComparer<object> _AssetListComparer;
+
+        static BaseWeaponViewModel()
+        {
+            _AssetListComparer = new EnumerableComparer<object>();
+        }
+
         private readonly BaseWeapon _Weapon;
         private string _DisplayName;
 
@@ -43,28 +51,26 @@ namespace Gibbed.BorderlandsOz.SaveEdit
         {
             this._Weapon = weapon ?? throw new ArgumentNullException(nameof(weapon));
 
-            this.TypeAssets = CreateAssetList(InfoManager.WeaponBalance.Items
-                .Where(kv => kv.Value.Type != null)
-                .Select(kv => kv.Value.Type.ResourcePath)
-                .Distinct()
-                .OrderBy(s => s));
+            this.WeaponTypeAssets = CreateAssetList(InfoManager.WeaponBalance.Items
+                .Where(kv => kv.Value.WeaponType != null)
+                .Select(kv => kv.Value.WeaponType.ResourcePath));
             this.BuildBalanceAssets();
             this.UpdateDisplayName();
         }
 
-        private static string GenerateDisplayName(string type, string prefixPart, string titlePart)
+        private static string GenerateDisplayName(string weaponTypePath, string prefixPartPath, string titlePartPath)
         {
-            if (titlePart != "None" &&
-                InfoManager.WeaponNameParts.ContainsKey(titlePart) == true &&
-                string.IsNullOrEmpty(InfoManager.WeaponNameParts[titlePart].Name) == false)
+            if (titlePartPath != "None" &&
+                InfoManager.WeaponNameParts.TryGetValue(titlePartPath, out var titlePart) == true &&
+                string.IsNullOrEmpty(titlePart.Name) == false)
             {
-                var text = InfoManager.WeaponNameParts[titlePart].Name;
+                var text = titlePart.Name;
 
-                if (prefixPart != "None" &&
-                    InfoManager.WeaponNameParts.ContainsKey(prefixPart) == true &&
-                    string.IsNullOrEmpty(InfoManager.WeaponNameParts[prefixPart].Name) == false)
+                if (prefixPartPath != "None" &&
+                    InfoManager.WeaponNameParts.TryGetValue(prefixPartPath, out var prefixPart) == true &&
+                    string.IsNullOrEmpty(prefixPart.Name) == false)
                 {
-                    text = InfoManager.WeaponNameParts[prefixPart].Name + " " + text;
+                    text = prefixPart.Name + " " + text;
                 }
 
                 return text;
@@ -75,17 +81,17 @@ namespace Gibbed.BorderlandsOz.SaveEdit
 
         private void UpdateDisplayName()
         {
-            this.DisplayName = GenerateDisplayName(this.Type, this.PrefixPart, this.TitlePart);
+            this.DisplayName = GenerateDisplayName(this.WeaponType, this.PrefixPart, this.TitlePart);
         }
 
         #region Properties
-        public string Type
+        public string WeaponType
         {
-            get { return this._Weapon.Type; }
+            get { return this._Weapon.WeaponType; }
             set
             {
-                this._Weapon.Type = value;
-                this.NotifyOfPropertyChange(nameof(Type));
+                this._Weapon.WeaponType = value;
+                this.NotifyOfPropertyChange(nameof(WeaponType));
                 this.BuildBalanceAssets();
                 this.UpdateDisplayName();
             }
@@ -308,12 +314,22 @@ namespace Gibbed.BorderlandsOz.SaveEdit
         {
             var list = new List<string>()
             {
-                "None"
+                "None",
             };
 
             if (items != null)
             {
-                list.AddRange(items);
+                object convert(string str)
+                {
+                    if (int.TryParse(str, out var value) == true)
+                    {
+                        return value;
+                    }
+                    return str;
+                }
+                list.AddRange(items
+                    .Distinct()
+                    .OrderBy(s => Regex.Split(s.Replace(" ", ""), "([0-9]+)").Select(convert), _AssetListComparer));
             }
 
             return list;
@@ -334,7 +350,7 @@ namespace Gibbed.BorderlandsOz.SaveEdit
         #endregion
 
         #region Properties
-        public IEnumerable<string> TypeAssets { get; private set; }
+        public IEnumerable<string> WeaponTypeAssets { get; private set; }
 
         public IEnumerable<string> BalanceAssets
         {
@@ -454,18 +470,15 @@ namespace Gibbed.BorderlandsOz.SaveEdit
 
         private void BuildBalanceAssets()
         {
-            if (InfoManager.WeaponTypes.ContainsKey(this.Type) == false)
+            if (InfoManager.WeaponTypes.TryGetValue(this.WeaponType, out var weaponType) == false)
             {
                 this.BalanceAssets = CreateAssetList(null);
             }
             else
             {
-                var type = InfoManager.WeaponTypes[this.Type];
                 this.BalanceAssets = CreateAssetList(InfoManager.WeaponBalance.Items
-                    .Where(bd => bd.Value.IsSuitableFor(type) == true)
-                    .Select(kv => kv.Key)
-                    .Distinct()
-                    .OrderBy(s => s));
+                    .Where(bd => bd.Value.IsSuitableFor(weaponType) == true)
+                    .Select(kv => kv.Key));
             }
 
             this.BuildPartAssets();
@@ -473,9 +486,9 @@ namespace Gibbed.BorderlandsOz.SaveEdit
 
         private void BuildPartAssets()
         {
-            if (InfoManager.WeaponTypes.ContainsKey(this.Type) == false ||
+            if (InfoManager.WeaponTypes.TryGetValue(this.WeaponType, out var weaponType) == false ||
                 this.BalanceAssets.Contains(this.Balance) == false ||
-                InfoManager.WeaponBalance.ContainsKey(this.Balance) == false ||
+                InfoManager.WeaponBalance.TryGetValue(this.Balance, out var weaponTypeBalance) == false ||
                 this.Balance == "None")
             {
                 this.ManufacturerAssets = _NoneAssets;
@@ -492,18 +505,17 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             }
             else
             {
-                var type = InfoManager.WeaponTypes[this.Type];
-                var balance = InfoManager.WeaponBalance[this.Balance].Create(type);
-                this.ManufacturerAssets = CreateAssetList(balance.Manufacturers.OrderBy(s => s).Distinct());
-                this.BodyPartAssets = CreateAssetList(balance.Parts.BodyParts.OrderBy(s => s).Distinct());
-                this.GripPartAssets = CreateAssetList(balance.Parts.GripParts.OrderBy(s => s).Distinct());
-                this.BarrelPartAssets = CreateAssetList(balance.Parts.BarrelParts.OrderBy(s => s).Distinct());
-                this.SightPartAssets = CreateAssetList(balance.Parts.SightParts.OrderBy(s => s).Distinct());
-                this.StockPartAssets = CreateAssetList(balance.Parts.StockParts.OrderBy(s => s).Distinct());
-                this.ElementalPartAssets = CreateAssetList(balance.Parts.ElementalParts.OrderBy(s => s).Distinct());
-                this.Accessory1PartAssets = CreateAssetList(balance.Parts.Accessory1Parts.OrderBy(s => s).Distinct());
-                this.Accessory2PartAssets = CreateAssetList(balance.Parts.Accessory2Parts.OrderBy(s => s).Distinct());
-                this.MaterialPartAssets = CreateAssetList(balance.Parts.MaterialParts.OrderBy(s => s).Distinct());
+                var balance = weaponTypeBalance.Create(weaponType);
+                this.ManufacturerAssets = CreateAssetList(balance.Manufacturers);
+                this.BodyPartAssets = CreateAssetList(balance.Parts.BodyParts);
+                this.GripPartAssets = CreateAssetList(balance.Parts.GripParts);
+                this.BarrelPartAssets = CreateAssetList(balance.Parts.BarrelParts);
+                this.SightPartAssets = CreateAssetList(balance.Parts.SightParts);
+                this.StockPartAssets = CreateAssetList(balance.Parts.StockParts);
+                this.ElementalPartAssets = CreateAssetList(balance.Parts.ElementalParts);
+                this.Accessory1PartAssets = CreateAssetList(balance.Parts.Accessory1Parts);
+                this.Accessory2PartAssets = CreateAssetList(balance.Parts.Accessory2Parts);
+                this.MaterialPartAssets = CreateAssetList(balance.Parts.MaterialParts);
             }
         }
         #endregion

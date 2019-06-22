@@ -22,7 +22,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Data;
 using Caliburn.Micro;
 using Gibbed.BorderlandsOz.FileFormats.Items;
 using Gibbed.BorderlandsOz.GameInfo;
@@ -31,6 +34,13 @@ namespace Gibbed.BorderlandsOz.SaveEdit
 {
     internal class BaseItemViewModel : PropertyChangedBase, IBaseSlotViewModel
     {
+        private static readonly EnumerableComparer<object> _AssetListComparer;
+
+        static BaseItemViewModel()
+        {
+            _AssetListComparer = new EnumerableComparer<object>();
+        }
+
         private readonly BaseItem _Item;
         private string _DisplayName = "Unknown Item";
 
@@ -43,10 +53,14 @@ namespace Gibbed.BorderlandsOz.SaveEdit
         {
             this._Item = item ?? throw new ArgumentNullException(nameof(item));
 
-            IEnumerable<ItemTypeDefinition> resources;
-            resources = InfoManager.ItemBalance.Items.Where(kv => kv.Value.Type != null).Select(kv => kv.Value.Type);
+            IEnumerable<ItemDefinition> resources;
+            resources = InfoManager.ItemBalance.Items
+                .Where(kv => kv.Value.Item != null)
+                .Select(kv => kv.Value.Item);
             resources = resources.Concat(
-                InfoManager.ItemBalance.Items.Where(kv => kv.Value.Types != null).SelectMany(bd => bd.Value.Types));
+                InfoManager.ItemBalance.Items
+                    .Where(kv => kv.Value.Items != null)
+                    .SelectMany(bd => bd.Value.Items));
 
             var itemTypeFilters = new List<ItemTypeFilter>()
             {
@@ -64,24 +78,33 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             };
             this._ItemTypeFilters = itemTypeFilters;
 
-            this.TypeAssets = CreateAssetList(resources.Distinct().Select(t => t.ResourcePath).OrderBy(s => s));
+            this.ItemAssets = CreateAssetList(resources.Distinct().Select(t => t.ResourcePath));
             this.BuildBalanceAssets();
             this.UpdateDisplayName();
 
-            this._FilteredTypeAssets = System.Windows.Data.CollectionViewSource.GetDefaultView(this.TypeAssets);
-            this._FilteredTypeAssets.Filter += this.FilterItem;
-            this.SelectedItemTypeFilter = itemTypeFilters.First();
+            this._FilteredItemAssets = CollectionViewSource.GetDefaultView(this.ItemAssets);
+            this._FilteredItemAssets.Filter += this.FilterItem;
+
+            ItemTypeFilter selectedItemFilter = null;
+            if (InfoManager.Items.TryGetValue(item.Item, out var itemDef) == true)
+            {
+                selectedItemFilter = itemTypeFilters.SingleOrDefault(
+                    itf =>
+                    itf.Value == itemDef.Type ||
+                    (itf.SecondValue != ItemType.Unknown && itf.SecondValue == itemDef.Type));
+            }
+            this.SelectedItemTypeFilter = selectedItemFilter ?? itemTypeFilters.First();
         }
 
         private bool FilterItem(object o)
         {
-            var typePath = o as string;
-            if (typePath == null)
+            var itemPath = o as string;
+            if (itemPath == null)
             {
                 return false;
             }
 
-            if (typePath == "None")
+            if (itemPath == "None")
             {
                 return true;
             }
@@ -98,18 +121,17 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                 return true;
             }
 
-            if (InfoManager.ItemTypes.ContainsKey(typePath) == false)
+            if (InfoManager.Items.TryGetValue(itemPath, out var item) == false)
             {
                 return false;
             }
 
-            var itemType = InfoManager.ItemTypes[typePath];
-            if (selectedItemType == itemType.Type)
+            if (selectedItemType == item.Type)
             {
                 return true;
             }
 
-            if (selectedSecondItemType != ItemType.Unknown && selectedSecondItemType == itemType.Type)
+            if (selectedSecondItemType != ItemType.Unknown && selectedSecondItemType == item.Type)
             {
                 return true;
             }
@@ -117,30 +139,30 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             return false;
         }
 
-        private static string GenerateDisplayName(string typePath, string prefixPartPath, string titlePartPath)
+        private static string GenerateDisplayName(string itemPath, string prefixPartPath, string titlePartPath)
         {
             string name = null;
             bool hasFullName = false;
 
-            if (typePath != "None" && InfoManager.ItemTypes.ContainsKey(typePath) == true)
+            if (itemPath != "None" && InfoManager.Items.TryGetValue(itemPath, out var item) == true)
             {
-                var itemType = InfoManager.ItemTypes[typePath];
-                name = itemType.Name;
-                hasFullName = itemType.HasFullName;
+                name = item.Name;
+                hasFullName = item.HasFullName;
             }
 
             if (hasFullName == false &&
-                titlePartPath != "None" && InfoManager.ItemNameParts.ContainsKey(titlePartPath) == true)
+                titlePartPath != "None" &&
+                InfoManager.ItemNameParts.TryGetValue(titlePartPath, out var titlePart) == true)
             {
-                var titlePart = InfoManager.ItemNameParts[titlePartPath];
                 name = titlePart.Name;
             }
 
             if (name != null &&
-                prefixPartPath != "None" && InfoManager.ItemNameParts.ContainsKey(prefixPartPath) == true &&
-                string.IsNullOrEmpty(InfoManager.ItemNameParts[prefixPartPath].Name) == false)
+                prefixPartPath != "None" &&
+                InfoManager.ItemNameParts.TryGetValue(prefixPartPath, out var prefixPart) == true &&
+                string.IsNullOrEmpty(prefixPart.Name) == false)
             {
-                name = InfoManager.ItemNameParts[prefixPartPath].Name + " " + name;
+                name = prefixPart.Name + " " + name;
             }
 
             if (string.IsNullOrEmpty(name) == false)
@@ -153,17 +175,17 @@ namespace Gibbed.BorderlandsOz.SaveEdit
 
         private void UpdateDisplayName()
         {
-            this.DisplayName = GenerateDisplayName(this.Type, this.PrefixPart, this.TitlePart);
+            this.DisplayName = GenerateDisplayName(this.Item, this.PrefixPart, this.TitlePart);
         }
 
         #region Properties
-        public string Type
+        public string Item
         {
-            get { return this._Item.Type; }
+            get { return this._Item.Item; }
             set
             {
-                this._Item.Type = value;
-                this.NotifyOfPropertyChange(nameof(Type));
+                this._Item.Item = value;
+                this.NotifyOfPropertyChange(nameof(Item));
                 this.BuildBalanceAssets();
                 this.UpdateDisplayName();
             }
@@ -353,9 +375,10 @@ namespace Gibbed.BorderlandsOz.SaveEdit
                     return "Base Game";
                 }
 
-                var package = InfoManager.DownloadablePackages.Items
-                                         .Select(kv => kv.Value)
-                                         .FirstOrDefault(dp => dp.Id == this.AssetLibrarySetId);
+                var package = InfoManager.DownloadablePackages
+                    .Items
+                    .Select(kv => kv.Value)
+                    .FirstOrDefault(dp => dp.Id == this.AssetLibrarySetId);
                 if (package == null)
                 {
                     return $"(unknown #{this.AssetLibrarySetId})";
@@ -379,12 +402,11 @@ namespace Gibbed.BorderlandsOz.SaveEdit
         {
             get
             {
-                if (InfoManager.ItemTypes.ContainsKey(this.Type) == false)
+                if (InfoManager.Items.TryGetValue(this.Item, out var item) == false)
                 {
                     return "Unknown";
                 }
-
-                return GetDisplayNameForItemType(InfoManager.ItemTypes[this.Type].Type);
+                return GetDisplayNameForItemType(item.Type);
             }
         }
         #endregion
@@ -438,22 +460,32 @@ namespace Gibbed.BorderlandsOz.SaveEdit
         {
             var list = new List<string>()
             {
-                "None"
+                "None",
             };
 
             if (items != null)
             {
-                list.AddRange(items);
+                object convert(string str)
+                {
+                    if (int.TryParse(str, out var value) == true)
+                    {
+                        return value;
+                    }
+                    return str;
+                }
+                list.AddRange(items
+                    .Distinct()
+                    .OrderBy(s => Regex.Split(s.Replace(" ", ""), "([0-9]+)").Select(convert), _AssetListComparer));
             }
 
             return list;
         }
 
         #region Fields
-        private IEnumerable<string> _TypeAssets;
-        private IEnumerable<ItemTypeFilter> _ItemTypeFilters;
+        private IEnumerable<string> _ItemAssets;
+        private readonly IEnumerable<ItemTypeFilter> _ItemTypeFilters;
         private ItemTypeFilter _SelectedItemTypeFilter;
-        private readonly System.ComponentModel.ICollectionView _FilteredTypeAssets;
+        private readonly ICollectionView _FilteredItemAssets;
 
         private IEnumerable<string> _BalanceAssets;
         private IEnumerable<string> _ManufacturerAssets;
@@ -481,23 +513,23 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             {
                 this._SelectedItemTypeFilter = value;
                 this.NotifyOfPropertyChange(nameof(SelectedItemTypeFilter));
-                this.FilteredTypeAssets.Refresh();
+                this.FilteredItemAssets.Refresh();
             }
         }
 
-        public IEnumerable<string> TypeAssets
+        public IEnumerable<string> ItemAssets
         {
-            get { return this._TypeAssets; }
+            get { return this._ItemAssets; }
             private set
             {
-                this._TypeAssets = value;
-                this.NotifyOfPropertyChange(nameof(TypeAssets));
+                this._ItemAssets = value;
+                this.NotifyOfPropertyChange(nameof(ItemAssets));
             }
         }
 
-        public System.ComponentModel.ICollectionView FilteredTypeAssets
+        public ICollectionView FilteredItemAssets
         {
-            get { return this._FilteredTypeAssets; }
+            get { return this._FilteredItemAssets; }
         }
 
         public IEnumerable<string> BalanceAssets
@@ -618,17 +650,15 @@ namespace Gibbed.BorderlandsOz.SaveEdit
 
         private void BuildBalanceAssets()
         {
-            if (InfoManager.ItemTypes.ContainsKey(this.Type) == false)
+            if (InfoManager.Items.TryGetValue(this.Item, out var item) == true)
             {
-                this.BalanceAssets = CreateAssetList(null);
+                this.BalanceAssets = CreateAssetList(InfoManager.ItemBalance.Items
+                    .Where(kv => kv.Value.IsSuitableFor(item) == true)
+                    .Select(kv => kv.Key));
             }
             else
             {
-                var type = InfoManager.ItemTypes[this.Type];
-                this.BalanceAssets = CreateAssetList(InfoManager.ItemBalance.Items
-                    .Where(kv => kv.Value.IsSuitableFor(type) == true)
-                    .Select(kv => kv.Key)
-                    .OrderBy(s => s));
+                this.BalanceAssets = CreateAssetList(null);
             }
 
             this.BuildPartAssets();
@@ -636,9 +666,9 @@ namespace Gibbed.BorderlandsOz.SaveEdit
 
         private void BuildPartAssets()
         {
-            if (InfoManager.ItemTypes.ContainsKey(this.Type) == false ||
+            if (InfoManager.Items.TryGetValue(this.Item, out var item) == false ||
                 this.BalanceAssets.Contains(this.Balance) == false ||
-                InfoManager.ItemBalance.ContainsKey(this.Balance) == false ||
+                InfoManager.ItemBalance.TryGetValue(this.Balance, out var itemBalance) == false ||
                 this.Balance == "None")
             {
                 this.ManufacturerAssets = _NoneAssets;
@@ -655,18 +685,17 @@ namespace Gibbed.BorderlandsOz.SaveEdit
             }
             else
             {
-                var type = InfoManager.ItemTypes[this.Type];
-                var balance = InfoManager.ItemBalance[this.Balance].Create(type);
-                this.ManufacturerAssets = CreateAssetList(balance.Manufacturers.OrderBy(s => s).Distinct());
-                this.AlphaPartAssets = CreateAssetList(balance.Parts.AlphaParts.OrderBy(s => s).Distinct());
-                this.BetaPartAssets = CreateAssetList(balance.Parts.BetaParts.OrderBy(s => s).Distinct());
-                this.GammaPartAssets = CreateAssetList(balance.Parts.GammaParts.OrderBy(s => s).Distinct());
-                this.DeltaPartAssets = CreateAssetList(balance.Parts.DeltaParts.OrderBy(s => s).Distinct());
-                this.EpsilonPartAssets = CreateAssetList(balance.Parts.EpsilonParts.OrderBy(s => s).Distinct());
-                this.ZetaPartAssets = CreateAssetList(balance.Parts.ZetaParts.OrderBy(s => s).Distinct());
-                this.EtaPartAssets = CreateAssetList(balance.Parts.EtaParts.OrderBy(s => s).Distinct());
-                this.ThetaPartAssets = CreateAssetList(balance.Parts.ThetaParts.OrderBy(s => s).Distinct());
-                this.MaterialPartAssets = CreateAssetList(balance.Parts.MaterialParts.OrderBy(s => s).Distinct());
+                var balance = itemBalance.Create(item);
+                this.ManufacturerAssets = CreateAssetList(balance.Manufacturers);
+                this.AlphaPartAssets = CreateAssetList(balance.Parts.AlphaParts);
+                this.BetaPartAssets = CreateAssetList(balance.Parts.BetaParts);
+                this.GammaPartAssets = CreateAssetList(balance.Parts.GammaParts);
+                this.DeltaPartAssets = CreateAssetList(balance.Parts.DeltaParts);
+                this.EpsilonPartAssets = CreateAssetList(balance.Parts.EpsilonParts);
+                this.ZetaPartAssets = CreateAssetList(balance.Parts.ZetaParts);
+                this.EtaPartAssets = CreateAssetList(balance.Parts.EtaParts);
+                this.ThetaPartAssets = CreateAssetList(balance.Parts.ThetaParts);
+                this.MaterialPartAssets = CreateAssetList(balance.Parts.MaterialParts);
             }
         }
         #endregion

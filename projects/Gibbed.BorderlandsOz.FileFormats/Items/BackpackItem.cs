@@ -96,7 +96,7 @@ namespace Gibbed.BorderlandsOz.FileFormats.Items
         {
             return new BackpackItem()
             {
-                Type = this.Type,
+                Item = this.Item,
                 Balance = this.Balance,
                 Manufacturer = this.Manufacturer,
                 ManufacturerGradeIndex = this.ManufacturerGradeIndex,

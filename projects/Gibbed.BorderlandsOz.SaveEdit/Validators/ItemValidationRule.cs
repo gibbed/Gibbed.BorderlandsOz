@@ -24,9 +24,9 @@ using Gibbed.BorderlandsOz.GameInfo;
 
 namespace Gibbed.BorderlandsOz.SaveEdit.Validators
 {
-    internal class ItemTypeValidationRule : AssetValidationRule
+    internal class ItemValidationRule : AssetValidationRule
     {
-        public ItemTypeValidationRule()
+        public ItemValidationRule()
             : base(AssetGroup.ItemTypes)
         {
         }

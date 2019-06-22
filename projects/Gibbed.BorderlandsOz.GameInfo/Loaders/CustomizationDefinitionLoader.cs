@@ -36,8 +36,9 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
                 var raws = LoaderHelper.DeserializeDump<Dictionary<string, Raw.CustomizationDefinition>>(
                     "Customizations");
                 return new InfoDictionary<CustomizationDefinition>(
-                    raws.ToDictionary(kv => kv.Key,
-                                      kv => GetCustomizationDefinition(downloadableContents, kv)));
+                    raws.ToDictionary(
+                        kv => kv.Key,
+                        kv => CreateCustomization(downloadableContents, kv)));
             }
             catch (Exception e)
             {
@@ -45,29 +46,30 @@ namespace Gibbed.BorderlandsOz.GameInfo.Loaders
             }
         }
 
-        private static CustomizationDefinition GetCustomizationDefinition(
+        private static CustomizationDefinition CreateCustomization(
             InfoDictionary<DownloadableContentDefinition> downloadableContents,
             KeyValuePair<string, Raw.CustomizationDefinition> kv)
         {
+            var raw = kv.Value;
+
             DownloadableContentDefinition content = null;
-            if (string.IsNullOrEmpty(kv.Value.DLC) == false)
+            if (string.IsNullOrEmpty(raw.DLC) == false)
             {
-                if (downloadableContents.ContainsKey(kv.Value.DLC) == false)
+                if (downloadableContents.TryGetValue(raw.DLC, out content) == false)
                 {
                     throw ResourceNotFoundException.Create("downloadable content", kv.Value.DLC);
                 }
-                content = downloadableContents[kv.Value.DLC];
             }
 
             return new CustomizationDefinition()
             {
                 ResourcePath = kv.Key,
-                Name = kv.Value.Name,
-                Type = kv.Value.Type,
-                Usage = kv.Value.Usage,
-                DataName = kv.Value.DataName,
-                PrimarySort = kv.Value.PrimarySort,
-                SecondarySort = kv.Value.SecondarySort,
+                Name = raw.Name,
+                Type = raw.Type,
+                Usage = raw.Usage,
+                DataName = raw.DataName,
+                PrimarySort = raw.PrimarySort,
+                SecondarySort = raw.SecondarySort,
                 DLC = content,
             };
         }

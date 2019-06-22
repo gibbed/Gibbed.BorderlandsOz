@@ -24,9 +24,9 @@ using System.Collections.Generic;
 
 namespace Gibbed.BorderlandsOz.GameInfo
 {
-    public sealed class ItemTypeDefinition
+    public sealed class ItemDefinition
     {
-        internal ItemTypeDefinition()
+        internal ItemDefinition()
         {
         }
 

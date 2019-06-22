@@ -30,7 +30,7 @@ namespace Gibbed.BorderlandsOz.GameInfo
         {
         }
 
-        public WeaponTypeDefinition Type { get; internal set; }
+        public WeaponTypeDefinition WeaponType { get; internal set; }
         public PartReplacementMode Mode { get; internal set; }
         public List<string> BodyParts { get; internal set; }
         public List<string> GripParts { get; internal set; }
